@@ -3,6 +3,7 @@ export default function Home() {
     <>
       <h1 style={{ color: "red" }}>BOOK SHOP WEB APPLICATION</h1>
       <h1 style={{ color: "blue" }}>ADDED ANOTHER H1 TAG!</h1>
+      <h1 style={{ color: "violet" }}>LAST TESTING FOR TODAY!!!</h1>
     </>
   );
 }
