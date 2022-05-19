@@ -121,11 +121,14 @@ const Navigation = () => {
         </Offcanvas.Header>
 
         <Offcanvas.Body>
-          <input
-            type="search"
-            placeholder="Search entire shop here..."
-            className={styles.nav_offcanvas_search_input}
-          />
+          <div className={styles.nav_offcanvas_search_wrapper}>
+            <input
+              type="search"
+              placeholder="Search entire shop here..."
+              className={styles.nav_offcanvas_search_input}
+            />
+            <BsSearch className={styles.nav_offcanvas_search_btn} />
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
       {/* END */}
