@@ -1,0 +1,20 @@
+@import "../styles/colors.scss";
+
+
+.Wrapper{
+    background-color: whitesmoke;
+    .services_box{
+        max-width: 600px;
+        width: 100%;
+        background-color: white;
+        padding: 1rem;
+      
+    
+        .services_icons{
+            color: $BLUE;
+            font-size: 3rem;
+        }
+    
+    }
+}
+
