@@ -1,0 +1,56 @@
+@import "../styles/colors.scss";
+
+.Wrapper{
+    background: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+
+    .brand_logo{
+        font-size: 2rem;
+        color: $BLACK;
+        font-weight: bold;
+        span{
+            color: $YELLOW;
+            text-transform: uppercase;
+        }
+    }
+
+    .nav_icons{
+        font-size: 1.2rem;
+        color: $BLUE;
+    }
+    #nav_icons_heart{
+        color: #f2b195;
+    }
+   
+    .nav_search_btn_wrapper{
+        border: 1px solid darkgrey;
+        border-radius: 10px;
+        cursor:text;
+    }
+
+    .nav_search_icon{
+        color: darkgrey;
+        cursor: default;
+    }
+
+    .nav_search_btn{
+        all: unset;
+        margin-bottom: 0 !important;
+        max-width: 180px;
+        width: 100%;
+        font-size: 1rem;
+        padding: 0 0.6rem;
+    }
+
+    .dd_user_settings{
+       a{
+           color: $BLACK !important;
+       }
+    }
+
+   .sup_badge{
+       font-size: 0.9rem;
+       color: $BLACK;
+   }
+}
