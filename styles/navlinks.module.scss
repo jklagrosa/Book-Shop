@@ -1,37 +1,27 @@
 @import "../styles/colors.scss";
 
 
-#nav_offcanvas{
-    @media only screen and (max-width: 600px) { 
-        max-width: 300px;
-        width: 100%;
+.Wrapper{
+    background: whitesmoke;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    top: 73px;
+    z-index: 1;
+
+    @media only screen and (max-width: 991px) { 
+        display: none;
     }
 
-    @media only screen and (max-width: 400px) { 
-        max-width: 250px;
-        width: 100%;
-    }
-
-    .brand_logo_offcanvas{
-        font-size: 2rem;
-        color: $BLACK;
-        font-weight: bold;
-        span{
-            color: $YELLOW;
-            text-transform: uppercase;
+    a{
+        color: $BLACK !important;
+        &:hover{
+            text-decoration: underline;
         }
     }
-}
-
-.Wrapper{
-    background: white;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
     .brand_logo{
         font-size: 2rem;
         color: $BLACK;
         font-weight: bold;
-        cursor: pointer;
         span{
             color: $YELLOW;
             text-transform: uppercase;
