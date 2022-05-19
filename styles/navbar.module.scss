@@ -26,7 +26,7 @@
 .Wrapper{
     background: white;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-
+    padding: 1rem;
     .brand_logo{
         font-size: 2rem;
         color: $BLACK;
@@ -36,6 +36,22 @@
             color: $YELLOW;
             text-transform: uppercase;
         }
+
+  
+    
+        @media only screen and (min-width: 2201px) {
+            font-size: 3rem;
+        }
+    
+    
+        @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+            font-size: 2.5rem;
+        }
+    
+        
+    @media only screen and (min-width: 1500px) and (max-width: 1800px) {
+        font-size: 2.25rem;
+    }
     }
 
     .hamburger_menu{
@@ -45,6 +61,25 @@
     .nav_icons{
         font-size: 1.2rem;
         color: $BLUE;
+
+        @media only screen and (min-width: 2501px) {
+            font-size: 3rem;
+        }
+
+        @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+            font-size: 2.5rem;
+        }
+
+
+        @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+            font-size: 2rem;
+        }
+
+        
+    @media only screen and (min-width: 1500px) and (max-width: 1800px) {
+        font-size: 1.5rem;
+    }
+
     }
     #nav_icons_heart{
         color: #f2b195;
@@ -68,16 +103,73 @@
         width: 100%;
         font-size: 1rem;
         padding: 0 0.6rem;
+
+    //     @media only screen and (min-width: 2501px) {
+    //         font-size: 3rem;
+    //     }
+
+    //     @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+    //         font-size: 2.5rem;
+    //     }
+
+
+    //     @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+    //         font-size: 2rem;
+    //     }
+
+        
+    // @media only screen and (min-width: 1500px) and (max-width: 1800px) {
+    //     font-size: 1.25rem;
+    // }
+
     }
 
     .dd_user_settings{
+       
        a{
            color: $BLACK !important;
+           font-size: 1rem;
+           
+        @media only screen and (min-width: 2501px) {
+            font-size: 2.25rem;
+        }
+
+        @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+            font-size: 2rem;
+        }
+
+
+        @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+            font-size: 1.5rem;
+        }
+
+        
+    @media only screen and (min-width: 1500px) and (max-width: 1800px) {
+        font-size: 1.25rem;
+    }
        }
     }
 
    .sup_badge{
        font-size: 0.9rem;
        color: $BLACK;
+
+       @media only screen and (min-width: 2501px) {
+        font-size: 2rem;
+    }
+
+    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+        font-size: 1.5rem;
+    }
+
+
+    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+        font-size: 1.25rem;
+    }
+
+    
+@media only screen and (min-width: 1500px) and (max-width: 1800px) {
+    font-size: 1rem;
+}
    }
 }
