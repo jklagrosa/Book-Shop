@@ -3,16 +3,105 @@
 
 .Wrapper{
     background-color: whitesmoke;
-    .services_box{
-        max-width: 600px;
-        width: 100%;
-        background-color: white;
-        padding: 1rem;
-      
+
     
+
+    .services_box{
+        margin: 0 auto;
+        max-width: 1050px;
+        width: 100%;
+        min-height: 230px;
+        background-color: white;
+        padding: 2rem 1rem 1rem 1rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        text-align: center;
+        
+
+
+          
+        @media only screen and (min-width: 2501px) { 
+            min-height: 360px;
+        }
+
+        @media only screen and (min-width: 2001px) and (max-width: 2500px) { 
+            min-height: 300px;
+        }
+
+        @media only screen and (max-width: 991px) { 
+             margin-bottom: 1rem;
+        }
+       
+
         .services_icons{
             color: $BLUE;
             font-size: 3rem;
+
+                
+        @media only screen and (min-width: 2501px) { 
+            font-size: 6rem;
+        }
+
+            @media only screen and (min-width: 2001px) and (max-width: 2500px) { 
+                font-size: 4.5rem;
+            }
+
+            @media only screen and (min-width: 1500px) and (max-width: 2000px) { 
+            font-size: 3.5rem;
+                
+            }
+
+        }
+
+        h3{
+            margin-top: 1rem;
+            overflow: hidden;
+            color: $BLACK;
+            font-weight: 400;
+            font-size: 2rem;
+            text-transform: capitalize; 
+
+
+            @media only screen and (min-width: 2501px) { 
+                font-size: 3.25rem;
+            }
+
+            @media only screen and (min-width: 2001px) and (max-width: 2500px) { 
+                font-size: 3rem;
+            }
+
+            @media only screen and (min-width: 1500px) and (max-width: 2000px) { 
+                font-size: 2.5rem;
+            }
+
+            @media only screen and (max-width: 600px) { 
+                font-size: 1.5rem;
+            }
+
+        }
+
+        p{
+
+            font-size: 1rem;
+            text-transform: capitalize;
+            color: grey;
+
+          
+            @media only screen and (min-width: 2501px) { 
+                font-size: 1.8rem;
+            }
+
+
+            @media only screen and (min-width: 2001px) and (max-width: 2500px) { 
+                font-size: 1.5rem;
+            }
+
+            @media only screen and (min-width: 1500px) and (max-width: 2000px) { 
+                font-size: 1.25rem;
+            }
+
+            @media only screen and (max-width: 600px) { 
+                font-size: 0.9rem;
+            }
         }
     
     }

@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { MdOutlineDeliveryDining, MdOutlinePayment } from "react-icons/md";
+import { RiCustomerServiceLine } from "react-icons/ri";
 import styles from "../styles/services.module.scss";
 
 const Services = () => {
@@ -18,13 +19,13 @@ const Services = () => {
 
             <Col xs={12} md={6} lg={4}>
               <div className={styles.services_box}>
-                <MdOutlineDeliveryDining className={styles.services_icons} />
+                <RiCustomerServiceLine className={styles.services_icons} />
                 <h3>Customer Service</h3>
                 <p>Satisfied customers are our best ads.</p>
               </div>
             </Col>
 
-            <Col xs={12} md={6} lg={4}>
+            <Col xs={12} md={12} lg={4}>
               <div className={styles.services_box}>
                 <MdOutlinePayment className={styles.services_icons} />
                 <h3>Easy Payment</h3>

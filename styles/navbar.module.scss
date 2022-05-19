@@ -12,7 +12,91 @@
         width: 100%;
     }
 
+ 
+    .brand_logo_offcanvas_search{
+
+        font-size: 2rem;
+        color: $BLACK;
+        font-weight: bold;
+        span{
+            color: $YELLOW;
+            text-transform: uppercase;
+        }
+
+        @media only screen and (min-width: 2501px) {
+            font-size: 5rem;
+        }
+
+        @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+            font-size: 3.5rem;
+        }
+
+        @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+            font-size: 3rem;
+        }
+    }
+
+    .nav_offcanvas_search_input{
+        all: unset;
+        margin: 0 auto;
+        display: block;
+        max-width: 500px;
+        width: 100%;
+        padding: 0.6rem 1rem;
+        border: 3px solid $BLACK;
+        font-size: 1.25rem;
+        background: $BLACK;
+        border-radius: 3px;
+        margin-top: -1rem;
+        color: white;
+        font-style: italic;
+
+
+        &::placeholder{
+            color: darkgrey;
+            font-style: italic;
+            font-size: 1.25rem;
+
+
+            @media only screen and (min-width: 2501px) {
+                font-size: 2.5rem;
+            }
+
+            @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+                font-size: 2rem;
+            }
+
+            @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                font-size: 1.5rem;
+            }
+        }
+
+
+        @media only screen and (min-width: 2501px) {
+            max-width: 1000px;
+            width: 100%;
+            font-size: 2.5rem;
+            padding: 1rem;
+        }
+
+        @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+            max-width: 800px;
+            width: 100%;
+            font-size: 2rem;
+            padding: 1rem;
+        }
+
+        @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+            max-width: 700px;
+            width: 100%;
+            font-size: 1.5rem;
+            padding: 1rem;
+        }
+
+    }
+
     .brand_logo_offcanvas{
+        
         font-size: 2rem;
         color: $BLACK;
         font-weight: bold;
@@ -58,9 +142,14 @@
         font-size: 2rem;
     }
 
+    #nav_icons_search{
+        color: $PINK;
+    }
+
     .nav_icons{
         font-size: 1.2rem;
         color: $BLUE;
+        cursor: pointer;
 
         @media only screen and (min-width: 2501px) {
             font-size: 3rem;
@@ -150,9 +239,17 @@
        }
     }
 
+    #sup_badge_cart{
+        color: $BLUE;
+    }
+
+    #sup_badge_likes{
+        color: $RED;
+    }
+
    .sup_badge{
        font-size: 0.9rem;
-       color: $BLACK;
+       
 
        @media only screen and (min-width: 2501px) {
         font-size: 2rem;

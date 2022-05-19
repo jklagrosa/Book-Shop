@@ -14,9 +14,16 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navigation = () => {
   const [show, setShow] = useState(false);
+  const [search_show, setSearch_Show] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // SEARCH OFFCANVAS
+
+  const search_handleClose = () => setSearch_Show(false);
+  const search_handleShow = () => setSearch_Show(true);
+  // END
   const router = useRouter();
   return (
     <>
@@ -38,31 +45,36 @@ const Navigation = () => {
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav" className="d-none d-lg-block">
             <Nav className="ms-auto">
-              <Nav.Link className={styles.nav_search_btn_wrapper}>
-                <BsSearch className={styles.nav_search_icon} />
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className={styles.nav_search_btn}
+              <Nav.Link>
+                <BsSearch
+                  className={styles.nav_icons}
+                  id={styles.nav_icons_search}
+                  onClick={search_handleShow}
                 />
               </Nav.Link>
-
+              <span className="mx-4"></span>
               <Nav.Link href="#">
                 <BsCart2 className={styles.nav_icons} />
-                <BsCartFill className={styles.nav_icons} />
-                <sup className={styles.sup_badge}>9</sup>
+                {/* <BsCartFill className={styles.nav_icons} /> */}
+                <sup className={styles.sup_badge} id={styles.sup_badge_cart}>
+                  9
+                </sup>
               </Nav.Link>
+              <span className="mx-2"></span>
               <Nav.Link>
                 <RiHeartLine
                   className={styles.nav_icons}
                   id={styles.nav_icons_heart}
                 />
-                <RiHeartFill
+                {/* <RiHeartFill
                   className={styles.nav_icons}
                   id={styles.nav_icons_heart}
-                />
-                <sup className={styles.sup_badge}>9</sup>
+                /> */}
+                <sup className={styles.sup_badge} id={styles.sup_badge_likes}>
+                  9
+                </sup>
               </Nav.Link>
+              <span className="mx-2"></span>
               <NavDropdown
                 title="Demo User"
                 id="basic-nav-dropdown"
@@ -90,6 +102,30 @@ const Navigation = () => {
         <Offcanvas.Body>
           Some text as placeholder. In real life you can have the elements you
           have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
+      {/* END */}
+
+      {/* OFFCANVAS - SEARCH AREA */}
+      <Offcanvas
+        placement="top"
+        show={search_show}
+        onHide={search_handleClose}
+        id={styles.nav_offcanvas}
+        className="d-none d-lg-block"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title className={styles.brand_logo_offcanvas_search}>
+            Li<span>bros</span>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+
+        <Offcanvas.Body>
+          <input
+            type="search"
+            placeholder="Search entire shop here..."
+            className={styles.nav_offcanvas_search_input}
+          />
         </Offcanvas.Body>
       </Offcanvas>
       {/* END */}
