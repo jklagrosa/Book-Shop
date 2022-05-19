@@ -1,10 +1,22 @@
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Offcanvas,
+} from "react-bootstrap";
 import styles from "../styles/navbar.module.scss";
 import { BsCart2, BsHeart, BsCartFill, BsSearch } from "react-icons/bs";
 import { RiHeartLine, RiHeartFill } from "react-icons/ri";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navigation = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const router = useRouter();
   return (
     <>
@@ -16,8 +28,15 @@ const Navigation = () => {
           >
             Li<span>bros</span>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={handleShow}
+            style={{ all: "unset" }}
+            className="d-block d-lg-none"
+          >
+            <GiHamburgerMenu className={styles.hamburger_menu} />
+          </Navbar.Toggle>
+          <Navbar.Collapse id="basic-navbar-nav" className="d-none d-lg-block">
             <Nav className="ms-auto">
               <Nav.Link className={styles.nav_search_btn_wrapper}>
                 <BsSearch className={styles.nav_search_icon} />
@@ -55,6 +74,25 @@ const Navigation = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {/* OFFCANVAS */}
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        className="d-block d-lg-none"
+        id={styles.nav_offcanvas}
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title className={styles.brand_logo_offcanvas}>
+            Li<span>bros</span>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
+      {/* END */}
     </>
   );
 };
