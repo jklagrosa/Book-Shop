@@ -81,11 +81,20 @@
          }
 
          @media only screen and (max-width: 576px) {
-            font-size: 3rem;
+            font-size: 3.2rem;
+            text-align: left;
+        }
+
+          @media only screen and (max-width: 400px) {
+            font-size: 2.6rem;
           }
 
           @media only screen and (max-width: 375px) {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
+          }
+
+          @media only screen and (max-width: 330px) {
+            font-size: 2.2rem;
           }
 
     }
@@ -106,6 +115,10 @@
         margin-top: 2rem;  
         text-align: center;
 
+        @media only screen and (max-width: 576px) {
+            text-align: left;
+        }
+
         .span_divider{
             padding: 0 0.6rem;
 
@@ -121,6 +134,7 @@
             cursor: pointer;
             font-size: 1rem;
             transition: all 0.2s ease-in;
+            text-align: center;
 
             background-color: $BTN_BLUE;
             color: white;
@@ -161,6 +175,7 @@
             max-width: 90px;
             width: 100%;
             font-size: 0.8rem;
+            
         }
 
      

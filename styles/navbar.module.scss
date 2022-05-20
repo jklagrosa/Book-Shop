@@ -1,6 +1,235 @@
 @import "../styles/colors.scss";
 
 
+// SEARCH OFFCANVAS
+#nav_offcanvas_search{
+    
+ 
+
+   
+ 
+    .brand_logo_offcanvas_search{
+
+        font-size: 2rem;
+        color: $BLACK;
+        font-weight: bold;
+        span{
+            color: $YELLOW;
+            text-transform: uppercase;
+        }
+
+        @media only screen and (min-width: 2501px) {
+            font-size: 5rem;
+        }
+
+        @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+            font-size: 3.5rem;
+        }
+
+        @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+            font-size: 3rem;
+        }
+    }
+
+
+    .nav_offcanvas_search_wrapper{
+        margin: 0 auto;
+        background-color: $BLACK;
+        max-width: 700px;
+        width: 100%;
+        border-radius: 5px;
+
+        @media only screen and (max-width: 767px) {
+            max-width: 300px;
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 400px) {
+            max-width: 250px;
+            width: 100%;
+        }
+     
+        .nav_offcanvas_search_input{
+            all: unset;
+            padding: 0.8rem 1rem;
+            max-width: 610px;
+            width: 100%;
+            color: white;
+            font-size: 1.25rem;
+            font-style: italic;
+          
+            &::placeholder{
+                font-style: italic;
+                font-size: 1.25rem;
+                color: darkgrey;
+
+
+                @media only screen and (min-width: 2501px) {
+                    font-size: 2.6rem;
+                }
+
+                @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                    font-size: 2rem;
+                }
+
+                @media only screen and (min-width: 1800px) and (max-width: 2200px) {
+                    font-size: 1.5rem;
+                }
+
+                @media only screen and (max-width: 767px) {
+                   
+                    font-size: 1rem;
+                }
+
+                @media only screen and (max-width: 400px) {
+                    font-size: 0.8rem;
+                }
+
+            }
+
+            @media only screen and (min-width: 2501px) {
+                font-size: 2.6rem;
+            }
+
+            @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                font-size: 2rem;
+            }
+
+            @media only screen and (min-width: 1800px) and (max-width: 2200px) {
+                font-size: 1.5rem;
+            }
+
+
+            @media only screen and (max-width: 767px) {
+                max-width: 220px;
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            @media only screen and (max-width: 400px) {
+                max-width: 175px;
+                width: 100%;
+            }
+
+        }
+
+        .nav_offcanvas_search_btn{
+            cursor: pointer;
+            color: white;
+            font-size: 1.7rem;
+            margin-left: 0.7rem;
+            margin-top: -0.5rem;
+
+
+            
+            @media only screen and (min-width: 2501px) {
+                margin-left: 0.3rem;
+                margin-top: -1.5rem;
+                font-size: 3rem;
+            }
+
+            @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                margin-left: 0.4rem;
+                margin-top: -1rem;
+                font-size: 2.8rem;
+            }
+
+            @media only screen and (min-width: 1800px) and (max-width: 2200px) {
+                margin-left: 0.6rem;
+                margin-top: -0.6rem;
+                font-size: 2.3rem;
+            }
+
+            @media only screen and (max-width: 767px) {
+                margin-left: 0.7rem;
+                margin-top: -0.3rem;
+                font-size: 1.5rem;
+            }
+
+            @media only screen and (max-width: 400px) {
+                margin-left: 0.8rem;
+                margin-top: -0.3rem;
+                font-size: 1rem;
+            }
+
+        }
+    // .nav_offcanvas_search_input{
+    //     all: unset;
+    //     margin: 0 auto;
+    //     display: block;
+    //     max-width: 500px;
+    //     width: 100%;
+    //     padding: 0.6rem 1rem;
+    //     border: 3px solid $BLACK;
+    //     font-size: 1.25rem;
+    //     background: $BLACK;
+    //     border-radius: 3px;
+    //     margin-top: -1rem;
+    //     color: white;
+    //     font-style: italic;
+
+
+    //     &::placeholder{
+    //         color: darkgrey;
+    //         font-style: italic;
+    //         font-size: 1.25rem;
+
+
+    //         @media only screen and (min-width: 2501px) {
+    //             font-size: 2.5rem;
+    //         }
+
+    //         @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+    //             font-size: 2rem;
+    //         }
+
+    //         @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+    //             font-size: 1.5rem;
+    //         }
+    //     }
+
+
+    //     @media only screen and (min-width: 2501px) {
+    //         max-width: 1000px;
+    //         width: 100%;
+    //         font-size: 2.5rem;
+    //         padding: 1rem;
+    //     }
+
+    //     @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+    //         max-width: 800px;
+    //         width: 100%;
+    //         font-size: 2rem;
+    //         padding: 1rem;
+    //     }
+
+    //     @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+    //         max-width: 700px;
+    //         width: 100%;
+    //         font-size: 1.5rem;
+    //         padding: 1rem;
+    //     }
+
+    // }
+
+}
+
+   
+
+    .brand_logo_offcanvas{
+        
+        font-size: 2rem;
+        color: $BLACK;
+        font-weight: bold;
+        span{
+            color: $YELLOW;
+            text-transform: uppercase;
+        }
+    }
+}
+
+// END
+
 #nav_offcanvas{
     
     @media only screen and (max-width: 600px) { 
@@ -234,6 +463,48 @@
     @media only screen and (min-width: 1500px) and (max-width: 1800px) {
         font-size: 2.25rem;
     }
+
+
+    @media only screen and (max-width: 576px) {
+        display: none;
+    }
+
+
+    }
+
+
+    .brand_logo_smalls_device{
+            font-size: 2rem;
+            color: $BLACK;
+            font-weight: bold;
+            display: none;
+            cursor: pointer;
+            span{
+                color: $YELLOW;
+                text-transform: uppercase;
+            }
+    
+      
+        
+            @media only screen and (min-width: 2201px) {
+                font-size: 3rem;
+            }
+        
+        
+            @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                font-size: 2.5rem;
+            }
+        
+            
+        @media only screen and (min-width: 1500px) and (max-width: 1800px) {
+            font-size: 2.25rem;
+        }
+
+        @media only screen and (max-width: 576px) {
+            display: block;
+            font-size: 1.5rem;
+        }
+       
     }
 
     .hamburger_menu{

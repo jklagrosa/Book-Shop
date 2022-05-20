@@ -35,6 +35,54 @@ const Navigation = () => {
           >
             Li<span>bros</span>
           </Navbar.Brand>
+
+          {/* BELOW 576px */}
+          <Navbar.Brand
+            onClick={() => router.push("/")}
+            className={styles.brand_logo_smalls_device}
+          >
+            L<span>b</span>
+          </Navbar.Brand>
+
+          {/* END */}
+
+          {/* BELOW 991px */}
+
+          <Nav className="d-inline-block ms-auto d-block d-lg-none">
+            <Nav.Link className="d-inline-block">
+              <BsSearch
+                className={styles.nav_icons}
+                id={styles.nav_icons_search}
+                onClick={search_handleShow}
+              />
+            </Nav.Link>
+            <span className="mx-3"></span>
+            <Nav.Link href="#" className="d-inline-block">
+              <BsCart2 className={styles.nav_icons} />
+              {/* <BsCartFill className={styles.nav_icons} /> */}
+              <sup className={styles.sup_badge} id={styles.sup_badge_cart}>
+                9
+              </sup>
+            </Nav.Link>
+            <span className="mx-3"></span>
+            <Nav.Link className="d-inline-block">
+              <RiHeartLine
+                className={styles.nav_icons}
+                id={styles.nav_icons_heart}
+              />
+              {/* <RiHeartFill
+                  className={styles.nav_icons}
+                  id={styles.nav_icons_heart}
+                /> */}
+              <sup className={styles.sup_badge} id={styles.sup_badge_likes}>
+                9
+              </sup>
+            </Nav.Link>
+            <span className="mx-3"></span>
+          </Nav>
+
+          {/* END */}
+
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
             onClick={handleShow}
@@ -43,6 +91,7 @@ const Navigation = () => {
           >
             <GiHamburgerMenu className={styles.hamburger_menu} />
           </Navbar.Toggle>
+
           <Navbar.Collapse id="basic-navbar-nav" className="d-none d-lg-block">
             <Nav className="ms-auto">
               <Nav.Link>
@@ -111,8 +160,8 @@ const Navigation = () => {
         placement="top"
         show={search_show}
         onHide={search_handleClose}
-        id={styles.nav_offcanvas}
-        className="d-none d-lg-block"
+        id={styles.nav_offcanvas_search}
+        // className="d-none d-lg-block"
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title className={styles.brand_logo_offcanvas_search}>
