@@ -1,0 +1,27 @@
+@import "../styles/colors.scss";
+
+
+.Wrapper{
+    padding: 4rem 2rem;
+
+
+    .mySwiper{
+        z-index: -1;
+        margin: 0 auto;
+        display: block;
+        .mySwiperSlide{
+            transform: translateZ(0);
+            -web-kit-transform: translateZ(0);
+            max-width: 300px;
+            width: 100%;
+            
+            img{
+                max-width: 100%;
+                object-fit: cover;
+                object-position: center;
+                min-height: 400px;
+            }
+        }
+    }
+
+}
