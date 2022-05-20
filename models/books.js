@@ -28,6 +28,12 @@ const bookSchema = new mongoose.Schema({
   desc: {
     type: String,
   },
+  cat: {
+    type: String,
+  },
+  prevPrice: {
+    type: Number,
+  },
 });
 
 mongoose.models = {};
