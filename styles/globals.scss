@@ -1,3 +1,6 @@
+@import "../styles/colors.scss";
+
+
 html,
 body {
   padding: 0;
@@ -12,6 +15,40 @@ body {
   box-sizing: border-box;
   scroll-behavior: smooth;
   
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  margin-top: -140px !important;
+	background-color: $BLACK;
+  padding: 2rem;
+  color: white !important;
+  border-radius: 10px;
+  opacity: 0.7;
+  transition: 0.2s ease-in;
+  &:hover{
+    transition: 0.2s ease-out;
+    opacity: 1;
+  }
+
+  @media only screen and (min-width: 2501px){
+    padding: 3.5rem;
+  margin-top: -130px !important;
+
+}
+
+  @media only screen and (min-width: 2201px) and (max-width: 2500px){
+    padding: 3rem;
+  margin-top: -140px !important;
+
+}
+
+  @media only screen and (min-width: 1801px) and (max-width: 2200px){
+    padding: 2.5rem;
+  margin-top: -180px !important;
+
+}
+
 }
 
 
