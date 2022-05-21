@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { Tooltip } from "@mui/material";
-import styles from "../styles/featured.module.scss";
+import styles from "../styles/bestseller.module.scss";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import NO_DATA_TO_SHOW from "./NO_DATA_TO_SHOW";
@@ -56,8 +56,10 @@ const Featured = () => {
     <>
       <div className={styles.Wrapper}>
         <Container fluid="lg">
-          <Tooltip title="View all featured books" placement="right-start">
-            <h1 className={styles.featured_top_header_tag}>Featured Books</h1>
+          <Tooltip title="View all best seller books" placement="right-start">
+            <h1 className={styles.featured_top_header_tag}>
+              Alltime Best Seller
+            </h1>
           </Tooltip>
 
           {/* KEEN SLIDER */}

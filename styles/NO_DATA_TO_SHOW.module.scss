@@ -2,6 +2,89 @@
 
 
 .Wrapper{
-    background-color: red;
+    background-color: white;
     padding: 4rem 2rem;
+    text-align: center;
+
+    @media only screen and (max-width: 767px) {
+        padding: 2rem 1rem;
+     }
+  
+
+    h1{  
+        margin: 0 auto;
+        max-width: 400px;
+        width: 100%;
+        font-weight: 400;
+        color: darkgrey;
+        font-style: italic;
+        font-size: 1.5rem;
+        margin-top: 2rem;
+
+
+        @media only screen and (min-width: 2501px) {
+            font-size: 2.7rem;
+            max-width: 900px;
+         }
+
+        @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+            font-size: 2.5rem;
+            max-width: 900px;
+         }
+
+        @media only screen and (min-width: 1800px) and (max-width: 2200px) {
+            font-size: 2rem;
+            max-width: 700px;
+         }
+
+    }
+
+    .icon{
+        display: block;
+        margin: 0 auto;
+        margin-top: 1rem;
+        font-size: 3rem;
+        color: darkgrey;
+
+        
+        @media only screen and (min-width: 2501px) {
+            font-size: 4.5rem;
+          
+         }
+
+        @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+            font-size: 4rem;
+         
+         }
+
+        @media only screen and (min-width: 1800px) and (max-width: 2200px) {
+            font-size: 3.5rem;
+          
+         }
+
+    }
+
+    button{
+        all: unset;
+        cursor: pointer;
+        margin-top: 2rem;
+        font-size: 1rem;
+        color: $BLUE;
+        text-decoration: underline;
+
+        @media only screen and (min-width: 2501px) {
+            font-size: 2rem;
+            text-decoration-thickness: 1px;
+         }
+
+        @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+            font-size: 1.7rem;
+            text-decoration-thickness: 1px;
+         }
+
+        @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+            font-size: 1.3rem;
+            text-decoration-thickness: 1px;
+         }
+    }
 }

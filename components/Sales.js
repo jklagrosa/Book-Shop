@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { Tooltip } from "@mui/material";
-import styles from "../styles/featured.module.scss";
+import styles from "../styles/sales.module.scss";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import NO_DATA_TO_SHOW from "./NO_DATA_TO_SHOW";
@@ -21,20 +21,20 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import { Navigation, EffectFade, Pagination } from "swiper";
 
-const Featured = () => {
+const Sales = () => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
-  const { books } = useSelector((state) => state.book);
+  const { saleBooks } = useSelector((state) => state.book);
 
   useEffect(() => {
-    if (!books) {
+    if (!saleBooks) {
       setDBooks(null);
       setIsEmpty(true);
     } else {
-      setDBooks(books);
+      setDBooks(saleBooks);
       setIsEmpty(false);
     }
-  }, [books]);
+  }, [saleBooks]);
 
   // const [sliderRef] = useKeenSlider({
   //   loop: true,
@@ -56,8 +56,10 @@ const Featured = () => {
     <>
       <div className={styles.Wrapper}>
         <Container fluid="lg">
-          <Tooltip title="View all featured books" placement="right-start">
-            <h1 className={styles.featured_top_header_tag}>Featured Books</h1>
+          <Tooltip title="View all books sale" placement="right-start">
+            <h1 className={styles.featured_top_header_tag}>
+              Limited Time Offer
+            </h1>
           </Tooltip>
 
           {/* KEEN SLIDER */}
@@ -182,7 +184,16 @@ const Featured = () => {
 
                     <div className={styles.mySwiperSlide_extra_details}>
                       <h5 className={styles.mySwiperSlide_extra_details_Price}>
-                        ₱{book.price}
+                        <span
+                          style={{
+                            textDecoration: "line-through",
+                            textDecorationThickness: "2px",
+                            color: "whitesmoke",
+                          }}
+                        >
+                          ₱{book.prevPrice}
+                        </span>
+                        {" / "}₱{book.price}
                       </h5>
                     </div>
                   </div>
@@ -199,4 +210,4 @@ const Featured = () => {
   );
 };
 
-export default Featured;
+export default Sales;

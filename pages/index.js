@@ -4,6 +4,8 @@ import NavigationLinks from "../components/NavLinks";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
 import Featured from "../components/Featured";
+import Sales from "../components/Sales";
+import BestSeller from "../components/BestSeller";
 import Dbconnection from "../utils/conn";
 import Books from "../models/books";
 import { useDispatch } from "react-redux";
@@ -63,6 +65,8 @@ export default function Home({ data_featured, data_sale }) {
       <Hero />
       <Services />
       <Featured />
+      <Sales />
+      <BestSeller />
     </>
   );
 }

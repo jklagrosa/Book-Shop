@@ -1,15 +1,16 @@
 import styles from "../styles/NO_DATA_TO_SHOW.module.scss";
+import { RiEmotionSadLine } from "react-icons/ri";
+import { useRouter } from "next/router";
 
 const No_Data_To_Show = () => {
+  const router = useRouter();
+
   return (
     <>
       <div className={styles.Wrapper}>
-        Anim velit irure esse ex veniam aliqua amet nostrud dolore. Dolore
-        officia velit qui consequat officia id dolore nulla aliquip voluptate.
-        Irure et magna cillum sunt sint do incididunt consequat. Ullamco eu
-        magna non amet fugiat est adipisicing ex fugiat pariatur proident.
-        Dolore qui amet incididunt tempor dolore adipisicing duis dolore aliqua
-        do eiusmod cillum. Est duis do excepteur ea adipisicing.
+        <h1>Cannot display the books right now, please try again later.</h1>
+        <RiEmotionSadLine className={styles.icon} />
+        <button onClick={() => router.reload()}>Reload the page</button>
       </div>
     </>
   );
