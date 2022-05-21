@@ -3,6 +3,7 @@ import { Tooltip } from "@mui/material";
 import styles from "../styles/featured.module.scss";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import NO_DATA_TO_SHOW from "./NO_DATA_TO_SHOW";
 
 // import { useKeenSlider } from "keen-slider/react";
 // import "keen-slider/keen-slider.min.css";
@@ -51,11 +52,14 @@ const TopRatesBooks = () => {
   //   // slides: { perView: 2 },
   // });
 
-  return !isEmpty ? (
+  return isEmpty ? (
     <>
       <div className={styles.Wrapper}>
         <Container fluid="lg">
-          <h1 className={styles.featured_top_header_tag}>Featured Books</h1>
+          <Tooltip title="View all featured books" placement="right-start">
+            <h1 className={styles.featured_top_header_tag}>Featured Books</h1>
+          </Tooltip>
+
           {/* KEEN SLIDER */}
           {/* <div
             ref={sliderRef}
@@ -190,7 +194,7 @@ const TopRatesBooks = () => {
     </>
   ) : (
     <>
-      <h1>No Data to show</h1>
+      <NO_DATA_TO_SHOW />
     </>
   );
 };
