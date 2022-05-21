@@ -130,7 +130,7 @@ const Sales = () => {
             }}
             modules={[Pagination, Navigation]}
             // className="mySwiper"
-            loop={true}
+            // loop={true}
             className={styles.mySwiper}
           >
             {d_books &&

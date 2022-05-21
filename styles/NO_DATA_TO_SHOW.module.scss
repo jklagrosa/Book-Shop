@@ -1,6 +1,11 @@
 @import "../styles/colors.scss";
 
 
+.divider{
+    border: 1px solid $BLACK !important;
+    opacity: 0.6;
+}
+
 .Wrapper{
     background-color: white;
     padding: 4rem 2rem;
@@ -19,7 +24,7 @@
         color: darkgrey;
         font-style: italic;
         font-size: 1.5rem;
-        margin-top: 2rem;
+     
 
 
         @media only screen and (min-width: 2501px) {
@@ -35,6 +40,11 @@
         @media only screen and (min-width: 1800px) and (max-width: 2200px) {
             font-size: 2rem;
             max-width: 700px;
+         }
+
+         @media only screen and (max-width: 576px) {
+            font-size: 1rem;
+            max-width: 300px;
          }
 
     }
@@ -85,6 +95,11 @@
         @media only screen and (min-width: 1600px) and (max-width: 2000px) {
             font-size: 1.3rem;
             text-decoration-thickness: 1px;
+         }
+
+         @media only screen and (max-width: 576px) {
+            font-size: 0.9rem;
+          
          }
     }
 }

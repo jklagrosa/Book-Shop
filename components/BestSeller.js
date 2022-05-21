@@ -24,17 +24,17 @@ import { Navigation, EffectFade, Pagination } from "swiper";
 const Featured = () => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
-  const { books } = useSelector((state) => state.book);
+  const { bestSeller } = useSelector((state) => state.book);
 
   useEffect(() => {
-    if (!books) {
+    if (!bestSeller) {
       setDBooks(null);
       setIsEmpty(true);
     } else {
-      setDBooks(books);
+      setDBooks(bestSeller);
       setIsEmpty(false);
     }
-  }, [books]);
+  }, [bestSeller]);
 
   // const [sliderRef] = useKeenSlider({
   //   loop: true,
@@ -130,7 +130,7 @@ const Featured = () => {
             }}
             modules={[Pagination, Navigation]}
             // className="mySwiper"
-            loop={true}
+            // loop={true}
             className={styles.mySwiper}
           >
             {d_books &&

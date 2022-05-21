@@ -12,6 +12,7 @@ const No_Data_To_Show = () => {
         <RiEmotionSadLine className={styles.icon} />
         <button onClick={() => router.reload()}>Reload the page</button>
       </div>
+      <hr className={styles.divider}/>
     </>
   );
 };

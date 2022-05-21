@@ -9,19 +9,25 @@ import BestSeller from "../components/BestSeller";
 import Dbconnection from "../utils/conn";
 import Books from "../models/books";
 import { useDispatch } from "react-redux";
-import { GET_ALL_BOOKS, GET_ALL_BOOKS_SALE } from "../store/books";
+import {
+  GET_ALL_BOOKS,
+  GET_ALL_BOOKS_SALE,
+  GET_ALL_BEST_SELLER,
+} from "../store/books";
 
 // FEATURED BOOKS
 export async function getStaticProps() {
   await Dbconnection();
   const fetch_books_featured = await Books.find({ cat: { $in: ["tr", "ft"] } });
   const fetch_books_sale = await Books.find({ cat: { $in: ["sale"] } });
+  const fetch_books_best_seller = await Books.find({ cat: { $in: ["bs"] } });
 
-  if (!fetch_books_featured || !fetch_books_sale) {
+  if (!fetch_books_featured || !fetch_books_sale || !fetch_books_best_seller) {
     return {
       props: {
         data_featured: null,
         data_sale: null,
+        data_best_seller: null,
       },
     };
   }
@@ -30,15 +36,19 @@ export async function getStaticProps() {
     props: {
       data_featured: JSON.stringify(fetch_books_featured),
       data_sale: JSON.stringify(fetch_books_sale),
+      data_best_seller: JSON.stringify(fetch_books_best_seller),
     },
   };
 }
 // END ==============================================================
 
-export default function Home({ data_featured, data_sale }) {
+export default function Home({ data_featured, data_sale, data_best_seller }) {
   const dispatch = useDispatch();
   const parsed_data_featured = data_featured ? JSON.parse(data_featured) : null;
   const parsed_data_sale = data_sale ? JSON.parse(data_sale) : null;
+  const parsed_data_best_seller = data_best_seller
+    ? JSON.parse(data_best_seller)
+    : null;
 
   useEffect(() => {
     if (!parsed_data_featured) {
@@ -57,6 +67,15 @@ export default function Home({ data_featured, data_sale }) {
       // console.log("Sale Books: " + parsed_data_sale.map((x) => console.log(x)));
     }
   }, [parsed_data_sale]);
+
+  useEffect(() => {
+    if (!parsed_data_best_seller) {
+      dispatch(GET_ALL_BEST_SELLER(null));
+    } else {
+      dispatch(GET_ALL_BEST_SELLER(parsed_data_best_seller));
+      // console.log("Sale Books: " + parsed_data_sale.map((x) => console.log(x)));
+    }
+  }, [parsed_data_best_seller]);
 
   return (
     <>
