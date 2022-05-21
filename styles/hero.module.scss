@@ -3,31 +3,20 @@
 .Wrapper{
     padding: 4rem 2rem;
     background: linear-gradient(
-        rgba(0,0,0,0.7),
-        rgba(0,0,0,0.6) ) ,
+        rgba(0,0,0,0.8),
+        rgba(0,0,0,0.5) ) ,
         url('/bgs/hero.jpg') no-repeat;
     background-size: cover;
     background-position: center;
     max-width: 100vw;
-    min-height: 700px;
+    min-height: 100vh;
 
 
-    @media only screen and (min-width: 2501px) {
-        min-height: 1200px;
-    }
-
-
-    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
-        min-height: 1000px;
-    }
-
-    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
-        min-height: 850px;
-    }
+   
 
     @media only screen and (max-width: 768px) {
         padding: 2rem 1rem;
-        min-height: 100vh;
+        
      }
 
   
@@ -101,19 +90,27 @@
 
     span{
         &:nth-child(1){
-            color: $PINK;
+            // color: $PINK;
+            color: #00f5d4;
+          
         }
         &:nth-child(2){
             color: $YELLOW;
         }
         &:nth-child(3){
+            // color: #FF2400;
             color: $RED;
+          
         }
     }
 
     .hero_btn_wrapper{
         margin-top: 2rem;  
         text-align: center;
+
+        @media only screen and (min-width: 1700px) {
+            margin-top: 3rem;
+        }
 
         @media only screen and (max-width: 576px) {
             text-align: left;
@@ -136,12 +133,13 @@
             transition: all 0.2s ease-in;
             text-align: center;
 
-            background-color: $BTN_BLUE;
+            // background-color: $BTN_BLUE;
+            background-color: #00296b;
             color: white;
 
                 &:hover{
                     transition: all 0.2s ease-out;
-                    background-color: $H_BLUE;
+                    background-color: #003f88;
                 }
           
 
