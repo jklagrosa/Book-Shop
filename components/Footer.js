@@ -30,15 +30,24 @@ const Footer = () => {
                   <a
                     href="https://www.linkedin.com/in/jklagrosa/"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     LinkedIn
                   </a>
                   <br />
-                  <a href="https://github.com/jklagrosa" target="_blank">
+                  <a
+                    href="https://github.com/jklagrosa"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Github
                   </a>
                   <br />
-                  <a href="mailto:jklagrosa.dev@gmail.com" target="_blank">
+                  <a
+                    href="mailto:jklagrosa.dev@gmail.com"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Gmail
                   </a>
                   <br />
