@@ -104,8 +104,8 @@ const Testimonials = () => {
               <p>
                 <ImQuotesLeft className="me-2" id={styles.quotes} />
                 This is my favorite bookstore! The pricing and atmosphere are
-                both great and I visit routinely to see what&apos;s new the owners
-                are helpful and friendly too!
+                both great and I visit routinely to see what&apos;s new the
+                owners are helpful and friendly too!
                 <ImQuotesRight className="ms-2" id={styles.quotes} />
               </p>
               <div className={styles.names_wrapper}>

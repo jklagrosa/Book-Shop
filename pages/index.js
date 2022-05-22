@@ -59,7 +59,7 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       dispatch(GET_ALL_BOOKS(parsed_data_featured));
       // console.log("Fetch success: " + parsed_data.map((x) => console.log(x)));
     }
-  }, [parsed_data_featured]);
+  }, [parsed_data_featured, dispatch]);
 
   useEffect(() => {
     if (!parsed_data_sale) {
@@ -68,7 +68,7 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       dispatch(GET_ALL_BOOKS_SALE(parsed_data_sale));
       // console.log("Sale Books: " + parsed_data_sale.map((x) => console.log(x)));
     }
-  }, [parsed_data_sale]);
+  }, [parsed_data_sale, dispatch]);
 
   useEffect(() => {
     if (!parsed_data_best_seller) {
@@ -77,7 +77,7 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       dispatch(GET_ALL_BEST_SELLER(parsed_data_best_seller));
       // console.log("Sale Books: " + parsed_data_sale.map((x) => console.log(x)));
     }
-  }, [parsed_data_best_seller]);
+  }, [parsed_data_best_seller, dispatch]);
 
   return (
     <>
