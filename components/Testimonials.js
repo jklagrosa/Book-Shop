@@ -79,7 +79,7 @@ const Testimonials = () => {
                 <ImQuotesLeft className="me-2" id={styles.quotes} />
                 I finally made it to find this bookshop. I love it! I barely
                 made a start in looking through the many many stacks so I def
-                know I'll be back often! You must check it out!
+                know I&apos;ll be back often! You must check it out!
                 <ImQuotesRight className="ms-2" id={styles.quotes} />
               </p>
               <div className={styles.names_wrapper}>
@@ -104,7 +104,7 @@ const Testimonials = () => {
               <p>
                 <ImQuotesLeft className="me-2" id={styles.quotes} />
                 This is my favorite bookstore! The pricing and atmosphere are
-                both great and I visit routinely to see what's new the owners
+                both great and I visit routinely to see what&apos;s new the owners
                 are helpful and friendly too!
                 <ImQuotesRight className="ms-2" id={styles.quotes} />
               </p>
