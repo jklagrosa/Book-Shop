@@ -9,7 +9,7 @@ const FAQ = () => {
           <h1 className={styles.featured_top_header_tag}>
             Frequently Asked Questions
           </h1>
-          <Accordion defaultActiveKey="0">
+          <Accordion>
             <Accordion.Item eventKey="0" className={styles.faq_accordion}>
               <Accordion.Header>
                 <h5 className={styles.faq_header}>

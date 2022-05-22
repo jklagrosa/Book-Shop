@@ -1,0 +1,67 @@
+@import "../styles/colors.scss";
+
+.Wrapper{
+    padding: 4rem 2rem;
+    background-color: $BLACK;
+    color: whitesmoke;
+
+    @media only screen and (max-width: 767px){
+        padding: 2rem 1rem;
+    }
+
+
+.footer_box{
+    margin-bottom: 1.25rem;
+
+    .footer_h5{
+        margin-bottom: 0.6rem;
+        font-size: 1rem;
+        color: grey;
+        font-weight: normal;
+    }
+
+    .footer_links_wrapper_tech_used{
+        .footer_tech_used{
+            all: unset;
+            font-size: 1rem;
+            display: block;
+            color: darkgrey;
+        }
+    }
+
+   
+
+   .footer_links_wrapper a{
+       font-size: 1rem;
+       display: inline-block;
+       color: darkgrey;
+       cursor: pointer;
+
+       text-decoration: none;
+ 
+
+       &:hover{
+           text-decoration: underline;
+       }
+   }
+
+    .brand_logo_offcanvas{
+        font-size: 2.5rem;
+        color: whitesmoke;
+        font-weight: bold;
+        span{
+            color: $YELLOW;
+            text-transform: uppercase;
+        }
+    }
+
+   p{
+       max-width: 300px;
+       width: 100%;
+       font-size: 1rem;
+       color: grey;
+   }
+}
+  
+
+}

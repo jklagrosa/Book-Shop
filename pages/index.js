@@ -9,6 +9,7 @@ import BestSeller from "../components/BestSeller";
 import Testimonials from "../components/Testimonials";
 import Other from "../components/Other";
 import FAQ from "../components/FAQ";
+import Footer from "../components/Footer";
 import Dbconnection from "../utils/conn";
 import Books from "../models/books";
 import { useDispatch } from "react-redux";
@@ -92,6 +93,7 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       <Other />
       <Testimonials />
       <FAQ />
+      <Footer />
     </>
   );
 }
