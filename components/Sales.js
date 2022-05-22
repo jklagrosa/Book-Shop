@@ -19,7 +19,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
-import { Navigation, EffectFade, Pagination } from "swiper";
+import { Navigation } from "swiper";
 
 const Sales = () => {
   const [d_books, setDBooks] = useState([]);
@@ -128,7 +128,7 @@ const Sales = () => {
                 spaceBetween: 30,
               },
             }}
-            modules={[Pagination, Navigation]}
+            modules={[Navigation]}
             // className="mySwiper"
             // loop={true}
             className={styles.mySwiper}
