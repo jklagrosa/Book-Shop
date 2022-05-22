@@ -13,7 +13,7 @@ const FAQ = () => {
             <Accordion.Item eventKey="0" className={styles.faq_accordion}>
               <Accordion.Header>
                 <h5 className={styles.faq_header}>
-                  How do I return an order if I receive a book that I don't
+                  How do I return an order if I receive a book that I don&apos;t
                   want?
                 </h5>
               </Accordion.Header>
@@ -31,7 +31,8 @@ const FAQ = () => {
             <Accordion.Item eventKey="1" className={styles.faq_accordion}>
               <Accordion.Header>
                 <h5 className={styles.faq_header}>
-                  If I'm an affiliate, how are the sales of my books handled?
+                  If I&apos;m an affiliate, how are the sales of my books
+                  handled?
                 </h5>
               </Accordion.Header>
               <Accordion.Body>
@@ -53,8 +54,8 @@ const FAQ = () => {
                 <p className={styles.faq_body}>
                   Yes, as your shipping method. There is no charge for this
                   service, and you can pick up the books at our Pickup counter.
-                  After you receive your "Ready for Pickup" email from us, bring
-                  your order number and a photo ID to the bookstore.
+                  After you receive your &quot;Ready for Pickup&quot; email from
+                  us, bring your order number and a photo ID to the bookstore.
                 </p>
               </Accordion.Body>
             </Accordion.Item>
