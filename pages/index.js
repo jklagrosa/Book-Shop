@@ -6,7 +6,7 @@ import Services from "../components/Services";
 import Featured from "../components/Featured";
 import Sales from "../components/Sales";
 import BestSeller from "../components/BestSeller";
-import Testimonials from "../components/Testimonials";
+// import Testimonials from "../components/Testimonials";
 import Other from "../components/Other";
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
@@ -92,7 +92,6 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       <Sales />
       <BestSeller />
       <Other />
-      <Testimonials />
       <FAQ />
       <Footer />
       <Copyright />

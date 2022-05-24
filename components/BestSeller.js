@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import NO_DATA_TO_SHOW from "./NO_DATA_TO_SHOW";
 
+import { BsCartFill, BsCart2 } from "react-icons/bs";
+
 // import { useKeenSlider } from "keen-slider/react";
 // import "keen-slider/keen-slider.min.css";
 // import "./styles.css";
@@ -103,21 +105,21 @@ const Featured = () => {
                 slidesPerView: 2,
                 spaceBetween: 10,
               },
-              800: {
+              992: {
                 slidesPerView: 3,
                 spaceBetween: 15,
               },
               1024: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 15,
               },
               1200: {
                 slidesPerView: 5,
-                spaceBetween: 30,
+                spaceBetween: 20,
               },
               1801: {
                 slidesPerView: 4,
-                spaceBetween: 30,
+                spaceBetween: 20,
               },
               2201: {
                 slidesPerView: 3,
@@ -136,12 +138,30 @@ const Featured = () => {
             {d_books &&
               d_books.map((book) => (
                 <SwiperSlide className={styles.mySwiperSlide} key={book._id}>
-                  <img
-                    src={`/books/${book.img}`}
-                    className={styles.mySwiperSlide_img}
-                    loading="lazy"
-                  />
+                  <div className={styles.mySwiperSlide_img_wrapper}>
+                    <img
+                      src={`/books/${book.img}`}
+                      className={styles.mySwiperSlide_img}
+                      loading="lazy"
+                    />
+                  </div>
                   <div className={styles.mySwiperSlide_details}>
+                    <h5>
+                      <Tooltip title="Add to favourites" placement="top-start">
+                        <MdFavoriteBorder
+                          className={styles.mySwiperSlide_tooltip_favourites}
+                          id={styles.mySwiperSlide_author_favourites}
+                        />
+                      </Tooltip>
+                      <span className="mx-2"></span>
+                      <Tooltip title="Add to cart" placement="top-start">
+                        <BsCart2
+                          className={styles.mySwiperSlide_tooltip_cart}
+                          id={styles.mySwiperSlide_author_favourites}
+                        />
+                      </Tooltip>
+                    </h5>
+
                     <Tooltip title="Genre" placement="top-start">
                       <h6>{book.genre}</h6>
                     </Tooltip>
@@ -166,19 +186,6 @@ const Featured = () => {
                           className={styles.mySwiperSlide_author}
                         />{" "}
                         {book.ratings}/5
-                      </h5>
-                    </Tooltip>
-
-                    <Tooltip
-                      title="Add to favourites"
-                      placement="bottom-start"
-                      className={styles.mySwiperSlide_tooltip_favourites}
-                    >
-                      <h5>
-                        <MdFavoriteBorder
-                          className={styles.mySwiperSlide_author}
-                          id={styles.mySwiperSlide_author_favourites}
-                        />
                       </h5>
                     </Tooltip>
 

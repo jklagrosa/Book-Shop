@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import NO_DATA_TO_SHOW from "./NO_DATA_TO_SHOW";
 
+import { BsCartFill, BsCart2 } from "react-icons/bs";
+
 // import { useKeenSlider } from "keen-slider/react";
 // import "keen-slider/keen-slider.min.css";
 // import "./styles.css";
@@ -21,7 +23,7 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import { Navigation } from "swiper";
 
-const Sales = () => {
+const Featured = () => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
   const { saleBooks } = useSelector((state) => state.book);
@@ -56,9 +58,9 @@ const Sales = () => {
     <>
       <div className={styles.Wrapper}>
         <Container fluid="lg">
-          <Tooltip title="View all books sale" placement="right-start">
+          <Tooltip title="View all sale books" placement="right-start">
             <h1 className={styles.featured_top_header_tag}>
-              Limited Time Offer
+              Limited Time Offers
             </h1>
           </Tooltip>
 
@@ -103,21 +105,21 @@ const Sales = () => {
                 slidesPerView: 2,
                 spaceBetween: 10,
               },
-              800: {
+              992: {
                 slidesPerView: 3,
                 spaceBetween: 15,
               },
               1024: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 15,
               },
               1200: {
                 slidesPerView: 5,
-                spaceBetween: 30,
+                spaceBetween: 20,
               },
               1801: {
                 slidesPerView: 4,
-                spaceBetween: 30,
+                spaceBetween: 20,
               },
               2201: {
                 slidesPerView: 3,
@@ -136,12 +138,29 @@ const Sales = () => {
             {d_books &&
               d_books.map((book) => (
                 <SwiperSlide className={styles.mySwiperSlide} key={book._id}>
-                  <img
-                    src={`/books/${book.img}`}
-                    className={styles.mySwiperSlide_img}
-                    loading="lazy"
-                  />
+                  <div className={styles.mySwiperSlide_img_wrapper}>
+                    <img
+                      src={`/books/${book.img}`}
+                      className={styles.mySwiperSlide_img}
+                      loading="lazy"
+                    />
+                  </div>
                   <div className={styles.mySwiperSlide_details}>
+                    <h5>
+                      <Tooltip title="Add to favourites" placement="top-start">
+                        <MdFavoriteBorder
+                          className={styles.mySwiperSlide_tooltip_favourites}
+                        />
+                      </Tooltip>
+                      <span className="mx-2"></span>
+
+                      <Tooltip title="Add to cart" placement="top-start">
+                        <BsCart2
+                          className={styles.mySwiperSlide_tooltip_cart}
+                        />
+                      </Tooltip>
+                    </h5>
+
                     <Tooltip title="Genre" placement="top-start">
                       <h6>{book.genre}</h6>
                     </Tooltip>
@@ -169,31 +188,12 @@ const Sales = () => {
                       </h5>
                     </Tooltip>
 
-                    <Tooltip
-                      title="Add to favourites"
-                      placement="bottom-start"
-                      className={styles.mySwiperSlide_tooltip_favourites}
-                    >
-                      <h5>
-                        <MdFavoriteBorder
-                          className={styles.mySwiperSlide_author}
-                          id={styles.mySwiperSlide_author_favourites}
-                        />
-                      </h5>
-                    </Tooltip>
-
                     <div className={styles.mySwiperSlide_extra_details}>
                       <h5 className={styles.mySwiperSlide_extra_details_Price}>
-                        <span
-                          style={{
-                            textDecoration: "line-through",
-                            textDecorationThickness: "2px",
-                            color: "whitesmoke",
-                          }}
-                        >
+                        <span style={{ textDecoration: "line-through" }}>
                           ₱{book.prevPrice}
-                        </span>
-                        {" / "}₱{book.price}
+                        </span>{" "}
+                        / ₱{book.price}
                       </h5>
                     </div>
                   </div>
@@ -210,4 +210,4 @@ const Sales = () => {
   );
 };
 
-export default Sales;
+export default Featured;

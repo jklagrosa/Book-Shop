@@ -3,7 +3,7 @@
 
 .Wrapper{
     padding: 4rem 2rem;
-
+    background-color: white;
 
     @media only screen and (max-width: 767px){
         padding: 2rem 1rem;
@@ -12,311 +12,330 @@
 
     .featured_top_header_tag{
         font-size: 2rem;
-        font-weight: 300;
-        margin-bottom: 2rem;
+        font-weight: 400;
+        margin-bottom: 1.25rem;
         cursor: pointer;
         display: inline-block;
-        transition: all 0.2s ease-in;
 
         &:hover{
-        transition: all 0.2s ease-out;
-            color: $BTN_BLUE;
+            color: $PINK;
             text-decoration: underline;
             text-decoration-thickness: 1px;
         }
 
-        @media only screen and (min-width: 2501px){
+        @media only screen and (min-width: 2501px) {
             font-size: 3.5rem;
-        }
+      }
 
-           @media only screen and (min-width: 2001px) and (max-width: 2500px){
+        @media only screen and (min-width: 2201px) and (max-width: 2500px) {
             font-size: 3rem;
-        }
+      }
 
-           @media only screen and (min-width: 1600px) and (max-width: 2000px){
-            font-size: 2.5rem;
-        }
 
-        @media only screen and (max-width: 640px){
-           font-size: 1.5rem;
-           font-weight: 500;
-        }
+    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+        font-size: 2.5rem;
+  }
+
+        @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+          font-size: 2.25rem;
     }
 
+       
+        @media only screen and (max-width: 768px) {
+            font-size: 1.5rem;
+    }
+    }
 
-    .mySwiper{    
-        margin: 0 auto;
+    .mySwiper{
+  
         .mySwiperSlide{
             transform: translateZ(0);
-            -web-kit-transform: translateZ(0);
-            margin: 0 auto;
-            max-width: 600px;
+            -web-kit-transform: translateZ(0);  
+            max-width: 700px;
             width: 100%;
-            min-height: 550px;
-            // background-color: red;
+            min-height: 600px;
             transition: all 0.3s ease-in;
-            transform: translateY(0);
+            cursor: pointer;
+            background: white;
+            // background-color: green;
 
             &:hover{
-            transition: all 0.3s ease-out;
-            transform: translateY(-5px);
-
+                transition: all 0.3s ease-out;
+                background-color: whitesmoke;
             }
-         
+
+
+
+            @media only screen and (min-width: 2501px) {
+                min-height: 1500px; 
+        }
+
+
+            @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                min-height: 1050px; 
+        }
+
+            @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                min-height: 800px; 
+        }
+
            
+            @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                min-height: 700px; 
+        }
 
-            cursor: pointer;
 
-            
-           
-
-            .mySwiperSlide_tooltip{
-                max-width: 100px;
-            //    background-color: red;
-
-               @media only screen and (min-width: 2501px){
-                max-width: 180px;
-            }
-
-               @media only screen and (min-width: 2201px) and (max-width: 2500px){
-                max-width: 180px;
-            }
-
-               @media only screen and (min-width: 1801px) and (max-width: 2200px){
-                max-width: 130px;
-            }
-               
-            }
-
-            .mySwiperSlide_tooltip_favourites{
-                max-width: 30px;
-                // background-color: red;
-
-                @media only screen and (min-width: 2501px){
-                    max-width: 90px;
-                }
-
-                @media only screen and (min-width: 2201px) and (max-width: 2500px){
-                    max-width: 80px;
-                }
-
-                @media only screen and (min-width: 1801px) and (max-width: 2200px){
-                    max-width: 50px;
-                }
-                
-            }
-
-            .mySwiperSlide_img{
+            .mySwiperSlide_img_wrapper{
                 position: relative;
-                width: 100%;
-                min-height: 350px;
-                object-fit: cover;
-                object-position: center;
-                margin-bottom: 1rem;
+                .mySwiperSlide_img{
+                    max-width: 100%;
+                    width: 100%;
+                    min-height: 350px;
+                    object-fit: cover;
+                    object-position: center;
 
 
-                @media only screen and (min-width: 2501px){
-                    min-height: 950px;
+                    @media only screen and (min-width: 2501px) {
+                        min-height: 1100px; 
                 }
 
-                @media only screen and (min-width: 2201px) and (max-width: 2500px){
-                    min-height: 700px;
+                    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                        min-height: 700px;
                 }
 
-                @media only screen and (min-width: 1801px) and (max-width: 2200px){
-                    min-height: 500px;
+
+                    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                        min-height: 550px;
                 }
 
-                @media only screen and (min-width: 1400px) and (max-width: 1800px){
-                    min-height: 380px;
+
+                @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                    
+                        min-height: 460px;
                 }
 
-                @media only screen and (max-width: 1023px) { 
+
+                @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+                    
+                    min-height: 420px;
+                }
+
+                @media only screen and (min-width: 640px) and (max-width: 1023px) {
+                    
+                    max-height: 350px;
+                }
+
+                @media only screen and (max-width: 639px) {
                     max-height: 200px;
-                    height: 100%;
                 }
 
-                @media only screen and (max-width: 799px) { 
-                    // max-width: 300px;
-                    min-height: 250px;
-                    object-position: center bottom;
-                }
-
-                @media only screen and (max-width: 639px) { 
-                    // max-width: 500px;
-                    min-height: 260px;
-                    // object-position: center bottom;
-                }
             }
-
+            }
 
             .mySwiperSlide_details{
-             
-                padding: 0 0.1rem;
+                padding: 0.8rem  0.2rem;
+                h6{
+                    // Genre
+                    font-size: 0.9rem;
+                    font-weight: normal;
+                    margin-bottom: 0.6rem;
+                    color: darkgrey;
 
+                    @media only screen and (min-width: 2501px) {
+                        font-size: 2rem;
+                }
 
-                .mySwiperSlide_extra_details{
-                    // background: $YELLOW;
-                    background: $PINK;
-                    position: absolute;
-                    padding: 0.6rem 1rem;
-                    top: 10px;
-                    left: 0;
-                    text-align: center;
-                    border-top-right-radius: 5px;
-                    border-bottom-right-radius: 5px;
+                    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                        font-size: 1.6rem;
+                }
 
+                    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                        font-size: 1.25rem;
+                }
 
-                    .mySwiperSlide_extra_details_Price{
-                        margin-bottom: 0;
-                        font-size: 1.1rem;
-                        font-weight: 400;
-                        // color: $BLACK;
-                        color: whitesmoke;
-                        text-align: center;
-                        letter-spacing: 1px;
+                    
+                @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                    
+                    font-size: 1.1rem;
+            }
 
-                        @media only screen and (min-width: 2501px){
-                            font-size: 2.5rem;
-                        }
-
-                        @media only screen and (min-width: 2201px) and (max-width: 2500px){
-                            font-size: 2rem;
-                        }
-
-                        @media only screen and (min-width: 1801px) and (max-width: 2200px){
-                            font-size: 1.6rem;
-                        }
-
-                        @media only screen and (min-width: 1400px) and (max-width: 1800px){
-                            font-size: 1.25rem;
-                        }
+                    @media only screen and (max-width: 639px) {
+                        font-size: 1rem;
                     }
-                
+
+                }
+
+                h4{
+                    // TItle
+                    font-size: 1rem;
+                    margin-bottom: 1rem;
+
+
+                    @media only screen and (min-width: 2501px) {
+                        font-size: 2.7rem;
                 }
 
 
-                #mySwiperSlide_author_favourites{
-                    color: $RED;
-                    transition: all 0.2s ease-in;
+                    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                        font-size: 2.25rem;
+                }
+
+                    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                        font-size: 1.6rem;
+                }
+
+
+                    @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                    
+                        font-size: 1.3rem;
+                }
+
+                    @media only screen and (max-width: 639px) {
+                        font-size: 1.25rem;
+                    }
+                }
+
+                h5{
+                    // Icons
+                    font-size: 0.9rem;
+                    color: darkgrey;
+                    font-weight: normal;
+
+                    @media only screen and (min-width: 2501px) {
+                        font-size: 1.8rem;
+                }
+
+                    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                        font-size: 1.6rem;
+                }
+
+                    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                        font-size: 1.2rem;
+                }
+
+
+                    @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                    
+                        font-size: 1.05rem;
+                }
+
+                    @media only screen and (max-width: 639px) {
+                        font-size: 1rem;
+                    }
+
                 }
 
                 .mySwiperSlide_author{
                     font-size: 1.25rem;
-                    color: $BLACK;
-                    margin-right: 0.4rem;
-                    color: darkgrey;
 
-                    @media only screen and (min-width: 2501px){
-                        font-size: 3.25rem;
-                    }
-
-                    @media only screen and (min-width: 2201px) and (max-width: 2500px){
-                        font-size: 2.5rem;
-                    }
-
-                    @media only screen and (min-width: 1801px) and (max-width: 2200px){
-                        font-size: 2rem;
-                    }
                     
-                    @media only screen and (min-width: 1400px) and (max-width: 1800px){
-                        font-size: 1.5rem;
-                    }
-
-                    @media only screen and (max-width: 639px){
-                        font-size: 1.5rem;
-                    }
+                    @media only screen and (min-width: 2501px) {
+                        font-size: 2.4rem;
                 }
 
-              
-
-                h6{
-                    margin-bottom: 0.6rem;
-                    font-size: 0.9rem;
-                    font-weight: normal;
-                    color: grey;
-                    text-transform: capitalize;
-
-                    @media only screen and (min-width: 2501px){
+                    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
                         font-size: 2rem;
-                    }
-
-                    @media only screen and (min-width: 2201px) and (max-width: 2500px){
-                        font-size: 1.8rem;
-                    }
-
-                    @media only screen and (min-width: 1801px) and (max-width: 2200px){
-                        font-size: 1.4rem;
-                    }
-
-                    @media only screen and (min-width: 1400px) and (max-width: 1800px){
-                        font-size: 1.1rem;
-                    }
-
-                    @media only screen and (max-width: 639px){
-                        font-size: 1rem;
-                    }
                 }
-                h5{
-                    margin-bottom: 0.6rem;
-                    font-size: 0.9rem;
-                    font-weight: normal;
-                    color: grey;
-
-                    @media only screen and (min-width: 2501px){
-                        font-size: 1.8rem;
-                    }
-
-                    @media only screen and (min-width: 2201px) and (max-width: 2500px){
-                        font-size: 1.65rem;
-                    }
-
-                    @media only screen and (min-width: 1801px) and (max-width: 2200px){
-                        font-size: 1.4rem;
-                    }
-
-                    @media only screen and (min-width: 1400px) and (max-width: 1800px){
-                        font-size: 1.2rem;
-                    }
-
-                    @media only screen and (max-width: 639px){
-                        font-size: 1.1rem;
-                    }
-                   
+                    
+                    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                        font-size: 1.7rem;
                 }
-                h4{
-                    margin-bottom: 1rem;
-                    font-size: 1rem;
-                    text-transform: capitalize;
-                    font-weight: 500;
 
-                    @media only screen and (min-width: 2501px){
-                        margin-bottom: 2rem;
-                        font-size: 2.5rem;
-                    }
+                    @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                    
+                        font-size: 1.4rem;
+                }
 
-                    @media only screen and (min-width: 2201px) and (max-width: 2500px){
-                        margin-bottom: 2rem;
-                        font-size: 2.25rem;
-                    }
-
-                    @media only screen and (min-width: 1801px) and (max-width: 2200px){
-                        margin-bottom: 2rem;
-                        font-size: 1.8rem;
-                    }
-
-                    @media only screen and (min-width: 1400px) and (max-width: 1800px){
-                        margin-bottom: 2rem;
-                        font-size: 1.25rem;
-                    }
-
-                    @media only screen and (max-width: 639px){
+                    @media only screen and (max-width: 639px) {
                         font-size: 1.5rem;
                     }
                 }
+
+
+               .mySwiperSlide_extra_details{
+                   position: absolute;
+                   top: 0;
+                   left: 0;
+                   right: 0;
+                   bottom: 0;
+                   .mySwiperSlide_extra_details_Price{
+                       background: $PINK;
+                       max-width: 80px;
+                       width: 100%;
+                       font-size: 1.25rem;
+                       text-align: center;
+                       color: white;
+                       padding: 0.2rem 0;
+
+                       @media only screen and (min-width: 2501px) {
+                        font-size: 2.5rem;
+                        max-width: 200px;
+                }
+
+
+                    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                        font-size: 2.25rem;
+                       max-width: 170px;
+                }
+
+                    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                       font-size: 2rem;
+                       max-width: 150px;
+                }
+
+                   }
+               }
+
             }
+
+        
+          
+            .mySwiperSlide_tooltip_favourites{
+                font-size: 1.25rem;
+                color: $RED;
+
+                @media only screen and (min-width: 2501px) {
+                    font-size: 3rem;
+            }
+
+                @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                    font-size: 2.5rem;
+            }
+
+                @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                    font-size: 2rem;
+             }
+
+             @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                font-size: 1.5rem;
+         }
+
+            }
+
+                .mySwiperSlide_tooltip_cart{
+                    font-size: 1.25rem;
+                    color: $BLUE;
+
+                    @media only screen and (min-width: 2501px) {
+                        font-size: 3rem;
+                }
+
+                    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                        font-size: 2.5rem;
+                }
+
+                    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                        font-size: 2rem;
+                 }
+
+                 @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                    font-size: 1.5rem;
+             }
+
+                }
            
         }
     }
 
 }
+
