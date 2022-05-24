@@ -7,7 +7,7 @@ import NavLinks from "../../components/NavLinks";
 import Footer from "../../components/Footer";
 import Copyright from "../../components/Copyright";
 import PAGES_NO_DATA_TO_SHOW from "../../components/PAGES_NO_DATA_TO_SHOW";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { Tooltip } from "@mui/material";
 import { BsCartFill, BsCart2 } from "react-icons/bs";
 
@@ -20,28 +20,50 @@ import {
   MdFavoriteBorder,
   MdFavorite,
 } from "react-icons/md";
+import Dbconnection from "../../utils/conn";
+import Books from "../../models/books";
 
-const FeaturedBooksPages = () => {
+export async function getStaticProps() {
+  await Dbconnection;
+  const fetch_books_featured = await Books.find({ cat: { $in: ["tr", "ft"] } });
+  if (!fetch_books_featured) {
+    return {
+      props: {
+        data_featured: null,
+      },
+    };
+  }
+
+  return {
+    props: {
+      data_featured: JSON.stringify(fetch_books_featured),
+    },
+  };
+}
+
+const FeaturedBooksPages = ({ data_featured }) => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
-  const { books } = useSelector((state) => state.book);
+  //   const { books } = useSelector((state) => state.book);
+  const parsed_data_featured = data_featured ? JSON.parse(data_featured) : null;
 
   useEffect(() => {
-    if (!books) {
+    console.log(parsed_data_featured);
+    if (!parsed_data_featured) {
       setDBooks(null);
       setIsEmpty(true);
     } else {
-      setDBooks(books);
+      setDBooks(parsed_data_featured);
       setIsEmpty(false);
     }
-  }, [books]);
+  }, []);
 
   return (
     <>
       <Navbar />
       <NavLinks />
 
-      {isEmpty && (
+      {!isEmpty && (
         <div className={styles.Wrapper}>
           <Container fluid="lg">
             <Row className="gy-0 gx-4 mx-auto" id={styles.row_wrapper}>
@@ -49,72 +71,83 @@ const FeaturedBooksPages = () => {
 
               <Col xs={12} md={8}>
                 <Row className="gy-0 gx-3">
-                  {
-                    <Col xs={12} md={6}>
-                      <div className={styles.books_wrapper}>
-                        <img src="/books/b1.jpg" />
-                        <div className={styles.books_details}>
-                          <h5>
+                  {d_books.length == 0 &&
+                    d_books.map((book) => (
+                      <Col xs={12} md={6} key={book._id}>
+                        <div className={styles.books_wrapper}>
+                          <img src={`/books/${book.img}`} />
+                          <div className={styles.books_details}>
+                            <h5>
+                              <Tooltip
+                                title="Add to favourites"
+                                placement="top-start"
+                              >
+                                <MdFavoriteBorder
+                                  className={
+                                    styles.mySwiperSlide_tooltip_favourites
+                                  }
+                                  id={styles.mySwiperSlide_author_favourites}
+                                />
+                              </Tooltip>
+                              <span className="mx-2"></span>
+                              <Tooltip
+                                title="Add to cart"
+                                placement="top-start"
+                              >
+                                <BsCart2
+                                  className={styles.mySwiperSlide_tooltip_cart}
+                                  id={styles.mySwiperSlide_author_favourites}
+                                />
+                              </Tooltip>
+                            </h5>
+
+                            <Tooltip title="Genre" placement="top-start">
+                              <h6>{book.genre}</h6>
+                            </Tooltip>
+
+                            <h4>WEWEWEWE</h4>
+                            <Tooltip title="Author" placement="top-start">
+                              <h5>
+                                <MdPersonOutline
+                                  className={styles.mySwiperSlide_author}
+                                />
+                                Pablo Escobar
+                              </h5>
+                            </Tooltip>
+
                             <Tooltip
-                              title="Add to favourites"
+                              title="Ratings"
                               placement="top-start"
+                              className={styles.mySwiperSlide_tooltip}
                             >
-                              <MdFavoriteBorder
+                              <h5>
+                                <MdStarOutline
+                                  className={styles.mySwiperSlide_author}
+                                />{" "}
+                                6/5
+                              </h5>
+                            </Tooltip>
+
+                            <div className={styles.mySwiperSlide_extra_details}>
+                              <h5
                                 className={
-                                  styles.mySwiperSlide_tooltip_favourites
+                                  styles.mySwiperSlide_extra_details_Price
                                 }
-                                id={styles.mySwiperSlide_author_favourites}
-                              />
-                            </Tooltip>
-                            <span className="mx-2"></span>
-                            <Tooltip title="Add to cart" placement="top-start">
-                              <BsCart2
-                                className={styles.mySwiperSlide_tooltip_cart}
-                                id={styles.mySwiperSlide_author_favourites}
-                              />
-                            </Tooltip>
-                          </h5>
-
-                          <Tooltip title="Genre" placement="top-start">
-                            <h6>Mystery</h6>
-                          </Tooltip>
-
-                          <h4>WEWEWEWE</h4>
-                          <Tooltip title="Author" placement="top-start">
-                            <h5>
-                              <MdPersonOutline
-                                className={styles.mySwiperSlide_author}
-                              />
-                              Pablo Escobar
-                            </h5>
-                          </Tooltip>
-
-                          <Tooltip
-                            title="Ratings"
-                            placement="top-start"
-                            className={styles.mySwiperSlide_tooltip}
-                          >
-                            <h5>
-                              <MdStarOutline
-                                className={styles.mySwiperSlide_author}
-                              />{" "}
-                              6/5
-                            </h5>
-                          </Tooltip>
-
-                          <div className={styles.mySwiperSlide_extra_details}>
-                            <h5
-                              className={
-                                styles.mySwiperSlide_extra_details_Price
-                              }
-                            >
-                              ₱23
-                            </h5>
+                              >
+                                ₱23
+                              </h5>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Col>
-                  }
+                      </Col>
+                    ))}
+
+                  {d_books.length > 0 && (
+                    <Spinner
+                      animation="border"
+                      className={styles.loading_spinner}
+                    />
+                  )}
                 </Row>
               </Col>
               <Col xs={12} md={4} className={styles.settings_wrapper}>
@@ -131,7 +164,7 @@ const FeaturedBooksPages = () => {
         </div>
       )}
 
-      {!isEmpty && (
+      {isEmpty && (
         <>
           <PAGES_NO_DATA_TO_SHOW />
         </>
