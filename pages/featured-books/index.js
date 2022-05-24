@@ -9,7 +9,7 @@ import Copyright from "../../components/Copyright";
 import PAGES_NO_DATA_TO_SHOW from "../../components/PAGES_NO_DATA_TO_SHOW";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { Tooltip } from "@mui/material";
-import { BsCartFill, BsCart2 } from "react-icons/bs";
+import { BsCartFill, BsCart2, BsFilter } from "react-icons/bs";
 
 // import { useKeenSlider } from "keen-slider/react";
 // import "keen-slider/keen-slider.min.css";
@@ -44,11 +44,14 @@ export async function getStaticProps() {
 const FeaturedBooksPages = ({ data_featured }) => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [isSelected, setSelected] = useState("");
+  const [no_book, setNo_Book] = useState(false);
+  const [loading, setLoading] = useState(true);
   //   const { books } = useSelector((state) => state.book);
   const parsed_data_featured = data_featured ? JSON.parse(data_featured) : null;
 
   useEffect(() => {
-    console.log(parsed_data_featured);
+    // console.log(parsed_data_featured.map((x) => x.genre));
     if (!parsed_data_featured) {
       setDBooks(null);
       setIsEmpty(true);
@@ -56,7 +59,22 @@ const FeaturedBooksPages = ({ data_featured }) => {
       setDBooks(parsed_data_featured);
       setIsEmpty(false);
     }
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    console.log(isSelected);
+    const filterBooks = d_books.filter((book) => {
+      return book.genre.toLowerCase().includes(isSelected.toLowerCase());
+    });
+
+    if (filterBooks.length !== 0) {
+      setDBooks(filterBooks);
+    } else {
+      setDBooks(parsed_data_featured);
+      console.log("No Book Found");
+    }
+  }, [isSelected]);
 
   return (
     <>
@@ -142,19 +160,40 @@ const FeaturedBooksPages = ({ data_featured }) => {
                       </Col>
                     ))}
 
-                  {d_books.length == 0 && (
+                  {loading && (
                     <Spinner
                       animation="border"
                       className={styles.loading_spinner}
                     />
                   )}
+
+                  {/* SEARCH RESULTS */}
+                  {no_book && d_books.length == 0 && <h1>Book not found.</h1>}
+
+                  {/* END */}
                 </Row>
               </Col>
               <Col xs={12} sm={4} className={styles.settings_wrapper}>
                 <div className={styles.settings_box}>
-
+                  <h5>
+                    <BsFilter /> Filter by:
+                  </h5>
+                  <select
+                    value={isSelected}
+                    onChange={(e) => setSelected(e.target.value)}
+                  >
+                    <option value="adventure fiction">Adventure Fiction</option>
+                    <option value="novel">Novel</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="epic">Epic</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="suspense">Suspense</option>
+                    <option value="horror">Horror</option>
+                    <option value="psychological">Psychological</option>
+                    <option value="drama">Drama</option>
+                    <option value="action">Action</option>
+                  </select>
                 </div>
-
               </Col>
             </Row>
           </Container>

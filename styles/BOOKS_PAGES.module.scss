@@ -313,10 +313,10 @@
     }
 
     .settings_wrapper{
-        background-color: black;
-        max-height: 500px;
-
-        
+        background-color: $BLACK;
+        max-height: 500px;  
+        color: white;
+        padding: 1rem;
         @media only screen and (max-width: 767px) {
             margin: 0 auto;
             max-width: 200px;

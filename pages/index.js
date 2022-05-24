@@ -60,9 +60,9 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       dispatch(GET_ALL_BOOKS(null));
     } else {
       dispatch(GET_ALL_BOOKS(parsed_data_featured));
-      console.log(
-        "Fetch success: " + parsed_data_featured.map((x) => console.log(x))
-      );
+      // console.log(
+      //   "Fetch success: " + parsed_data_featured.map((x) => console.log(x))
+      // );
     }
   }, [dispatch]);
 
@@ -71,7 +71,7 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       dispatch(GET_ALL_BOOKS_SALE(null));
     } else {
       dispatch(GET_ALL_BOOKS_SALE(parsed_data_sale));
-      console.log("Sale Books: " + parsed_data_sale.map((x) => console.log(x)));
+      // console.log("Sale Books: " + parsed_data_sale.map((x) => console.log(x)));
     }
   }, [dispatch]);
 
@@ -80,7 +80,7 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       dispatch(GET_ALL_BEST_SELLER(null));
     } else {
       dispatch(GET_ALL_BEST_SELLER(parsed_data_best_seller));
-      console.log("Sale Books: " + parsed_data_sale.map((x) => console.log(x)));
+      // console.log("Sale Books: " + parsed_data_sale.map((x) => console.log(x)));
     }
   }, [dispatch]);
 
