@@ -69,9 +69,9 @@ const FeaturedBooksPages = ({ data_featured }) => {
             <Row className="gy-0 gx-4 mx-auto" id={styles.row_wrapper}>
               <h1 className={styles.featured_top_header_tag}>Featured Books</h1>
 
-              <Col xs={12} md={8}>
+              <Col xs={12} sm={8}>
                 <Row className="gy-0 gx-3">
-                  {d_books.length == 0 &&
+                  {d_books.length > 0 &&
                     d_books.map((book) => (
                       <Col xs={12} md={6} key={book._id}>
                         <div className={styles.books_wrapper}>
@@ -105,13 +105,13 @@ const FeaturedBooksPages = ({ data_featured }) => {
                               <h6>{book.genre}</h6>
                             </Tooltip>
 
-                            <h4>WEWEWEWE</h4>
+                            <h4>{book.title}</h4>
                             <Tooltip title="Author" placement="top-start">
                               <h5>
                                 <MdPersonOutline
                                   className={styles.mySwiperSlide_author}
                                 />
-                                Pablo Escobar
+                                {book.author}
                               </h5>
                             </Tooltip>
 
@@ -124,7 +124,7 @@ const FeaturedBooksPages = ({ data_featured }) => {
                                 <MdStarOutline
                                   className={styles.mySwiperSlide_author}
                                 />{" "}
-                                6/5
+                                {book.ratings}/5
                               </h5>
                             </Tooltip>
 
@@ -134,7 +134,7 @@ const FeaturedBooksPages = ({ data_featured }) => {
                                   styles.mySwiperSlide_extra_details_Price
                                 }
                               >
-                                ₱23
+                                ₱{book.price}
                               </h5>
                             </div>
                           </div>
@@ -142,7 +142,7 @@ const FeaturedBooksPages = ({ data_featured }) => {
                       </Col>
                     ))}
 
-                  {d_books.length > 0 && (
+                  {d_books.length == 0 && (
                     <Spinner
                       animation="border"
                       className={styles.loading_spinner}
@@ -150,14 +150,11 @@ const FeaturedBooksPages = ({ data_featured }) => {
                   )}
                 </Row>
               </Col>
-              <Col xs={12} md={4} className={styles.settings_wrapper}>
-                Dolore aute reprehenderit qui aliqua exercitation esse
-                reprehenderit laborum eiusmod. Dolore tempor consectetur sunt
-                proident elit aliquip deserunt nostrud ad Lorem. Eiusmod laborum
-                esse officia ullamco incididunt cupidatat id. Enim nostrud ex
-                nisi Lorem velit officia nisi sunt duis fugiat in velit. Nisi
-                ipsum ut nisi amet ex esse sit magna. Lorem fugiat enim
-                consectetur in non dolor consequat ullamco deserunt dolore.
+              <Col xs={12} sm={4} className={styles.settings_wrapper}>
+                <div className={styles.settings_box}>
+
+                </div>
+
               </Col>
             </Row>
           </Container>
