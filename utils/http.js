@@ -5,4 +5,6 @@ export const headersOpts = {
   },
 };
 
-export const BASE_URL = "http://localhost:3000";
+// export const BASE_URL = "http://localhost:3000";
+
+export const BASE_URL = "https://book-shop-web-application.vercel.app";
