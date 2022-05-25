@@ -33,7 +33,7 @@ const FeaturedBooksPages = () => {
 
   useEffect(() => {
     const get_featured = async () => {
-      const response = await axios.get(`${BASE_URL}/api/featured`, headersOpts);
+      const response = await axios.get(`${BASE_URL}/api/booksale`, headersOpts);
       if (!response.data.success) {
         setDBooks(null);
         setIsEmpty(true);
@@ -62,7 +62,9 @@ const FeaturedBooksPages = () => {
         <div className={styles.Wrapper}>
           <Container fluid="lg">
             <Row className="gy-0 gx-4 mx-auto" id={styles.row_wrapper}>
-              <h1 className={styles.featured_top_header_tag}>Featured Books</h1>
+              <h1 className={styles.featured_top_header_tag}>
+                Limited Time Offers
+              </h1>
 
               {/* SHOW ON MOBILE */}
               <div className={styles.filter_on_mobile_phones}>
@@ -167,14 +169,21 @@ const FeaturedBooksPages = () => {
                               </Tooltip>
 
                               <div
-                                className={styles.mySwiperSlide_extra_details}
+                                className={
+                                  styles.mySwiperSlide_extra_details_SALE
+                                }
                               >
                                 <h5
                                   className={
-                                    styles.mySwiperSlide_extra_details_Price
+                                    styles.mySwiperSlide_extra_details_Price_SALE
                                   }
                                 >
-                                  ₱{book.price}
+                                  <span
+                                    style={{ textDecoration: "line-through" }}
+                                  >
+                                    ₱{book.prevPrice}
+                                  </span>{" "}
+                                  / ₱{book.price}
                                 </h5>
                               </div>
                             </div>

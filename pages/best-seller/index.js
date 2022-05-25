@@ -33,7 +33,10 @@ const FeaturedBooksPages = () => {
 
   useEffect(() => {
     const get_featured = async () => {
-      const response = await axios.get(`${BASE_URL}/api/featured`, headersOpts);
+      const response = await axios.get(
+        `${BASE_URL}/api/bestseller`,
+        headersOpts
+      );
       if (!response.data.success) {
         setDBooks(null);
         setIsEmpty(true);
@@ -62,7 +65,9 @@ const FeaturedBooksPages = () => {
         <div className={styles.Wrapper}>
           <Container fluid="lg">
             <Row className="gy-0 gx-4 mx-auto" id={styles.row_wrapper}>
-              <h1 className={styles.featured_top_header_tag}>Featured Books</h1>
+              <h1 className={styles.featured_top_header_tag}>
+                Alltime Best Seller
+              </h1>
 
               {/* SHOW ON MOBILE */}
               <div className={styles.filter_on_mobile_phones}>
