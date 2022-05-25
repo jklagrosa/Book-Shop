@@ -47,7 +47,7 @@ const FeaturedBooksPages = ({ data_featured }) => {
   const [isSelected, setSelected] = useState("");
   const [no_book, setNo_Book] = useState(false);
   const [loading, setLoading] = useState(true);
-  //   const { books } = useSelector((state) => state.book);
+  // const { books } = useSelector((state) => state.book);
   const parsed_data_featured = data_featured ? JSON.parse(data_featured) : null;
 
   useEffect(() => {
@@ -62,19 +62,19 @@ const FeaturedBooksPages = ({ data_featured }) => {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    console.log(isSelected);
-    const filterBooks = d_books.filter((book) => {
-      return book.genre.toLowerCase().includes(isSelected.toLowerCase());
-    });
+  // useEffect(() => {
+  //   console.log(isSelected);
+  //   const filterBooks = d_books.filter((book) => {
+  //     return book.genre.toLowerCase().includes(isSelected.toLowerCase());
+  //   });
 
-    if (filterBooks.length !== 0) {
-      setDBooks(filterBooks);
-    } else {
-      setDBooks(parsed_data_featured);
-      console.log("No Book Found");
-    }
-  }, [isSelected]);
+  //   if (filterBooks.length !== 0) {
+  //     setDBooks(filterBooks);
+  //   } else {
+  //     setDBooks(parsed_data_featured);
+  //     console.log("No Book Found");
+  //   }
+  // }, [isSelected]);
 
   return (
     <>
