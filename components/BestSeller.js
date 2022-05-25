@@ -17,6 +17,8 @@ import {
   MdFavorite,
 } from "react-icons/md";
 
+import { useRouter } from "next/router";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -27,6 +29,8 @@ const Featured = () => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
   const { bestSeller } = useSelector((state) => state.book);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (!bestSeller) {
@@ -59,7 +63,10 @@ const Featured = () => {
       <div className={styles.Wrapper}>
         <Container fluid="lg">
           <Tooltip title="View all best seller books" placement="right-start">
-            <h1 className={styles.featured_top_header_tag}>
+            <h1
+              className={styles.featured_top_header_tag}
+              onClick={() => router.push("/best-seller")}
+            >
               Alltime Best Seller
             </h1>
           </Tooltip>

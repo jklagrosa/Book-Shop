@@ -16,6 +16,7 @@ import {
   MdFavoriteBorder,
   MdFavorite,
 } from "react-icons/md";
+import { useRouter } from "next/router";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -27,6 +28,7 @@ const Featured = () => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
   const { books } = useSelector((state) => state.book);
+  const router = useRouter();
 
   useEffect(() => {
     if (!books) {
@@ -59,7 +61,12 @@ const Featured = () => {
       <div className={styles.Wrapper}>
         <Container fluid="lg">
           <Tooltip title="View all featured books" placement="right-start">
-            <h1 className={styles.featured_top_header_tag}>Featured Books</h1>
+            <h1
+              className={styles.featured_top_header_tag}
+              onClick={() => router.push("/featured-books")}
+            >
+              Featured Books
+            </h1>
           </Tooltip>
 
           {/* KEEN SLIDER */}
