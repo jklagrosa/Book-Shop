@@ -23,24 +23,6 @@ import {
 import Dbconnection from "../../utils/conn";
 import Books from "../../models/books";
 
-export async function getStaticProps() {
-  await Dbconnection;
-  const fetch_books_featured = await Books.find({ cat: { $in: ["tr", "ft"] } });
-  if (!fetch_books_featured) {
-    return {
-      props: {
-        data_featured: null,
-      },
-    };
-  }
-
-  return {
-    props: {
-      data_featured: JSON.stringify(fetch_books_featured),
-    },
-  };
-}
-
 const FeaturedBooksPages = ({ data_featured }) => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -48,33 +30,7 @@ const FeaturedBooksPages = ({ data_featured }) => {
   const [no_book, setNo_Book] = useState(false);
   const [loading, setLoading] = useState(true);
   // const { books } = useSelector((state) => state.book);
-  const parsed_data_featured = data_featured ? JSON.parse(data_featured) : null;
 
-  useEffect(() => {
-    // console.log(parsed_data_featured.map((x) => x.genre));
-    if (!parsed_data_featured) {
-      setDBooks(null);
-      setIsEmpty(true);
-    } else {
-      setDBooks(parsed_data_featured);
-      setIsEmpty(false);
-    }
-    setLoading(false);
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(isSelected);
-  //   const filterBooks = d_books.filter((book) => {
-  //     return book.genre.toLowerCase().includes(isSelected.toLowerCase());
-  //   });
-
-  //   if (filterBooks.length !== 0) {
-  //     setDBooks(filterBooks);
-  //   } else {
-  //     setDBooks(parsed_data_featured);
-  //     console.log("No Book Found");
-  //   }
-  // }, [isSelected]);
 
   return (
     <>
