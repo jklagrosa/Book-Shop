@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 import styles from "../../styles/BOOKS_PAGES.module.scss";
 import Navbar from "../../components/Navbar";
@@ -11,17 +11,14 @@ import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { Tooltip } from "@mui/material";
 import { BsCartFill, BsCart2, BsFilter } from "react-icons/bs";
 
-// import { useKeenSlider } from "keen-slider/react";
-// import "keen-slider/keen-slider.min.css";
-// import "./styles.css";
 import {
   MdPersonOutline,
   MdStarOutline,
   MdFavoriteBorder,
   MdFavorite,
 } from "react-icons/md";
-import Dbconnection from "../../utils/conn";
-import Books from "../../models/books";
+import axios from "axios";
+import { headersOpts, BASE_URL } from "../../utils/http";
 
 const FeaturedBooksPages = ({ data_featured }) => {
   const [d_books, setDBooks] = useState([]);
@@ -31,6 +28,32 @@ const FeaturedBooksPages = ({ data_featured }) => {
   const [loading, setLoading] = useState(true);
   // const { books } = useSelector((state) => state.book);
 
+  useEffect(() => {
+    const get_featured = async () => {
+      const response = await axios.get(`${BASE_URL}/api/featured`, headersOpts);
+      if (!response.data.success) {
+        setDBooks(null);
+        setIsEmpty(true);
+      } else if (response && response.data && response.data.success) {
+        setDBooks(response.data.data);
+        setIsEmpty(false);
+      }
+      setLoading(false);
+    };
+    get_featured();
+  }, []);
+
+  // const handleFilter = (e) => {
+  //   const { value } = e.target;
+  //   const filterBooks = d_books;
+  //   console.log(value);
+  //   const filtered = filterBooks.filter((x) => {
+  //     return x.genre.toLowerCase().includes(value);
+  //   });
+  //   setDBooks(filtered);
+  // };
+
+  console.log(`Selected: ${isSelected}`);
 
   return (
     <>
@@ -46,75 +69,83 @@ const FeaturedBooksPages = ({ data_featured }) => {
               <Col xs={12} sm={8}>
                 <Row className="gy-0 gx-3">
                   {d_books.length > 0 &&
-                    d_books.map((book) => (
-                      <Col xs={12} md={6} key={book._id}>
-                        <div className={styles.books_wrapper}>
-                          <img src={`/books/${book.img}`} />
-                          <div className={styles.books_details}>
-                            <h5>
+                    d_books
+                      .filter((genre) =>
+                        genre.genre.toLowerCase().includes(isSelected)
+                      )
+                      .map((book) => (
+                        <Col xs={12} md={6} key={book._id}>
+                          <div className={styles.books_wrapper}>
+                            <img src={`/books/${book.img}`} />
+                            <div className={styles.books_details}>
+                              <h5>
+                                <Tooltip
+                                  title="Add to favourites"
+                                  placement="top-start"
+                                >
+                                  <MdFavoriteBorder
+                                    className={
+                                      styles.mySwiperSlide_tooltip_favourites
+                                    }
+                                    id={styles.mySwiperSlide_author_favourites}
+                                  />
+                                </Tooltip>
+                                <span className="mx-2"></span>
+                                <Tooltip
+                                  title="Add to cart"
+                                  placement="top-start"
+                                >
+                                  <BsCart2
+                                    className={
+                                      styles.mySwiperSlide_tooltip_cart
+                                    }
+                                    id={styles.mySwiperSlide_author_favourites}
+                                  />
+                                </Tooltip>
+                              </h5>
+
+                              <Tooltip title="Genre" placement="top-start">
+                                <h6>{book.genre}</h6>
+                              </Tooltip>
+
+                              <h4>{book.title}</h4>
+                              <Tooltip title="Author" placement="top-start">
+                                <h5>
+                                  <MdPersonOutline
+                                    className={styles.mySwiperSlide_author}
+                                  />
+                                  {book.author}
+                                </h5>
+                              </Tooltip>
+
                               <Tooltip
-                                title="Add to favourites"
+                                title="Ratings"
                                 placement="top-start"
+                                className={styles.mySwiperSlide_tooltip}
                               >
-                                <MdFavoriteBorder
+                                <h5>
+                                  <MdStarOutline
+                                    className={styles.mySwiperSlide_author}
+                                  />{" "}
+                                  {book.ratings}/5
+                                </h5>
+                              </Tooltip>
+
+                              <div
+                                className={styles.mySwiperSlide_extra_details}
+                              >
+                                <h5
                                   className={
-                                    styles.mySwiperSlide_tooltip_favourites
+                                    styles.mySwiperSlide_extra_details_Price
                                   }
-                                  id={styles.mySwiperSlide_author_favourites}
-                                />
-                              </Tooltip>
-                              <span className="mx-2"></span>
-                              <Tooltip
-                                title="Add to cart"
-                                placement="top-start"
-                              >
-                                <BsCart2
-                                  className={styles.mySwiperSlide_tooltip_cart}
-                                  id={styles.mySwiperSlide_author_favourites}
-                                />
-                              </Tooltip>
-                            </h5>
-
-                            <Tooltip title="Genre" placement="top-start">
-                              <h6>{book.genre}</h6>
-                            </Tooltip>
-
-                            <h4>{book.title}</h4>
-                            <Tooltip title="Author" placement="top-start">
-                              <h5>
-                                <MdPersonOutline
-                                  className={styles.mySwiperSlide_author}
-                                />
-                                {book.author}
-                              </h5>
-                            </Tooltip>
-
-                            <Tooltip
-                              title="Ratings"
-                              placement="top-start"
-                              className={styles.mySwiperSlide_tooltip}
-                            >
-                              <h5>
-                                <MdStarOutline
-                                  className={styles.mySwiperSlide_author}
-                                />{" "}
-                                {book.ratings}/5
-                              </h5>
-                            </Tooltip>
-
-                            <div className={styles.mySwiperSlide_extra_details}>
-                              <h5
-                                className={
-                                  styles.mySwiperSlide_extra_details_Price
-                                }
-                              >
-                                ₱{book.price}
-                              </h5>
+                                >
+                                  ₱{book.price}
+                                </h5>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Col>
-                    ))}
+                        </Col>
+                      ))}
 
                   {loading && (
                     <Spinner
@@ -138,6 +169,9 @@ const FeaturedBooksPages = ({ data_featured }) => {
                     value={isSelected}
                     onChange={(e) => setSelected(e.target.value)}
                   >
+                    <option defaultValue="" selected>
+                      Select Genre
+                    </option>
                     <option value="adventure fiction">Adventure Fiction</option>
                     <option value="novel">Novel</option>
                     <option value="mystery">Mystery</option>
