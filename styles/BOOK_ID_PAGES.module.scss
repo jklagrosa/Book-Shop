@@ -69,6 +69,18 @@
             color: whitesmoke;
             text-transform: capitalize;
 
+            @media only screen and (min-width: 2501px) {
+                font-size: 2rem;
+            }
+
+            @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+                font-size: 1.6rem;
+            }
+
+            @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                font-size: 1.3rem;
+            }
+
             @media only screen and (max-width: 991px) {
                 font-size: 1rem;
             }
@@ -80,6 +92,18 @@
             color: white;
             font-weight: 300;
             margin-bottom: 0.3rem;
+
+            @media only screen and (min-width: 2501px) {
+                font-size: 1.9rem;
+            }
+
+            @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+                font-size: 1.7rem;
+            }
+
+            @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                font-size: 1.25rem;
+            }
 
             @media only screen and (max-width: 991px) {
                 font-size: 0.9rem;
@@ -93,6 +117,18 @@
             color: darkgrey;
             font-weight: 300;
             margin-bottom: 0.3rem;
+
+            @media only screen and (min-width: 2501px) {
+                font-size: 1.6rem;
+            }
+
+            @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+                font-size: 1.4rem;
+            }
+
+            @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                font-size: 1.1rem;
+            }
 
             @media only screen and (max-width: 991px) {
                 font-size: 0.8rem;
