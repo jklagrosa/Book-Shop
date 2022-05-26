@@ -511,6 +511,7 @@
 
         select{
             all: unset;
+            cursor: pointer;
             border: 2px solid white;
             padding: 0.6rem 1rem;
             background-color: $BLACK;

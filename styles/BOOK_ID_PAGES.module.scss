@@ -1,0 +1,397 @@
+@import "../styles/colors.scss";
+
+
+.Wrapper{
+    padding: 4rem 2rem;
+    background-color: white;
+    min-height: 100vh;
+
+    @media only screen and (max-width: 767px){
+        padding: 2rem 1rem;
+    }
+
+    #row_wrapper{
+        margin-top: 10rem;
+
+        @media only screen and (max-width: 991px) {
+            margin-top: 5rem;
+         }
+
+         @media only screen and (max-width: 767px) {
+            margin-top: 5rem;
+         }
+
+    }
+
+
+    .display_other_books_wrapper{
+        cursor: pointer;
+        padding: 0.3rem;
+        transition: all 0.1s ease-in;
+        margin-bottom: 1rem;
+        &:hover{
+            transition: all 0.1s ease-out;
+            background-color: #3c3739;
+        }
+    }
+
+    .display_other_books{
+        min-height: 100vh;
+        padding: 1rem;
+        background-color: $BLACK;
+        margin-bottom: 1.25rem;
+
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+
+        @media only screen and (max-width: 767px) {
+        margin: 0 auto;
+           max-width: 600px;
+           width: 100%;
+        }
+
+        @media only screen and (max-width: 576px) {
+            margin: 0 auto;
+               max-width: 300px;
+               width: 100%;
+        }
+     
+
+        .divider{
+            margin: 0;
+            border: 1px solid grey;
+            opacity: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        h4{
+
+            font-size: 1.1rem;
+            color: whitesmoke;
+            text-transform: capitalize;
+
+            @media only screen and (max-width: 991px) {
+                font-size: 1rem;
+            }
+
+        }
+
+        h5{
+            font-size: 1rem;
+            color: white;
+            font-weight: 300;
+            margin-bottom: 0.3rem;
+
+            @media only screen and (max-width: 991px) {
+                font-size: 0.9rem;
+            }
+
+        }
+
+        h6{
+            margin: 0;
+            font-size: 0.9rem;
+            color: darkgrey;
+            font-weight: 300;
+            margin-bottom: 0.3rem;
+
+            @media only screen and (max-width: 991px) {
+                font-size: 0.8rem;
+            }
+
+        }
+    }
+
+    .book_details_wrapper{
+        // background-color: red;
+        @media only screen and (max-width: 767px) {
+           display: grid;
+           place-content: center;
+           margin-bottom: 2rem;
+         }
+
+        
+
+        .stack_wrapper{
+            margin-top: 1.25rem;
+
+            .icons{
+                font-size: 1.5rem;
+
+                
+                @media only screen and (min-width: 2501px) {
+                    font-size: 3rem;
+                 }
+
+                @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+                    font-size: 2.5rem;
+                 }
+
+                @media only screen and (min-width: 2001px) and (max-width: 2300px) {
+                    font-size: 2.25rem;
+                 }
+
+                @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                    font-size: 2rem;
+                 }
+
+                @media only screen and (min-width: 768px) and (max-width: 1200px) {
+                    font-size: 1.25rem;
+                 }
+
+                 @media only screen and (max-width: 767px) {
+                    font-size: 1.1rem;
+                 }
+
+            }
+            
+
+            .icons_others{
+                font-size: 1.5rem;
+                color: grey;
+
+                @media only screen and (min-width: 2501px) {
+                    font-size: 3.25rem;
+                 }
+
+                @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+                    font-size: 2.5rem;
+                 }
+
+                @media only screen and (min-width: 2001px) and (max-width: 2300px) {
+                    font-size: 2.25rem;
+                 }
+
+                @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                   font-size: 2rem;
+                }
+
+                @media only screen and (min-width: 768px) and (max-width: 1200px) {
+                    font-size: 1.25rem;
+                 }
+
+                 @media only screen and (max-width: 767px) {
+                    font-size: 1rem;
+                 }
+            }
+
+            .book_others{
+                display: inline-block;
+                margin-bottom: 1.25rem;
+                font-size: 1rem;
+                font-weight: 400;
+                margin-left: 0.3rem;
+                color: grey;
+
+                @media only screen and (min-width: 2501px) {
+                    font-size: 2rem;
+                 }
+
+                @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+                    font-size: 1.8rem;
+                 }
+
+                @media only screen and (min-width: 2001px) and (max-width: 2300px) {
+                    font-size: 1.5rem;
+                 }
+
+                @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                    font-size: 1.25rem;
+                 }
+
+                @media only screen and (max-width: 767px) {
+                    margin-bottom: 0.6rem;
+                    font-size: 0.9rem;
+                 }
+
+            }
+
+            h1{
+                margin-bottom: 1.5rem;
+                font-weight: 400;
+                font-size: 2rem;
+
+                @media only screen and (min-width: 2501px) {
+                    font-size: 3.25rem;
+                 }
+
+                @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+                    font-size: 3rem;
+                 }
+
+
+                @media only screen and (min-width: 2001px) and (max-width: 2300px) {
+                    font-size: 2.5rem;
+                 }
+
+                @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                   font-size: 2.25rem;
+                 }
+
+
+                @media only screen and (min-width: 768px) and (max-width: 1200px) {
+                    font-size: 1.5rem;
+                 }
+
+                 @media only screen and (max-width: 767px) {
+                    font-size: 1.25rem;
+                    margin-bottom: 1rem;
+                 }
+
+                 @media only screen and (max-width: 576px) {
+                    font-size: 1.1rem;
+             
+                 }
+
+            } 
+            
+            h2{
+            
+                margin-bottom: 1.25rem;
+                font-weight: 300;
+                color: grey;
+                font-size: 1.5rem;
+
+                @media only screen and (min-width: 2501px) {
+                    font-size: 3rem;
+                 }
+
+                @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+                    font-size: 2.5rem;
+                 }
+
+                @media only screen and (min-width: 2001px) and (max-width: 2300px) {
+                    font-size: 2.25rem;
+                 }
+
+                @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                    font-size: 1.9rem;
+                }
+
+                @media only screen and (min-width: 768px) and (max-width: 1200px) {
+                    font-size: 1.25rem;
+                 }
+
+                 
+                 @media only screen and (max-width: 767px) {
+                    font-size: 1rem;
+                 }
+
+            } 
+            
+            h3{
+                margin-top: 1rem;
+                font-weight: 300;
+                font-size: 1.1rem;
+                color: grey;
+
+                @media only screen and (min-width: 2501px) {
+                    font-size: 2.25rem;
+                 }
+
+                @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+                    font-size: 2rem;
+                 }
+
+                @media only screen and (min-width: 2001px) and (max-width: 2300px) {
+                    font-size: 1.8rem;
+                 }
+
+                @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                    font-size: 1.5rem;
+                }
+
+                @media only screen and (min-width: 768px) and (max-width: 1200px) {
+                    font-size: 1rem;
+                 }
+
+                 @media only screen and (max-width: 767px) {
+                    font-size: 0.9rem;
+                 }
+
+            } 
+            
+            p{
+                max-width: 600px;
+                width: 100%;
+                font-size: 1rem;
+
+                @media only screen and (min-width: 2501px) {
+                    font-size: 2.1rem;
+                    max-width: 1000px;
+                    width: 100%;
+                 }
+
+                @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+                    font-size: 2rem;
+                    max-width: 1000px;
+                    width: 100%;
+                 }
+
+                @media only screen and (min-width: 2001px) and (max-width: 2300px) {
+                    font-size: 1.5rem;
+                    max-width: 800px;
+                    width: 100%;
+                 }
+
+                @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+                    font-size: 1.25rem;
+                    max-width: 800px;
+                    width: 100%;
+                }
+
+                @media only screen and (max-width: 991px) {
+                    font-size: 0.9rem;
+                    max-width: 500px;
+                    width: 100%;
+                 }
+
+                 @media only screen and (max-width: 767px) {
+                    font-size: 0.8rem;
+                 }
+
+                 @media only screen and (max-width: 576px) {
+                    max-width: 300px;
+                    width: 100%;
+             
+                 }
+            }
+        }
+
+        img{
+
+            width: 100%;
+           display: block;
+           max-height: 350px;
+           height: 100%;
+           object-fit: cover;
+           object-position: center bottom;
+
+           @media only screen and (min-width: 2501px) {
+            min-height: 800px;
+         }
+            
+           @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+            min-height: 700px;
+         }
+
+           @media only screen and (min-width: 1600px) and (max-width: 2000px) {
+            min-height: 400px;
+         }
+
+
+           @media only screen and (max-width: 767px) {
+            max-width: 600px;
+            width: 100%;
+            min-height: 250px;
+         }
+
+         @media only screen and (max-width: 576px) {
+            max-width: 300px;
+            width: 100%;
+            min-height: 300px;
+         }
+            
+        }
+        
+    }
+}
