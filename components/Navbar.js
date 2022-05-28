@@ -4,6 +4,8 @@ import {
   Nav,
   NavDropdown,
   Offcanvas,
+  Row,
+  Col,
 } from "react-bootstrap";
 import styles from "../styles/navbar.module.scss";
 import { BsCart2, BsHeart, BsCartFill, BsSearch } from "react-icons/bs";
@@ -11,10 +13,13 @@ import { RiHeartLine, RiHeartFill } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { style } from "@mui/system";
 
 const Navigation = () => {
   const [show, setShow] = useState(false);
   const [search_show, setSearch_Show] = useState(false);
+  const [show_cart, set_show_cart] = useState(false);
+  const [show_fav, set_show_fav] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -24,6 +29,17 @@ const Navigation = () => {
   const search_handleClose = () => setSearch_Show(false);
   const search_handleShow = () => setSearch_Show(true);
   // END
+
+  // CART OFFCANVAS
+  const handleClose_cart = () => set_show_cart(false);
+  const handleShow_cart = () => set_show_cart(true);
+  // END
+
+  // FAVOURITES OFFCANVAS
+  const handleClose_fav = () => set_show_fav(false);
+  const handleShow_fav = () => set_show_fav(true);
+  // END
+
   const router = useRouter();
   return (
     <>
@@ -58,7 +74,7 @@ const Navigation = () => {
             </Nav.Link>
             <span className="mx-3"></span>
             <Nav.Link href="#" className="d-inline-block">
-              <BsCart2 className={styles.nav_icons} />
+              <BsCart2 className={styles.nav_icons} onClick={handleShow_cart} />
               {/* <BsCartFill className={styles.nav_icons} /> */}
               <sup className={styles.sup_badge} id={styles.sup_badge_cart}>
                 9
@@ -69,6 +85,7 @@ const Navigation = () => {
               <RiHeartLine
                 className={styles.nav_icons}
                 id={styles.nav_icons_heart}
+                onClick={handleShow_fav}
               />
               {/* <RiHeartFill
                   className={styles.nav_icons}
@@ -103,7 +120,10 @@ const Navigation = () => {
               </Nav.Link>
               <span className="mx-4"></span>
               <Nav.Link href="#">
-                <BsCart2 className={styles.nav_icons} />
+                <BsCart2
+                  className={styles.nav_icons}
+                  onClick={handleShow_cart}
+                />
                 {/* <BsCartFill className={styles.nav_icons} /> */}
                 <sup className={styles.sup_badge} id={styles.sup_badge_cart}>
                   9
@@ -114,6 +134,7 @@ const Navigation = () => {
                 <RiHeartLine
                   className={styles.nav_icons}
                   id={styles.nav_icons_heart}
+                  onClick={handleShow_fav}
                 />
                 {/* <RiHeartFill
                   className={styles.nav_icons}
@@ -177,6 +198,161 @@ const Navigation = () => {
               className={styles.nav_offcanvas_search_input}
             />
             <BsSearch className={styles.nav_offcanvas_search_btn} />
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
+      {/* END */}
+      {/* ===================================================================== */}
+      {/* CART OFFCANVAS */}
+      <Offcanvas
+        placement="end"
+        show={show_cart}
+        onHide={handleClose_cart}
+        className={styles.CART_N_FAV_OFFCANVAS}
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            <button className={styles.CHECK_OUT_BTN}>Check Out</button>
+          </Offcanvas.Title>
+
+          <Offcanvas.Title>
+            <span className={styles.YOUR_CART}>To Pay: ₱4200</span>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        {/* <button className={styles.CHECK_OUT_BTN}>Check Out</button> */}
+        <Offcanvas.Body>
+          <div className={styles.CART_N_FAV_OFFCANVAS_BODY}>
+            <div className={styles.BOXES}>
+              <Row className="gy-0 gx-3">
+                <Col xs={6}>
+                  <img src="/books/b1.jpg" />
+                </Col>
+                <Col xs={6}>
+                  <div className={styles.OTHERS}>
+                    <h6>Adventure Fiction</h6>
+                    <h4>Treasure Island</h4>
+                    <h5>Pablo Escobar</h5>
+                    <h5>4.4/5</h5>
+                    <h5>₱300</h5>
+
+                    <div className={styles.BTNS}>
+                      <input type="text" />
+                      <span className="me-2"></span>
+                      <button>+</button>
+                      <span className="mx-1"></span>
+                      <button>-</button>
+                    </div>
+
+                    <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+
+            <div className={styles.BOXES}>
+              <Row className="gy-0 gx-3">
+                <Col xs={6}>
+                  <img src="/books/b1.jpg" />
+                </Col>
+                <Col xs={6}>
+                  <div className={styles.OTHERS}>
+                    <h6>Adventure Fiction</h6>
+                    <h4>Treasure Island</h4>
+                    <h5>Pablo Escobar</h5>
+                    <h5>4.4/5</h5>
+                    <h5>₱300</h5>
+
+                    <div className={styles.BTNS}>
+                      <input type="text" />
+                      <span className="me-2"></span>
+                      <button>+</button>
+                      <span className="mx-1"></span>
+                      <button>-</button>
+                    </div>
+
+                    <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
+      {/* END */}
+
+      {/* ===================================================================== */}
+      {/* FAVOURITES OFFCANVAS */}
+      <Offcanvas
+        placement="end"
+        show={show_fav}
+        onHide={handleClose_fav}
+        className={styles.CART_N_FAV_OFFCANVAS}
+      >
+        <Offcanvas.Header closeButton>
+          {/* <Offcanvas.Title>
+            <span className={styles.YOUR_CART}>Favourites</span>
+          </Offcanvas.Title> */}
+
+          <Offcanvas.Title>
+            <button className={styles.CHECK_OUT_BTN_REMOVE}>Remove All</button>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        {/* <button className={styles.CHECK_OUT_BTN}>Check Out</button> */}
+        <Offcanvas.Body>
+          <div className={styles.CART_N_FAV_OFFCANVAS_BODY}>
+            <div className={styles.BOXES}>
+              <Row className="gy-0 gx-3">
+                <Col xs={6}>
+                  <img src="/books/b1.jpg" />
+                </Col>
+                <Col xs={6}>
+                  <div className={styles.OTHERS}>
+                    <h6>Adventure Fiction</h6>
+                    <h4>Treasure Island</h4>
+                    <h5>Pablo Escobar</h5>
+                    <h5>4.4/5</h5>
+                    <h5>₱300</h5>
+
+                    <div className={styles.BTNS}>
+                      <input type="text" />
+                      <span className="me-2"></span>
+                      <button>+</button>
+                      <span className="mx-1"></span>
+                      <button>-</button>
+                    </div>
+
+                    <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+
+            <div className={styles.BOXES}>
+              <Row className="gy-0 gx-3">
+                <Col xs={6}>
+                  <img src="/books/b1.jpg" />
+                </Col>
+                <Col xs={6}>
+                  <div className={styles.OTHERS}>
+                    <h6>Adventure Fiction</h6>
+                    <h4>Treasure Island</h4>
+                    <h5>Pablo Escobar</h5>
+                    <h5>4.4/5</h5>
+                    <h5>₱300</h5>
+
+                    <div className={styles.BTNS}>
+                      <input type="text" />
+                      <span className="me-2"></span>
+                      <button>+</button>
+                      <span className="mx-1"></span>
+                      <button>-</button>
+                    </div>
+
+                    <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+                  </div>
+                </Col>
+              </Row>
+            </div>
           </div>
         </Offcanvas.Body>
       </Offcanvas>

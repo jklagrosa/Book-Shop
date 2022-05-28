@@ -60,8 +60,14 @@ export default function Home({ data_featured, data_sale, data_best_seller }) {
       dispatch(GET_ALL_BOOKS(null));
     } else {
       dispatch(GET_ALL_BOOKS(parsed_data_featured));
+
+      console.log(
+        "Fetch success: " + parsed_data_featured.map((x) => console.log({ x }))
+      );
+
       // console.log(
-      //   "Fetch success: " + parsed_data_featured.map((x) => console.log(x))
+      //   "Fetch success: " +
+      //     parsed_data_featured.map((x) => console.log({ ...x, qty: 1 }))
       // );
     }
   }, [dispatch]);

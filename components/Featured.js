@@ -37,6 +37,8 @@ const Featured = () => {
     } else {
       setDBooks(books);
       setIsEmpty(false);
+
+      console.log(books);
     }
   }, [books]);
 

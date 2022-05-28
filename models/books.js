@@ -34,6 +34,12 @@ const bookSchema = new mongoose.Schema({
   prevPrice: {
     type: Number,
   },
+  fav: {
+    type: Boolean,
+  },
+  qty: {
+    type: Number,
+  },
 });
 
 mongoose.models = {};
