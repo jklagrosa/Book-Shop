@@ -4,6 +4,45 @@
 
 
 
+
+
+.SINGLE_REMOVE_BTN{
+  
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    cursor: pointer;
+    margin: 0;
+    font-size: 1.5rem;
+    // color: #b22222;
+    color: maroon;
+
+
+    @media only screen and (min-width: 2501px) { 
+        font-size: 2.8rem;
+    }
+
+    @media only screen and (min-width: 2201px) and (max-width: 2500px) { 
+        font-size: 2.5rem;
+    }
+
+    @media only screen and (min-width: 1801px) and (max-width: 2200px) { 
+        font-size: 2rem;
+    }
+
+    @media only screen and (min-width: 1400px) and (max-width: 1800px) { 
+        font-size: 1.7rem;
+    }
+
+    @media only screen and (max-width: 576px) { 
+        
+    }
+}
+
+
+
+
 .CART_N_FAV_OFFCANVAS{
 
 
@@ -36,7 +75,7 @@
         display: block;
         max-width: 200px;
         width: 100%;
-        background-color: maroon;
+        background-color: #b22222;
         margin-bottom: 0.3rem;
         padding: 0.1rem 1rem;
         font-size: 1rem;
@@ -47,7 +86,7 @@
         border-radius: 8px;
 
         &:hover{
-            background-color: red;
+            background-color: maroon;
         }
 
         @media only screen and (min-width: 2501px) { 
@@ -152,21 +191,71 @@
     }
 
    }
+
+//    #CART_N_FAV_OFFCANVAS_BODY_FAVOURITES{
+       
+//    }
+
+    #BOXES_FAV{
+        transition: all 0.2s ease-in;
+       &:hover{
+        transition: all 0.2s ease-out;
+           cursor: pointer;
+           background-color: whitesmoke;
+       }
+    }
+
    .CART_N_FAV_OFFCANVAS_BODY{
        width: 100%;
     //    background-color: red;
        min-height: 300px;
 
        .BOXES{
+           position: relative;
         margin-bottom: 1rem;
         padding: 0.6rem;
         width: 100%;
-        background-color: whitesmoke;
+        background-color: white;
 
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
+
+
+    
+
+
+        p{  
+            margin: 0;
+            font-size: 0.8rem;
+            color: darkgrey;
+            margin-top: 0.6rem;
+
+            @media only screen and (min-width: 2501px) { 
+                font-size: 1.8rem;
+            }
+
+            @media only screen and (min-width: 2201px) and (max-width: 2500px) { 
+                font-size: 1.5rem;
+            }
+
+            @media only screen and (min-width: 1801px) and (max-width: 2200px) { 
+                font-size: 1.25rem;
+            }
+
+            @media only screen and (min-width: 1400px) and (max-width: 1800px) { 
+                font-size: 1rem;
+            }
+
+            @media only screen and (max-width: 576px) { 
+                font-size: 0.7rem;
+            }
+
+        }
+
         .OTHERS{
             text-align: left;
+
+            
 
             .QTY_TOTAL{
                 margin-top: 1rem;
@@ -239,6 +328,13 @@
                     padding: 0 1rem;
                     border-radius: 5px;
                     font-size: 1rem;
+                    transition: all 0.2s ease-in;
+
+                    &:hover{
+                      transition: all 0.2s ease-out;
+                      background-color: $H_BLUE;
+                      color: white;
+                    }
 
                     @media only screen and (min-width: 2501px) { 
                         font-size: 2.1rem;
@@ -264,6 +360,8 @@
                 margin: 0;
                 font-size: 0.8rem;
                 font-weight: 400;
+                color: darkgrey;
+              
 
                 @media only screen and (min-width: 2501px) { 
                     font-size: 1.9rem;
@@ -287,9 +385,11 @@
             }
             h4{
                 margin: 0;
-                font-size: 1.1rem;
+                font-size: 1rem;
                 font-weight: 500;
                 margin-bottom: 0.4rem;
+
+                color: $BLACK;
 
                 @media only screen and (min-width: 2501px) { 
                     font-size: 2.25rem;
@@ -315,8 +415,9 @@
             h5{
                 margin: 0;
                 font-size: 0.8rem;
-                margin-bottom: 0.2rem;
+                margin-bottom: 0.45rem;
                 font-weight: 400;
+                color: darkgrey;
 
                 @media only screen and (min-width: 2501px) { 
                     font-size: 1.8rem;

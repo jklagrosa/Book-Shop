@@ -9,17 +9,20 @@ import {
 } from "react-bootstrap";
 import styles from "../styles/navbar.module.scss";
 import { BsCart2, BsHeart, BsCartFill, BsSearch } from "react-icons/bs";
-import { RiHeartLine, RiHeartFill } from "react-icons/ri";
+import { RiHeartLine, RiHeartFill, RiCloseFill } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { style } from "@mui/system";
 
 const Navigation = () => {
   const [show, setShow] = useState(false);
   const [search_show, setSearch_Show] = useState(false);
   const [show_cart, set_show_cart] = useState(false);
   const [show_fav, set_show_fav] = useState(false);
+
+  const [text, setText] = useState(
+    "    Minim duis ullamco nulla occaecat incididunt mollit elitcommodo nostrud officia qui culpa ut."
+  );
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -300,7 +303,7 @@ const Navigation = () => {
         {/* <button className={styles.CHECK_OUT_BTN}>Check Out</button> */}
         <Offcanvas.Body>
           <div className={styles.CART_N_FAV_OFFCANVAS_BODY}>
-            <div className={styles.BOXES}>
+            <div className={styles.BOXES} id={styles.BOXES_FAV}>
               <Row className="gy-0 gx-3">
                 <Col xs={6}>
                   <img src="/books/b1.jpg" />
@@ -308,20 +311,12 @@ const Navigation = () => {
                 <Col xs={6}>
                   <div className={styles.OTHERS}>
                     <h6>Adventure Fiction</h6>
-                    <h4>Treasure Island</h4>
+                    <h4>Treasure Island: And the Seven Dwarfs</h4>
                     <h5>Pablo Escobar</h5>
                     <h5>4.4/5</h5>
                     <h5>₱300</h5>
-
-                    <div className={styles.BTNS}>
-                      <input type="text" />
-                      <span className="me-2"></span>
-                      <button>+</button>
-                      <span className="mx-1"></span>
-                      <button>-</button>
-                    </div>
-
-                    <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+                    <p>{text.substring(0, 50) + "..."}</p>
+                    <RiCloseFill className={styles.SINGLE_REMOVE_BTN} />
                   </div>
                 </Col>
               </Row>
@@ -339,16 +334,7 @@ const Navigation = () => {
                     <h5>Pablo Escobar</h5>
                     <h5>4.4/5</h5>
                     <h5>₱300</h5>
-
-                    <div className={styles.BTNS}>
-                      <input type="text" />
-                      <span className="me-2"></span>
-                      <button>+</button>
-                      <span className="mx-1"></span>
-                      <button>-</button>
-                    </div>
-
-                    <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+                    <p>{text.substring(0, 50) + "..."}</p>
                   </div>
                 </Col>
               </Row>
