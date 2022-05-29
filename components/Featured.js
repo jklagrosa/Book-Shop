@@ -27,12 +27,21 @@ import { Navigation } from "swiper";
 
 import { BASE_URL, headersOpts } from "../utils/http";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { ALL_FAV_BOOKS } from "../store/books";
+
+import { toast } from "react-toastify";
 
 const Featured = () => {
   const [d_books, setDBooks] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
+
+  const [FAV_ADDED, SET_FAV_ADDED] = useState(null);
+
   const { books } = useSelector((state) => state.book);
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!books) {
@@ -62,6 +71,27 @@ const Featured = () => {
   //   // slides: { perView: 2 },
   // });
 
+  const GET_NEW_FAV_DATA = async () => {
+    console.log("ALL FAV BOOKS RAN!");
+    const get_new_fav_books = await axios.get(
+      `${BASE_URL}/api/favs`,
+      headersOpts
+    );
+    if (!get_new_fav_books.data.success) {
+      alert("Cannot get all your favourite books.");
+    } else if (
+      get_new_fav_books &&
+      get_new_fav_books.data &&
+      get_new_fav_books.data.success
+    ) {
+      dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
+    }
+  };
+
+  useEffect(() => {
+    GET_NEW_FAV_DATA();
+  }, [dispatch, FAV_ADDED]);
+
   const handleSelectedBook = (_id) => {
     return router.push({
       pathname: "/book-details/[id]",
@@ -77,8 +107,25 @@ const Featured = () => {
         headersOpts
       );
 
-        
+      if (response.data.isExist) {
+        alert("ALREADY EXIST");
+      } else if (!response.data.success) {
+        alert("ERROR OCCURED!");
+      } else if (response && response.data && response.data.success) {
+        SET_FAV_ADDED(response.data.data);
 
+        toast.success("Added to your favourites.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      return response.data;
     } catch (error) {}
   };
 

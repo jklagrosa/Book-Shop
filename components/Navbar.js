@@ -11,8 +11,9 @@ import styles from "../styles/navbar.module.scss";
 import { BsCart2, BsHeart, BsCartFill, BsSearch } from "react-icons/bs";
 import { RiHeartLine, RiHeartFill, RiCloseFill } from "react-icons/ri";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useSelector } from "react-redux";
 
 const Navigation = () => {
   const [show, setShow] = useState(false);
@@ -20,9 +21,24 @@ const Navigation = () => {
   const [show_cart, set_show_cart] = useState(false);
   const [show_fav, set_show_fav] = useState(false);
 
+  const [FAVS, SETFAVS] = useState([]);
+  const [HAS_FAVS, SET_HAS_FAVS] = useState(true);
+
   const [text, setText] = useState(
     "    Minim duis ullamco nulla occaecat incididunt mollit elitcommodo nostrud officia qui culpa ut."
   );
+
+  const { favBooks } = useSelector((state) => state.book);
+
+  useEffect(() => {
+    if (favBooks) {
+      SETFAVS(favBooks);
+      SET_HAS_FAVS(true);
+    } else {
+      SETFAVS(null);
+      SET_HAS_FAVS(false);
+    }
+  }, [favBooks]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -303,42 +319,41 @@ const Navigation = () => {
         {/* <button className={styles.CHECK_OUT_BTN}>Check Out</button> */}
         <Offcanvas.Body>
           <div className={styles.CART_N_FAV_OFFCANVAS_BODY}>
-            <div className={styles.BOXES} id={styles.BOXES_FAV}>
-              <Row className="gy-0 gx-3">
-                <Col xs={6}>
-                  <img src="/books/b1.jpg" />
-                </Col>
-                <Col xs={6}>
-                  <div className={styles.OTHERS}>
-                    <h6>Adventure Fiction</h6>
-                    <h4>Treasure Island: And the Seven Dwarfs</h4>
-                    <h5>Pablo Escobar</h5>
-                    <h5>4.4/5</h5>
-                    <h5>₱300</h5>
-                    <p>{text.substring(0, 50) + "..."}</p>
-                    <RiCloseFill className={styles.SINGLE_REMOVE_BTN} />
-                  </div>
-                </Col>
-              </Row>
-            </div>
+            {HAS_FAVS &&
+              FAVS.map((fav) => (
+                <div
+                  className={styles.BOXES}
+                  id={styles.BOXES_FAV}
+                  key={fav._id}
+                >
+                  <Row className="gy-0 gx-3">
+                    <Col xs={6}>
+                      <img src={`/books/${fav.img}`} />
+                    </Col>
+                    <Col xs={6}>
+                      <div className={styles.OTHERS}>
+                        <h6>{fav.genre}</h6>
+                        <h4>{fav.title}</h4>
+                        <h5>{fav.author}</h5>
+                        <h5>{fav.ratings}/5</h5>
 
-            <div className={styles.BOXES}>
-              <Row className="gy-0 gx-3">
-                <Col xs={6}>
-                  <img src="/books/b1.jpg" />
-                </Col>
-                <Col xs={6}>
-                  <div className={styles.OTHERS}>
-                    <h6>Adventure Fiction</h6>
-                    <h4>Treasure Island</h4>
-                    <h5>Pablo Escobar</h5>
-                    <h5>4.4/5</h5>
-                    <h5>₱300</h5>
-                    <p>{text.substring(0, 50) + "..."}</p>
-                  </div>
-                </Col>
-              </Row>
-            </div>
+                        <h5>
+                          {fav.prevPrice && (
+                            <>
+                              ₱{fav.prevPrice}
+                              {"/"}
+                            </>
+                          )}
+                          ₱{fav.price}
+                        </h5>
+
+                        <p>{`${fav.desc.substring(0, 40)}...`}</p>
+                        <RiCloseFill className={styles.SINGLE_REMOVE_BTN} />
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              ))}
           </div>
         </Offcanvas.Body>
       </Offcanvas>

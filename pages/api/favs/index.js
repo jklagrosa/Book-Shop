@@ -2,6 +2,25 @@ import Dbconnection from "../../../utils/conn";
 import Fav from "../../../models/fav";
 
 export default async function handler(req, res) {
+  if (req.method === "GET") {
+    await Dbconnection();
+    const get_all_new_favs = await Fav.find({});
+    if (!get_all_new_favs) {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot get all the favourite books.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: get_all_new_favs,
+      message: "Getting all new favourite books.",
+    });
+  }
+
+  // =============================================================================
+
   if (req.method === "POST") {
     await Dbconnection();
 
@@ -15,7 +34,17 @@ export default async function handler(req, res) {
       });
     }
 
-    const new_data = new Fav(data);
+    const new_data = new Fav({
+      title: data.title,
+      author: data.author,
+      ratings: data.ratings,
+      img: data.img,
+      desc: data.desc,
+      price: data.price,
+      prevPrice: data.prevPrice,
+      genre: data.genre,
+      fav: true,
+    });
     new_data
       .save()
       .then((result) => {
