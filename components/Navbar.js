@@ -444,7 +444,7 @@ const Navigation = () => {
             {/* IF OFFCANVAS HAS NO DATA */}
             {FAVS.length === 0 && (
               <h5 className={styles.FAV_IS_EMPTY}>
-                You don't have any saved favourites.
+                You don&apos;t have any saved favourites.
               </h5>
             )}
             {/* END */}
