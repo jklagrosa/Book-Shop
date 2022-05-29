@@ -1,0 +1,81 @@
+@import "../styles/colors.scss";
+
+
+
+.Wrapper{
+    padding: 1rem;
+    background-color: white;
+    margin: auto;
+    display: block;
+    text-align: center;
+    margin-top: 20%;
+    
+    @media only screen and (max-width: 767px){
+        padding: 2rem 1rem;
+  }
+
+  @media only screen and (max-width: 576px){
+    margin-top: 2rem;
+}
+
+
+  .loading_text{
+    font-size: 1rem;
+    margin-left:0.6rem;
+    color: $BLACK;
+
+    
+    @media only screen and (min-width: 2501px){
+        font-size: 2rem;
+     }
+
+    @media only screen and (min-width: 2201px) and (max-width: 2500px){
+        font-size: 1.8rem;
+     }
+
+    @media only screen and (min-width: 1801px) and (max-width: 2200px){
+        font-size: 1.5rem;
+     }
+
+    @media only screen and (min-width: 1400px) and (max-width: 1800px){
+        font-size: 1.25rem;
+     }
+
+    @media only screen and (max-width: 576px){
+       font-size: 0.9rem;
+    }
+}
+
+  .spinner_wrapper{
+    color: $BLACK;
+    width: 20px;
+    height: 20px;
+
+    @media only screen and (min-width: 2501px){
+        width: 35px;
+        height: 35px;
+     }
+
+    @media only screen and (min-width: 2201px) and (max-width: 2500px){
+        width: 30px;
+        height: 30px;
+     }
+
+    @media only screen and (min-width: 1801px) and (max-width: 2200px){
+        width: 25px;
+        height: 25px;
+     }
+
+    @media only screen and (min-width: 1400px) and (max-width: 1800px){
+        width: 20px;
+        height: 20px;
+     }
+
+    @media only screen and (max-width: 576px){
+        width: 15px;
+        height: 15px;
+    }
+
+  }
+
+}

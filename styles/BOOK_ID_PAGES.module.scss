@@ -13,6 +13,11 @@
     #row_wrapper{
         margin-top: 10rem;
 
+        @media only screen and (min-width: 2201px) {
+            margin-top: 15rem;
+         }
+
+
         @media only screen and (max-width: 991px) {
             margin-top: 5rem;
          }
@@ -219,14 +224,17 @@
                 color: grey;
 
                 @media only screen and (min-width: 2501px) {
+                    margin-bottom: 2.25rem;
                     font-size: 2rem;
                  }
 
                 @media only screen and (min-width: 2301px) and (max-width: 2500px) {
+                    margin-bottom: 1.5rem;
                     font-size: 1.8rem;
                  }
 
                 @media only screen and (min-width: 2001px) and (max-width: 2300px) {
+                    margin-bottom: 1.5rem;
                     font-size: 1.5rem;
                  }
 

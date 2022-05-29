@@ -15,9 +15,13 @@ import {
   MdStarOutline,
   MdFavoriteBorder,
   MdFavorite,
+  MdDateRange,
 } from "react-icons/md";
 
-import { useSelector } from "react-redux";
+import { AiOutlineCalendar } from "react-icons/ai";
+
+// import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 export async function getStaticPaths() {
   await dbConnection();
@@ -46,6 +50,10 @@ export async function getStaticProps(context) {
   const { params } = context;
   const find_book = await Books.findOne({ _id: `${params.id}` });
   const get_books_for_left_display = await Books.find({}).limit(8);
+
+  //
+  // console.log(`Params: ${params.id}`);
+  //
 
   if (!find_book) {
     return {
@@ -81,6 +89,10 @@ const BookId = ({ data, display }) => {
   const parsed_data = data ? JSON.parse(data) : false;
   const parsed_display = display ? JSON.parse(display) : false;
 
+  const router = useRouter();
+
+  console.log(books);
+
   useEffect(() => {
     if (!parsed_data) {
       setBooks([]);
@@ -101,6 +113,13 @@ const BookId = ({ data, display }) => {
       SET_HAS_DISPLAY(true);
     }
   }, []);
+
+  const handleSelectedBook = (_id) => {
+    return router.push({
+      pathname: "/book-details-display",
+      query: { id: _id },
+    });
+  };
 
   return (
     <>
@@ -135,6 +154,9 @@ const BookId = ({ data, display }) => {
                     <span className={styles.book_others}>
                       {books.ratings}/5
                     </span>
+                    <br></br>
+                    <AiOutlineCalendar className={styles.icons_others} />
+                    <span className={styles.book_others}>{books.p_date}</span>
 
                     <h2>
                       {books.prevPrice && (
@@ -161,6 +183,7 @@ const BookId = ({ data, display }) => {
                       <div
                         className={styles.display_other_books_wrapper}
                         key={x._id}
+                        onClick={() => handleSelectedBook(x._id)}
                       >
                         <h5>{x.title}</h5>
                         <h6>{x.author}</h6>

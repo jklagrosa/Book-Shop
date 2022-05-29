@@ -58,6 +58,13 @@ const Featured = () => {
   //   // slides: { perView: 2 },
   // });
 
+  const handleSelectedBook = (_id) => {
+    return router.push({
+      pathname: "/book-details/[id]",
+      query: { id: _id },
+    });
+  };
+
   return !isEmpty ? (
     <>
       <div className={styles.Wrapper}>
@@ -144,7 +151,11 @@ const Featured = () => {
           >
             {d_books &&
               d_books.map((book) => (
-                <SwiperSlide className={styles.mySwiperSlide} key={book._id}>
+                <SwiperSlide
+                  className={styles.mySwiperSlide}
+                  key={book._id}
+                  onClick={() => handleSelectedBook(book._id)}
+                >
                   <div className={styles.mySwiperSlide_img_wrapper}>
                     <img
                       src={`/books/${book.img}`}
