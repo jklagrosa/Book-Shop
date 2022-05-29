@@ -52,7 +52,7 @@ const Navigation = () => {
       headersOpts
     );
     if (!get_new_fav_books.data.success) {
-      toast.error("Cannot get your favourite books, please try again later.", {
+      toast.error("Cannot get all your favourite books.", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -233,7 +233,7 @@ const Navigation = () => {
                   id={styles.nav_icons_heart}
                 /> */}
                 <sup className={styles.sup_badge} id={styles.sup_badge_likes}>
-                  9
+                  {FAVS.length}
                 </sup>
               </Nav.Link>
               <span className="mx-2"></span>
@@ -386,7 +386,17 @@ const Navigation = () => {
           </Offcanvas.Title> */}
 
           <Offcanvas.Title>
-            <button className={styles.CHECK_OUT_BTN_REMOVE}>Remove All</button>
+            {FAVS.length > 0 && (
+              <button className={styles.CHECK_OUT_BTN_REMOVE}>
+                Remove All
+              </button>
+            )}
+            {/* ============================== */}
+            {FAVS.length === 0 && (
+              <button className={styles.CHECK_OUT_BTN_REMOVE_DISABLE} disabled>
+                Remove All
+              </button>
+            )}
           </Offcanvas.Title>
         </Offcanvas.Header>
         {/* <button className={styles.CHECK_OUT_BTN}>Check Out</button> */}
@@ -430,6 +440,14 @@ const Navigation = () => {
                   </Row>
                 </div>
               ))}
+
+            {/* IF OFFCANVAS HAS NO DATA */}
+            {FAVS.length === 0 && (
+              <h5 className={styles.FAV_IS_EMPTY}>
+                You don't have any saved favourites.
+              </h5>
+            )}
+            {/* END */}
           </div>
         </Offcanvas.Body>
       </Offcanvas>

@@ -52,3 +52,85 @@ body {
 
 
 
+
+
+
+.Toastify__toast-container {
+
+  @media only screen and (min-width: 2501px){
+    max-width: 600px !important;
+    width: 100% !important;
+  }
+
+  @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+    max-width: 500px !important;
+    width: 100% !important;
+   }
+
+
+  @media only screen and (min-width: 1901px) and (max-width: 2200px) {
+     max-width: 500px !important;
+    width: 100% !important;
+   }
+
+
+
+
+.Toastify__toast {
+  font-size: 1rem;
+  color: $BLACK;
+
+
+ 
+
+  .Toastify__toast-icon {
+   width: 18px;
+   height: 18px;
+
+   @media only screen and (min-width: 2501px){
+    width: 36px;
+    height: 36px;
+   }
+
+   @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+    width: 33px;
+    height: 33px;
+   }
+
+   @media only screen and (min-width: 1901px) and (max-width: 2200px) {
+    width: 30px;
+    height: 30px;
+   }
+
+   @media only screen and (min-width: 1500px) and (max-width: 1900px) {
+    width: 22px;
+    height: 22px;
+   }
+
+  }
+
+  @media only screen and (min-width: 2501px){
+    text-align: center;
+    font-size: 2rem;
+   }
+
+  @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+    text-align: center;
+    font-size: 1.8rem;
+   }
+
+
+  @media only screen and (min-width: 1901px) and (max-width: 2200px) {
+    text-align: center;
+    font-size: 1.5rem;
+   }
+
+  @media only screen and (min-width: 1500px) and (max-width: 1900px) {
+    font-size: 1.25rem;
+   }
+}
+
+
+}
+
+

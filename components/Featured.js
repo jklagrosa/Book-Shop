@@ -78,7 +78,15 @@ const Featured = () => {
       headersOpts
     );
     if (!get_new_fav_books.data.success) {
-      alert("Cannot get all your favourite books.");
+      toast.error("Cannot get all your favourite books.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     } else if (
       get_new_fav_books &&
       get_new_fav_books.data &&
@@ -90,7 +98,7 @@ const Featured = () => {
 
   useEffect(() => {
     GET_NEW_FAV_DATA();
-  }, [dispatch, FAV_ADDED]);
+  }, [FAV_ADDED]);
 
   const handleSelectedBook = (_id) => {
     return router.push({
@@ -110,7 +118,7 @@ const Featured = () => {
       if (response.data.isExist) {
         alert("ALREADY EXIST");
       } else if (!response.data.success) {
-        toast.error("Something went wrong, please try again later.", {
+        toast.error("Please try again later.", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
