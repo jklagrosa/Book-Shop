@@ -260,6 +260,9 @@
                    left: 0;
                    right: 0;
                    bottom: 0;
+
+                   pointer-events: none;
+
                    .mySwiperSlide_extra_details_Price{
                        background: $PINK;
                        max-width: 80px;

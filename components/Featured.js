@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import { Tooltip } from "@mui/material";
 import styles from "../styles/featured.module.scss";
+// import styles from "../styles/redesign/ALL_BOOKS_CMP.module.scss";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import NO_DATA_TO_SHOW from "./NO_DATA_TO_SHOW";
@@ -23,6 +24,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import { Navigation } from "swiper";
+
+import { BASE_URL, headersOpts } from "../utils/http";
+import axios from "axios";
 
 const Featured = () => {
   const [d_books, setDBooks] = useState([]);
@@ -65,6 +69,19 @@ const Featured = () => {
     });
   };
 
+  const handleAddToFavs = async (data) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/favs`,
+        data,
+        headersOpts
+      );
+
+        
+
+    } catch (error) {}
+  };
+
   return !isEmpty ? (
     <>
       <div className={styles.Wrapper}>
@@ -77,31 +94,6 @@ const Featured = () => {
               Featured Books
             </h1>
           </Tooltip>
-
-          {/* KEEN SLIDER */}
-          {/* <div
-            ref={sliderRef}
-            className="keen-slider"
-            // id={styles.parent_slider}
-          >
-            {d_books &&
-              d_books.map((book) => (
-                <div
-                  className="keen-slider__slide"
-                  // id={styles.slider}
-                  key={book._id}
-                >
-                  <img
-                    src={`/books/${book.img}`}
-                    id={styles.slider_img}
-                    loading="lazy"
-                  />
-                  <h1>{book.title}</h1>
-                </div>
-              ))}
-          </div> */}
-          {/* END */}
-
           <Swiper
             slidesPerView={1}
             spaceBetween={0}
@@ -151,27 +143,38 @@ const Featured = () => {
           >
             {d_books &&
               d_books.map((book) => (
-                <SwiperSlide
-                  className={styles.mySwiperSlide}
-                  key={book._id}
-                  onClick={() => handleSelectedBook(book._id)}
-                >
+                <SwiperSlide className={styles.mySwiperSlide} key={book._id}>
                   <div className={styles.mySwiperSlide_img_wrapper}>
                     <img
                       src={`/books/${book.img}`}
+                      alt={book.title}
                       className={styles.mySwiperSlide_img}
                       loading="lazy"
+                      onClick={() => handleSelectedBook(book._id)}
                     />
                   </div>
+
                   <div className={styles.mySwiperSlide_details}>
                     <h5>
                       <Tooltip title="Add to favourites" placement="top-start">
-                        <MdFavoriteBorder
+                        {!book.fav && (
+                          <MdFavoriteBorder
+                            className={styles.mySwiperSlide_tooltip_favourites}
+                            id={styles.mySwiperSlide_author_favourites}
+                            onClick={() => handleAddToFavs(book)}
+                          />
+                        )}
+                      </Tooltip>
+
+                      {book.fav && (
+                        <MdFavorite
                           className={styles.mySwiperSlide_tooltip_favourites}
                           id={styles.mySwiperSlide_author_favourites}
                         />
-                      </Tooltip>
+                      )}
+
                       <span className="mx-2"></span>
+
                       <Tooltip title="Add to cart" placement="top-start">
                         <BsCart2
                           className={styles.mySwiperSlide_tooltip_cart}

@@ -1,9 +1,12 @@
-@import "../styles/colors.scss";
+@import "../../styles/colors.scss";
+
+
+
 
 
 .Wrapper{
     padding: 4rem 2rem;
-    background-color: whitesmoke;
+    background-color: white;
 
     @media only screen and (max-width: 767px){
         padding: 2rem 1rem;
@@ -57,6 +60,7 @@
             transition: all 0.3s ease-in;
             cursor: pointer;
             background: white;
+           
             // background-color: green;
 
             &:hover{
@@ -87,12 +91,22 @@
 
             .mySwiperSlide_img_wrapper{
                 position: relative;
+       
+         
+                // background-color: red;
+
                 .mySwiperSlide_img{
                     max-width: 100%;
+
+              
+                 
                     width: 100%;
                     min-height: 350px;
                     object-fit: cover;
                     object-position: center;
+
+
+                   
 
 
                     @media only screen and (min-width: 2501px) {
@@ -134,11 +148,14 @@
 
             .mySwiperSlide_details{
                 padding: 0.8rem  0.2rem;
+
+               
+
                 h6{
                     // Genre
                     font-size: 0.9rem;
                     font-weight: normal;
-                    margin: 0.6rem 0;
+                    margin-bottom: 0.6rem;
                     color: darkgrey;
 
                     @media only screen and (min-width: 2501px) {
@@ -258,33 +275,30 @@
                    left: 0;
                    right: 0;
                    bottom: 0;
-
                    pointer-events: none;
-
                    .mySwiperSlide_extra_details_Price{
                        background: $PINK;
-                       max-width: 150px;
+                       max-width: 80px;
                        width: 100%;
                        font-size: 1.25rem;
-                   
                        text-align: center;
                        color: white;
                        padding: 0.2rem 0;
 
                        @media only screen and (min-width: 2501px) {
-                        font-size: 2.3rem;
-                        max-width: 280px;
+                        font-size: 2.5rem;
+                        max-width: 200px;
                 }
 
 
                     @media only screen and (min-width: 2201px) and (max-width: 2500px) {
-                        font-size: 2rem;
-                       max-width: 250px;
+                        font-size: 2.25rem;
+                       max-width: 170px;
                 }
 
                     @media only screen and (min-width: 1801px) and (max-width: 2200px) {
-                       font-size: 1.8rem;
-                       max-width: 200px;
+                       font-size: 2rem;
+                       max-width: 150px;
                 }
 
                    }
@@ -294,28 +308,30 @@
 
         
           
-                .mySwiperSlide_tooltip_favourites{
-                    font-size: 1.25rem;
-                    color: $RED;
+            .mySwiperSlide_tooltip_favourites{
+                font-size: 1.25rem;
+                color: $RED;
+               
+                
+               
 
-                    @media only screen and (min-width: 2501px) {
-                        font-size: 3rem;
-                }
+                @media only screen and (min-width: 2501px) {
+                    font-size: 3rem;
+            }
 
-                    @media only screen and (min-width: 2201px) and (max-width: 2500px) {
-                        font-size: 2.5rem;
-                }
+                @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+                    font-size: 2.5rem;
+            }
 
-                    @media only screen and (min-width: 1801px) and (max-width: 2200px) {
-                        font-size: 2rem;
-                 }
-
-                 @media only screen and (min-width: 1400px) and (max-width: 1800px) {
-                    font-size: 1.5rem;
+                @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+                    font-size: 2rem;
              }
 
-                }
+             @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+                font-size: 1.5rem;
+         }
 
+            }
 
                 .mySwiperSlide_tooltip_cart{
                     font-size: 1.25rem;

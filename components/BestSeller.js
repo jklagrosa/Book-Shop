@@ -151,26 +151,44 @@ const Featured = () => {
           >
             {d_books &&
               d_books.map((book) => (
-                <SwiperSlide
-                  className={styles.mySwiperSlide}
-                  key={book._id}
-                  onClick={() => handleSelectedBook(book._id)}
-                >
+                <SwiperSlide className={styles.mySwiperSlide} key={book._id}>
                   <div className={styles.mySwiperSlide_img_wrapper}>
                     <img
                       src={`/books/${book.img}`}
                       className={styles.mySwiperSlide_img}
                       loading="lazy"
+                      onClick={() => handleSelectedBook(book._id)}
                     />
                   </div>
                   <div className={styles.mySwiperSlide_details}>
                     <h5>
-                      <Tooltip title="Add to favourites" placement="top-start">
+                      {/* <Tooltip title="Add to favourites" placement="top-start">
                         <MdFavoriteBorder
                           className={styles.mySwiperSlide_tooltip_favourites}
                           id={styles.mySwiperSlide_author_favourites}
                         />
+                      </Tooltip> */}
+
+                      {/* FAV */}
+
+                      <Tooltip title="Add to favourites" placement="top-start">
+                        {!book.fav && (
+                          <MdFavoriteBorder
+                            className={styles.mySwiperSlide_tooltip_favourites}
+                            id={styles.mySwiperSlide_author_favourites}
+                          />
+                        )}
                       </Tooltip>
+
+                      {book.fav && (
+                        <MdFavorite
+                          className={styles.mySwiperSlide_tooltip_favourites}
+                          id={styles.mySwiperSlide_author_favourites}
+                        />
+                      )}
+
+                      {/* END FAV */}
+
                       <span className="mx-2"></span>
                       <Tooltip title="Add to cart" placement="top-start">
                         <BsCart2

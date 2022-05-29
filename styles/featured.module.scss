@@ -86,12 +86,14 @@
 
 
             .mySwiperSlide_img_wrapper{
+                
                 position: relative;
                 .mySwiperSlide_img{
                     max-width: 100%;
                     width: 100%;
                     min-height: 350px;
                     object-fit: cover;
+                   
                     object-position: center;
 
 
@@ -258,6 +260,9 @@
                    left: 0;
                    right: 0;
                    bottom: 0;
+
+                   pointer-events: none;
+
                    .mySwiperSlide_extra_details_Price{
                        background: $PINK;
                        max-width: 80px;
@@ -293,6 +298,7 @@
             .mySwiperSlide_tooltip_favourites{
                 font-size: 1.25rem;
                 color: $RED;
+               
 
                 @media only screen and (min-width: 2501px) {
                     font-size: 3rem;
