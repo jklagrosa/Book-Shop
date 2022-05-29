@@ -21,6 +21,42 @@ export default async function handler(req, res) {
 
   // =============================================================================
 
+  if (req.method === "DELETE") {
+    await Dbconnection();
+
+    const { id } = req.body;
+
+    const delete_from_favs = await Fav.findOneAndDelete({ _id: id });
+    if (!delete_from_favs) {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot delete from favourite books.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: delete_from_favs,
+      message: "Book is now deleted from favourites.",
+    });
+
+    // const get_all_new_favs = await Fav.find({});
+    // if (!get_all_new_favs) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Cannot get all the favourite books.",
+    //   });
+    // }
+
+    // return res.status(200).json({
+    //   success: true,
+    //   data: get_all_new_favs,
+    //   message: "Getting all new favourite books.",
+    // });
+  }
+
+  // =============================================================================
+
   if (req.method === "POST") {
     await Dbconnection();
 

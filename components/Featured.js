@@ -110,7 +110,15 @@ const Featured = () => {
       if (response.data.isExist) {
         alert("ALREADY EXIST");
       } else if (!response.data.success) {
-        alert("ERROR OCCURED!");
+        toast.error("Something went wrong, please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
       } else if (response && response.data && response.data.success) {
         SET_FAV_ADDED(response.data.data);
 

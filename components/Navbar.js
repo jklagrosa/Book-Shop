@@ -13,7 +13,12 @@ import { RiHeartLine, RiHeartFill, RiCloseFill } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import axios from "axios";
+import { BASE_URL, headersOpts } from "../utils/http";
+import { toast } from "react-toastify";
+import { ALL_FAV_BOOKS } from "../store/books";
 
 const Navigation = () => {
   const [show, setShow] = useState(false);
@@ -24,11 +29,11 @@ const Navigation = () => {
   const [FAVS, SETFAVS] = useState([]);
   const [HAS_FAVS, SET_HAS_FAVS] = useState(true);
 
-  const [text, setText] = useState(
-    "    Minim duis ullamco nulla occaecat incididunt mollit elitcommodo nostrud officia qui culpa ut."
-  );
+  const [FAV_DELETED, SET_FAV_DELETED] = useState(null);
 
   const { favBooks } = useSelector((state) => state.book);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (favBooks) {
@@ -39,6 +44,35 @@ const Navigation = () => {
       SET_HAS_FAVS(false);
     }
   }, [favBooks]);
+
+  const GET_NEW_FAV_DATA = async () => {
+    console.log("ALL FAV BOOKS RAN!");
+    const get_new_fav_books = await axios.get(
+      `${BASE_URL}/api/favs`,
+      headersOpts
+    );
+    if (!get_new_fav_books.data.success) {
+      toast.error("Cannot get your favourite books, please try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (
+      get_new_fav_books &&
+      get_new_fav_books.data &&
+      get_new_fav_books.data.success
+    ) {
+      dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
+    }
+  };
+
+  useEffect(() => {
+    GET_NEW_FAV_DATA();
+  }, [FAV_DELETED]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -59,7 +93,46 @@ const Navigation = () => {
   const handleShow_fav = () => set_show_fav(true);
   // END
 
-  const router = useRouter();
+  // const router = useRouter();
+
+  const handleRemoveFromFavs = async (_id) => {
+    const response = await axios.post(
+      `${BASE_URL}/api/favs-del`,
+      { id: _id },
+      headersOpts
+    );
+    if (!response.data.success) {
+      toast.error("Something went wrong, please try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response && response.data && response.data.data) {
+      console.log("YEHEY DELETED");
+      SET_FAV_DELETED(response.data.data);
+    }
+
+    return response.data;
+  };
+
+  // const handleRemoveFromFavs = () => {
+
+  //    toast.error("Something went wrong, please try again later.", {
+  //     position: "top-center",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: false,
+  //     draggable: true,
+  //     progress: undefined,
+  //   });
+
+  // };
+
   return (
     <>
       <Navbar expand="lg" fixed="top" className={styles.Wrapper}>
@@ -348,7 +421,10 @@ const Navigation = () => {
                         </h5>
 
                         <p>{`${fav.desc.substring(0, 40)}...`}</p>
-                        <RiCloseFill className={styles.SINGLE_REMOVE_BTN} />
+                        <RiCloseFill
+                          className={styles.SINGLE_REMOVE_BTN}
+                          onClick={() => handleRemoveFromFavs(fav._id)}
+                        />
                       </div>
                     </Col>
                   </Row>
