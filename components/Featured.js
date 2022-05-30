@@ -100,6 +100,34 @@ const Featured = () => {
     GET_NEW_FAV_DATA();
   }, [FAV_ADDED]);
 
+  // =============================================================
+
+  const GET_UPDATED_DOCS_DATA = async () => {
+    console.log("Heart Icon Updated!");
+    const response = await axios.get(`${BASE_URL}/api/all-books`, headersOpts);
+    if (!response.data.success) {
+      return response.data;
+      // toast.error("Cannot get all your favourite books.", {
+      //   position: "top-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: false,
+      //   draggable: true,
+      //   progress: undefined,
+      // });
+    } else if (response && response.data && response.data.success) {
+      // dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
+      setDBooks(response.data.data);
+    }
+
+    return response.data;
+  };
+
+  useEffect(() => {
+    GET_UPDATED_DOCS_DATA();
+  }, [FAV_ADDED]);
+
   const handleSelectedBook = (_id) => {
     return router.push({
       pathname: "/book-details/[id]",
@@ -219,19 +247,19 @@ const Featured = () => {
 
                   <div className={styles.mySwiperSlide_details}>
                     <h5>
-                      <Tooltip title="Add to favourites" placement="top-start">
-                        {!book.fav && (
-                          <MdFavoriteBorder
-                            className={styles.mySwiperSlide_tooltip_favourites}
-                            id={styles.mySwiperSlide_author_favourites}
-                            onClick={() => handleAddToFavs(book)}
-                          />
-                        )}
-                      </Tooltip>
+                      {!book.fav && (
+                        <MdFavoriteBorder
+                          className={styles.mySwiperSlide_tooltip_favourites}
+                          id={styles.mySwiperSlide_author_favourites}
+                          onClick={() => handleAddToFavs(book)}
+                        />
+                      )}
 
                       {book.fav && (
                         <MdFavorite
-                          className={styles.mySwiperSlide_tooltip_favourites}
+                          className={
+                            styles.mySwiperSlide_tooltip_favourites_SHADED
+                          }
                           id={styles.mySwiperSlide_author_favourites}
                         />
                       )}

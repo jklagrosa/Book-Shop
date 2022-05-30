@@ -1,5 +1,6 @@
 import Dbconnection from "../../../utils/conn";
 import Fav from "../../../models/fav";
+import Books from "../../../models/books";
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
@@ -70,6 +71,14 @@ export default async function handler(req, res) {
       });
     }
 
+    // await Fav.findOneAndUpdate(
+    //   { _id: data._id },
+    //   { fav: true },
+    //   {
+    //     new: true,
+    //   }
+    // );
+
     const new_data = new Fav({
       title: data.title,
       author: data.author,
@@ -83,8 +92,16 @@ export default async function handler(req, res) {
     });
     new_data
       .save()
-      .then((result) => {
+      .then(async (result) => {
         if (result) {
+          await Books.findOneAndUpdate(
+            { _id: data._id },
+            { fav: true },
+            {
+              new: true,
+            }
+          );
+
           return res.status(200).json({
             success: true,
             data: result,
