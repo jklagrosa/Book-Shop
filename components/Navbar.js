@@ -35,6 +35,14 @@ const Navigation = () => {
 
   const dispatch = useDispatch();
 
+  // =============================
+
+  // const wew = FAVS.map((x) => x._id);
+
+  // console.log(`IDs:${wew}`);
+
+  // =============================
+
   useEffect(() => {
     if (favBooks) {
       SETFAVS(favBooks);
@@ -93,7 +101,7 @@ const Navigation = () => {
   const handleShow_fav = () => set_show_fav(true);
   // END
 
-  // const router = useRouter();
+  const router = useRouter();
 
   const handleRemoveFromFavs = async (_id) => {
     const response = await axios.post(
@@ -132,6 +140,31 @@ const Navigation = () => {
   //   });
 
   // };
+
+  const handleRemoveAllFavs = async (favs) => {
+    // let get_all_fav_books_id = FAVS.map((x) => x._id);
+
+    const response = await axios.post(
+      `${BASE_URL}/api/favs-del-all`,
+      headersOpts
+    );
+    if (!response.data.success) {
+      toast.error("Cannot delete all, try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response && response.data && response.data.data) {
+      // console.log("YEHEY ALL FAVS DELETED");
+      SET_FAV_DELETED(response.data.data);
+    }
+
+    return response.data;
+  };
 
   return (
     <>
@@ -387,7 +420,10 @@ const Navigation = () => {
 
           <Offcanvas.Title>
             {FAVS.length > 0 && (
-              <button className={styles.CHECK_OUT_BTN_REMOVE}>
+              <button
+                className={styles.CHECK_OUT_BTN_REMOVE}
+                onClick={() => handleRemoveAllFavs(FAVS)}
+              >
                 Remove All
               </button>
             )}

@@ -1,5 +1,6 @@
 import Dbconnection from "../../../utils/conn";
 import Fav from "../../../models/fav";
+import Books from "../../../models/books";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -17,10 +18,22 @@ export default async function handler(req, res) {
 
     // console.log(`Deleted: ${delete_from_favs}`);
 
-    return res.status(200).json({
-      success: true,
-      data: delete_from_favs,
-      message: "Book is now deleted from favourites.",
-    });
+    if (delete_from_favs) {
+      await Books.findOneAndUpdate(
+        { _id: req.body.id },
+        { fav: false },
+        {
+          new: true,
+        }
+      );
+
+      console.log("UPDATED PANGA!");
+
+      return res.status(200).json({
+        success: true,
+        data: delete_from_favs,
+        message: "Book is now deleted from favourites.",
+      });
+    }
   }
 }

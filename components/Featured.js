@@ -170,7 +170,19 @@ const Featured = () => {
       }
 
       return response.data;
-    } catch (error) {}
+    } catch (error) {
+      if (error) {
+        toast.error("Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
   };
 
   return !isEmpty ? (
