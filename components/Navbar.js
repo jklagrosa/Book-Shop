@@ -141,11 +141,12 @@ const Navigation = () => {
 
   // };
 
-  const handleRemoveAllFavs = async (favs) => {
+  const handleRemoveAllFavs = async (favsId) => {
     // let get_all_fav_books_id = FAVS.map((x) => x._id);
 
     const response = await axios.post(
       `${BASE_URL}/api/favs-del-all`,
+      { id: favsId },
       headersOpts
     );
     if (!response.data.success) {
