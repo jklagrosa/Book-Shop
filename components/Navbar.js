@@ -67,11 +67,11 @@ const Navigation = () => {
 
   useEffect(() => {
     if (cartAdded) {
-      SETFAVS(cartAdded);
-      SET_HAS_FAVS(true);
+      SETCART(cartAdded);
+      SET_HAS_CART(true);
     } else {
-      SETFAVS(null);
-      SET_HAS_FAVS(false);
+      SETCART(null);
+      SET_HAS_CART(false);
     }
   }, [cartAdded]);
 
@@ -432,8 +432,8 @@ const Navigation = () => {
           <div className={styles.CART_N_FAV_OFFCANVAS_BODY}>
             {HAS_CART &&
               CART.map((c) => (
-                <div className={styles.BOXES}>
-                  <Row className="gy-0 gx-3" key={c._id}>
+                <div className={styles.BOXES} key={c._id}>
+                  <Row className="gy-0 gx-3">
                     <Col xs={6}>
                       <img src={`/books/${c.img}`} />
                     </Col>
