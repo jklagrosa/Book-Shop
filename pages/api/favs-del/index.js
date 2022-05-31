@@ -38,7 +38,7 @@ export default async function handler(req, res) {
                 message: "Book is now updated from favourites.",
               });
             }
-          });
+          }).clone;
         }
       }
     ).clone();

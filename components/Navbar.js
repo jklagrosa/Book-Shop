@@ -415,11 +415,13 @@ const Navigation = () => {
                   id={styles.BOXES_FAV}
                   key={fav._id}
                 >
-                  <Row
-                    className="gy-0 gx-3"
-                    onClick={() => handleSelectedBook(fav._id)}
-                  >
-                    <Col xs={6}>
+                  <Row className="gy-0 gx-3">
+                    <Col
+                      xs={6}
+                      onClick={() => handleSelectedBook(fav._id)}
+                      style={{ cursor: "pointer" }}
+                      className={styles.IMG_COL_WRAPPER}
+                    >
                       <img src={`/books/${fav.img}`} />
                     </Col>
                     <Col xs={6}>

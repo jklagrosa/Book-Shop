@@ -46,7 +46,7 @@
     top: 0;
     right: 0;
 
-    
+    //  pointer-events: none;   
 
     cursor: pointer;
     margin: 0;
@@ -81,6 +81,7 @@
 
 .CART_N_FAV_OFFCANVAS{
 
+    // cursor: none;
 
     @media only screen and (min-width: 2501px) { 
         max-width: 750px;
@@ -281,18 +282,38 @@
 //    }
 
     #BOXES_FAV{
-        transition: all 0.2s ease-in;
-       &:hover{
-        transition: all 0.2s ease-out;
-           cursor: pointer;
-           background-color: whitesmoke;
-       }
+       cursor: default !important; 
+    //     transition: all 0.2s ease-in;
+    //    &:hover{
+    //     transition: all 0.2s ease-out;
+    //        cursor: pointer;
+    //        background-color: whitesmoke;
+    //    }
     }
+
+    // .IMG_COL_WRAPPER{
+    //     &:hover{
+    //         background-color: red !important;
+    //         #BOXES_FAV{
+    //             background-color: red !important;
+    //             // cursor: default !important; 
+    //             //  transition: all 0.2s ease-in;
+    //             // &:hover{
+    //             //  transition: all 0.2s ease-out;
+    //             //     cursor: pointer;
+    //             //     background-color: whitesmoke;
+    //             // }
+    //          }
+    //     }
+  
+    // }
 
    .CART_N_FAV_OFFCANVAS_BODY{
        width: 100%;
     //    background-color: red;
        min-height: 300px;
+
+       
 
        .BOXES{
            position: relative;
@@ -526,10 +547,16 @@
         }
         img{
             display: block;
+            
             width: 100%;
             max-height: 220px;
             height: 100%;
             object-fit:contain;
+
+            pointer-events: none;
+           
+            transition: all 0.2s ease-in;
+          
 
             @media only screen and (min-width: 2501px) { 
                 min-height: 450px;

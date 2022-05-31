@@ -20,8 +20,13 @@ import {
 
 import { AiOutlineCalendar } from "react-icons/ai";
 
+import axios from "axios";
+import { BASE_URL, headersOpts } from "../../utils/http";
+
 // import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export async function getStaticPaths() {
   await dbConnection();
@@ -89,6 +94,8 @@ const BookId = ({ data, display }) => {
   const parsed_data = data ? JSON.parse(data) : false;
   const parsed_display = display ? JSON.parse(display) : false;
 
+  const { remove_from_favs } = useSelector((state) => state.book);
+
   const router = useRouter();
 
   console.log(books);
@@ -114,10 +121,11 @@ const BookId = ({ data, display }) => {
     }
   }, []);
 
-
-  
-
-
+  // useEffect(() => {
+  //   if (remove_from_favs) {
+  //     router.reload();
+  //   }
+  // }, []);
 
   const handleSelectedBook = (_id) => {
     return router.push({
@@ -126,17 +134,15 @@ const BookId = ({ data, display }) => {
     });
   };
 
-  const handleAddToFavs = async (data) => {
+  const handleAddToFavs_DYNAMIC = async (bId) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/favs`,
-        data,
+        `${BASE_URL}/api/favs-dy-pages`,
+        { id: bId },
         headersOpts
       );
 
-      if (response.data.isExist) {
-        alert("ALREADY EXIST");
-      } else if (!response.data.success) {
+      if (!response.data.success) {
         toast.error("Please try again later.", {
           position: "top-right",
           autoClose: 5000,
@@ -159,8 +165,6 @@ const BookId = ({ data, display }) => {
           progress: undefined,
         });
       }
-
-      return response.data;
     } catch (error) {
       if (error) {
         toast.error("Please try again later.", {
@@ -173,6 +177,8 @@ const BookId = ({ data, display }) => {
           progress: undefined,
         });
       }
+    } finally {
+      return response.data;
     }
   };
 
@@ -193,7 +199,7 @@ const BookId = ({ data, display }) => {
                       <MdFavoriteBorder
                         className={styles.mySwiperSlide_tooltip_favourites}
                         id={styles.mySwiperSlide_author_favourites}
-                        onClick={() => handleAddToFavs(books)}
+                        onClick={() => handleAddToFavs_DYNAMIC(books._id)}
                       />
                     )}
 
