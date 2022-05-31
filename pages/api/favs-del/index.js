@@ -6,33 +6,35 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     await Dbconnection();
 
-    const delete_from_favs = await Fav.findOneAndDelete({
-      _id: req.body.id,
-    });
-    if (!delete_from_favs) {
-      return res.status(204).json({
+    const from_fav_to_not_fav = await Books.findOneAndUpdate(
+      { _id: req.body.id },
+      { fav: false },
+      {
+        new: true,
+      }
+    );
+
+    if (from_fav_to_not_fav) {
+      await Fav.findOneAndDelete({
+        _id: req.body.id,
+      })
+        .then(() => {
+          return res.status(200).json({
+            success: true,
+            data: from_fav_to_not_fav,
+            message: "Book is now deleted from favourites.",
+          });
+        })
+        .catch((err) => {
+          return res.status(400).json({
+            success: false,
+            message: `Cannot delete from favourite books, ${err}`,
+          });
+        });
+    } else {
+      return res.status(400).json({
         success: false,
         message: "Cannot delete from favourite books.",
-      });
-    }
-
-    // console.log(`Deleted: ${delete_from_favs}`);
-
-    if (delete_from_favs) {
-      await Books.findOneAndUpdate(
-        { _id: req.body.id },
-        { fav: false },
-        {
-          new: true,
-        }
-      );
-
-      console.log("UPDATED PANGA!");
-
-      return res.status(200).json({
-        success: true,
-        data: delete_from_favs,
-        message: "Book is now deleted from favourites.",
       });
     }
   }

@@ -122,6 +122,7 @@ const Navigation = () => {
     } else if (response && response.data && response.data.data) {
       console.log("YEHEY DELETED");
       SET_FAV_DELETED(response.data.data);
+      dispatch(BOOK_IS_REMOVE_FROM_FAVS(response.data.data));
     }
 
     return response.data;
@@ -140,32 +141,6 @@ const Navigation = () => {
   //   });
 
   // };
-
-  const handleRemoveAllFavs = async (favsId) => {
-    // let get_all_fav_books_id = FAVS.map((x) => x._id);
-
-    const response = await axios.post(
-      `${BASE_URL}/api/favs-del-all`,
-      { id: favsId },
-      headersOpts
-    );
-    if (!response.data.success) {
-      toast.error("Cannot delete all, try again later.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
-    } else if (response && response.data && response.data.data) {
-      // console.log("YEHEY ALL FAVS DELETED");
-      SET_FAV_DELETED(response.data.data);
-    }
-
-    return response.data;
-  };
 
   return (
     <>
@@ -420,20 +395,7 @@ const Navigation = () => {
           </Offcanvas.Title> */}
 
           <Offcanvas.Title>
-            {FAVS.length > 0 && (
-              <button
-                className={styles.CHECK_OUT_BTN_REMOVE}
-                onClick={() => handleRemoveAllFavs(FAVS)}
-              >
-                Remove All
-              </button>
-            )}
-            {/* ============================== */}
-            {FAVS.length === 0 && (
-              <button className={styles.CHECK_OUT_BTN_REMOVE_DISABLE} disabled>
-                Remove All
-              </button>
-            )}
+            <span className={styles.YOUR_CART}>Favourites</span>
           </Offcanvas.Title>
         </Offcanvas.Header>
         {/* <button className={styles.CHECK_OUT_BTN}>Check Out</button> */}

@@ -28,7 +28,7 @@ import { Navigation } from "swiper";
 import { BASE_URL, headersOpts } from "../utils/http";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { ALL_FAV_BOOKS } from "../store/books";
+import { ALL_FAV_BOOKS, BOOK_IS_REMOVE_FROM_FAVS } from "../store/books";
 
 import { toast } from "react-toastify";
 
@@ -38,7 +38,7 @@ const Featured = () => {
 
   const [FAV_ADDED, SET_FAV_ADDED] = useState(null);
 
-  const { books } = useSelector((state) => state.book);
+  const { books, remove_from_favs } = useSelector((state) => state.book);
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -127,6 +127,14 @@ const Featured = () => {
   useEffect(() => {
     GET_UPDATED_DOCS_DATA();
   }, [FAV_ADDED]);
+
+  // ===================================================
+
+  useEffect(() => {
+    if (remove_from_favs) {
+      GET_UPDATED_DOCS_DATA();
+    }
+  }, [remove_from_favs]);
 
   const handleSelectedBook = (_id) => {
     return router.push({

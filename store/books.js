@@ -7,6 +7,7 @@ const bookSlice = createSlice({
     saleBooks: [],
     bestSeller: [],
     favBooks: [],
+    remove_from_favs: [],
   },
   reducers: {
     GET_ALL_BOOKS: (state, action) => {
@@ -22,6 +23,10 @@ const bookSlice = createSlice({
     ALL_FAV_BOOKS: (state, action) => {
       state.favBooks = action.payload;
     },
+
+    BOOK_IS_REMOVE_FROM_FAVS: (state, action) => {
+      state.remove_from_favs = action.payload;
+    },
   },
 });
 
@@ -30,6 +35,7 @@ export const {
   GET_ALL_BOOKS_SALE,
   GET_ALL_BEST_SELLER,
   ALL_FAV_BOOKS,
+  BOOK_IS_REMOVE_FROM_FAVS,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;
