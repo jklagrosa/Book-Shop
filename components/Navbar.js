@@ -20,6 +20,7 @@ import { BASE_URL, headersOpts } from "../utils/http";
 import { toast } from "react-toastify";
 import {
   ALL_FAV_BOOKS,
+  ALL_CART_ADDED,
   BOOK_IS_REMOVE_FROM_FAVS,
   DYNAMIC_PAGE_BOOK,
   BOOK_IS_REMOVE_FROM_CART,
@@ -139,7 +140,7 @@ const Navigation = () => {
       get_new_fav_books.data &&
       get_new_fav_books.data.success
     ) {
-      dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
+      dispatch(ALL_CART_ADDED(get_new_fav_books.data.data.reverse()));
     }
   };
   // FAVS
