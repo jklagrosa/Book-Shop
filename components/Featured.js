@@ -123,6 +123,10 @@ const Featured = () => {
       get_new_cart_books.data.success
     ) {
       dispatch(ALL_CART_ADDED(get_new_cart_books.data.data.reverse()));
+      window.localStorage.setItem(
+        "cart",
+        JSON.stringify(get_new_cart_books.data.data.reverse())
+      );
     }
   };
 

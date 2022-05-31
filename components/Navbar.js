@@ -33,9 +33,12 @@ const Navigation = () => {
   const [FAVS, SETFAVS] = useState([]);
   const [HAS_FAVS, SET_HAS_FAVS] = useState(true);
 
+  const [CART, SETCART] = useState([]);
+  const [HAS_CART, SET_HAS_CART] = useState(true);
+
   const [FAV_DELETED, SET_FAV_DELETED] = useState(null);
 
-  const { favBooks } = useSelector((state) => state.book);
+  const { favBooks, cartAdded } = useSelector((state) => state.book);
 
   const dispatch = useDispatch();
 
@@ -56,6 +59,28 @@ const Navigation = () => {
       SET_HAS_FAVS(false);
     }
   }, [favBooks]);
+
+  useEffect(() => {
+    const parsed_cart_items = window.localStorage.getItem("cart")
+      ? JSON.parse(window.localStorage.getItem("cart"))
+      : false;
+
+    if (parsed_cart_items) {
+      SETCART(parsed_cart_items);
+      SET_HAS_CART(true);
+    } else if (!parsed_cart_items) {
+      if (cartAdded) {
+        SETCART(cartAdded);
+        SET_HAS_CART(true);
+      } else {
+        SETCART(null);
+        SET_HAS_CART(false);
+      }
+    }
+    console.log(`CART ITEMS!`);
+
+    // cartAdded || parsed_cart_items
+  }, [cartAdded]);
 
   const GET_NEW_FAV_DATA = async () => {
     console.log("ALL FAV BOOKS RAN!");
@@ -190,7 +215,7 @@ const Navigation = () => {
               <BsCart2 className={styles.nav_icons} onClick={handleShow_cart} />
               {/* <BsCartFill className={styles.nav_icons} /> */}
               <sup className={styles.sup_badge} id={styles.sup_badge_cart}>
-                9
+                {CART.length}
               </sup>
             </Nav.Link>
             <span className="mx-3"></span>
@@ -205,7 +230,7 @@ const Navigation = () => {
                   id={styles.nav_icons_heart}
                 /> */}
               <sup className={styles.sup_badge} id={styles.sup_badge_likes}>
-                9
+                {FAVS.length}
               </sup>
             </Nav.Link>
             <span className="mx-3"></span>
@@ -239,7 +264,7 @@ const Navigation = () => {
                 />
                 {/* <BsCartFill className={styles.nav_icons} /> */}
                 <sup className={styles.sup_badge} id={styles.sup_badge_cart}>
-                  9
+                  {CART.length}
                 </sup>
               </Nav.Link>
               <span className="mx-2"></span>
@@ -335,59 +360,49 @@ const Navigation = () => {
         {/* <button className={styles.CHECK_OUT_BTN}>Check Out</button> */}
         <Offcanvas.Body>
           <div className={styles.CART_N_FAV_OFFCANVAS_BODY}>
-            <div className={styles.BOXES}>
-              <Row className="gy-0 gx-3">
-                <Col xs={6}>
-                  <img src="/books/b1.jpg" />
-                </Col>
-                <Col xs={6}>
-                  <div className={styles.OTHERS}>
-                    <h6>Adventure Fiction</h6>
-                    <h4>Treasure Island</h4>
-                    <h5>Pablo Escobar</h5>
-                    <h5>4.4/5</h5>
-                    <h5>₱300</h5>
+            {HAS_CART &&
+              CART.map((c) => (
+                <div className={styles.BOXES}>
+                  <Row className="gy-0 gx-3" key={c._id}>
+                    <Col xs={6}>
+                      <img src={`/books/${c.img}`} />
+                    </Col>
+                    <Col xs={6}>
+                      <div className={styles.OTHERS}>
+                        <h6>{c.genre}</h6>
+                        <h4>{c.title}</h4>
+                        <h5>{c.author}</h5>
+                        <h5>{c.ratings}/5</h5>
+                        <h5>
+                          {c.prevPrice && (
+                            <>
+                              ₱{c.prevPrice}
+                              {"/"}
+                            </>
+                          )}
+                          ₱{c.price}
+                        </h5>
 
-                    <div className={styles.BTNS}>
-                      <input type="text" />
-                      <span className="me-2"></span>
-                      <button>+</button>
-                      <span className="mx-1"></span>
-                      <button>-</button>
-                    </div>
+                        <div className={styles.BTNS}>
+                          <input type="text" value={c.qty} />
+                          <span className="me-2"></span>
+                          <button>+</button>
+                          <span className="mx-1"></span>
+                          <button>-</button>
+                        </div>
 
-                    <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
-                  </div>
-                </Col>
-              </Row>
-            </div>
+                        <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              ))}
 
-            <div className={styles.BOXES}>
-              <Row className="gy-0 gx-3">
-                <Col xs={6}>
-                  <img src="/books/b1.jpg" />
-                </Col>
-                <Col xs={6}>
-                  <div className={styles.OTHERS}>
-                    <h6>Adventure Fiction</h6>
-                    <h4>Treasure Island</h4>
-                    <h5>Pablo Escobar</h5>
-                    <h5>4.4/5</h5>
-                    <h5>₱300</h5>
-
-                    <div className={styles.BTNS}>
-                      <input type="text" />
-                      <span className="me-2"></span>
-                      <button>+</button>
-                      <span className="mx-1"></span>
-                      <button>-</button>
-                    </div>
-
-                    <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
-                  </div>
-                </Col>
-              </Row>
-            </div>
+            {/* IF OFFCANVAS HAS NO DATA */}
+            {CART.length === 0 && (
+              <h5 className={styles.FAV_IS_EMPTY}>Your cart is empty.</h5>
+            )}
+            {/* END */}
           </div>
         </Offcanvas.Body>
       </Offcanvas>
