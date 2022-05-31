@@ -18,7 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { BASE_URL, headersOpts } from "../utils/http";
 import { toast } from "react-toastify";
-import { ALL_FAV_BOOKS } from "../store/books";
+import { ALL_FAV_BOOKS, BOOK_IS_REMOVE_FROM_FAVS } from "../store/books";
 
 const Navigation = () => {
   const [show, setShow] = useState(false);
@@ -103,10 +103,10 @@ const Navigation = () => {
 
   const router = useRouter();
 
-  const handleRemoveFromFavs = async (_id) => {
+  const handleRemoveFromFavs = async (uid) => {
     const response = await axios.post(
       `${BASE_URL}/api/favs-del`,
-      { id: _id },
+      { id: uid },
       headersOpts
     );
     if (!response.data.success) {
@@ -126,6 +126,13 @@ const Navigation = () => {
     }
 
     return response.data;
+  };
+
+  const handleSelectedBook = (_id) => {
+    return router.push({
+      pathname: "/book-details/[id]",
+      query: { id: _id },
+    });
   };
 
   // const handleRemoveFromFavs = () => {
@@ -408,7 +415,10 @@ const Navigation = () => {
                   id={styles.BOXES_FAV}
                   key={fav._id}
                 >
-                  <Row className="gy-0 gx-3">
+                  <Row
+                    className="gy-0 gx-3"
+                    onClick={() => handleSelectedBook(fav._id)}
+                  >
                     <Col xs={6}>
                       <img src={`/books/${fav.img}`} />
                     </Col>

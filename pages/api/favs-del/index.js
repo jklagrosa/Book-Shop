@@ -6,36 +6,110 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     await Dbconnection();
 
-    const from_fav_to_not_fav = await Books.findOneAndUpdate(
-      { _id: req.body.id },
-      { fav: false },
-      {
-        new: true,
-      }
-    );
+    const { id } = req.body;
 
-    if (from_fav_to_not_fav) {
-      await Fav.findOneAndDelete({
-        _id: req.body.id,
-      })
-        .then(() => {
-          return res.status(200).json({
-            success: true,
-            data: from_fav_to_not_fav,
-            message: "Book is now deleted from favourites.",
-          });
-        })
-        .catch((err) => {
+    await Books.findOneAndUpdate(
+      { _id: id },
+      // { fav: true },
+      { $set: { fav: false } },
+      // { new: true },
+      async (err, result) => {
+        if (err) {
           return res.status(400).json({
             success: false,
-            message: `Cannot delete from favourite books, ${err}`,
+            message: "Cannot update from favourite books",
           });
-        });
-    } else {
-      return res.status(400).json({
-        success: false,
-        message: "Cannot delete from favourite books.",
-      });
-    }
+        }
+
+        if (result) {
+          await Fav.findOneAndDelete({ _id: id }, (err, isDeleted) => {
+            if (err) {
+              return res.status(400).json({
+                success: false,
+                message: "Cannot delete from favourite books",
+              });
+            }
+
+            if (isDeleted) {
+              console.log(`isDeleted: ${isDeleted}`);
+              return res.status(200).json({
+                success: true,
+                data: result,
+                message: "Book is now updated from favourites.",
+              });
+            }
+          });
+        }
+      }
+    ).clone();
+
+    // const find_book = await Books.findOne({ _id: id });
+    // if (find_book) {
+    //   await Books.updateOne(
+    //     { _id: id },
+    //     // { $set: { fav: true } },
+    //     { fav: true },
+
+    //     {
+    //       new: true,
+    //       upsert: true,
+    //     },
+    //     (error, result) => {
+    //       if (error) {
+    //         return res.status(400).json({
+    //           success: false,
+    //           message: `Cannot update, delete from favourite books, ${err}`,
+    //         });
+    //       }
+
+    //       console.log("POTANGINA");
+    //       return res.status(200).json({
+    //         success: true,
+    //         data: from_fav_to_not_fav,
+    //         message: "Book is now updated from favourites.",
+    //       });
+
+    //       // if (result) {
+    //       //   console.log("POTANGINA");
+    //       //   return res.status(200).json({
+    //       //     success: true,
+    //       //     data: from_fav_to_not_fav,
+    //       //     message: "Book is now updated from favourites.",
+    //       //   });
+    //       // }
+    //     }
+    //   );
+    // .then(() => {
+    //   console.log(`Fav is now updated.`);
+    // await Fav.findOneAndDelete({
+    //   _id: req.body.id,
+    // })
+    //   .then(() => {
+    //     console.log("POTANGINA");
+    //     return res.status(200).json({
+    //       success: true,
+    //       data: from_fav_to_not_fav,
+    //       message: "Book is now deleted from favourites.",
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     return res.status(400).json({
+    //       success: false,
+    //       message: `Cannot delete from favourite books, ${err}`,
+    //     });
+    //   });
+    // })
+    // .catch((err) => {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: `Cannot update, delete from favourite books, ${err}`,
+    //   });
+    // });
+    // } else {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Cannot update, delete from favourite books",
+    //   });
+    // }
   }
 }

@@ -10,6 +10,59 @@
         padding: 2rem 1rem;
     }
 
+
+
+    
+    .mySwiperSlide_tooltip_favourites_SHADED{
+        font-size: 1.25rem;
+        color: #D2042D;
+       
+       
+
+        @media only screen and (min-width: 2501px) {
+            font-size: 3rem;
+    }
+
+        @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+            font-size: 2.5rem;
+    }
+
+        @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+            font-size: 2rem;
+     }
+
+     @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+        font-size: 1.5rem;
+ }
+
+    }
+
+  
+    .mySwiperSlide_tooltip_favourites{
+        font-size: 1.25rem;
+        color: $RED;
+       
+       
+
+        @media only screen and (min-width: 2501px) {
+            font-size: 3rem;
+    }
+
+        @media only screen and (min-width: 2201px) and (max-width: 2500px) {
+            font-size: 2.5rem;
+    }
+
+        @media only screen and (min-width: 1801px) and (max-width: 2200px) {
+            font-size: 2rem;
+     }
+
+     @media only screen and (min-width: 1400px) and (max-width: 1800px) {
+        font-size: 1.5rem;
+ }
+
+    }
+
+
     #row_wrapper{
         margin-top: 10rem;
 

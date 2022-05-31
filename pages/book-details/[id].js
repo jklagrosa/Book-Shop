@@ -114,11 +114,66 @@ const BookId = ({ data, display }) => {
     }
   }, []);
 
+
+  
+
+
+
   const handleSelectedBook = (_id) => {
     return router.push({
       pathname: "/book-details-display",
       query: { id: _id },
     });
+  };
+
+  const handleAddToFavs = async (data) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/favs`,
+        data,
+        headersOpts
+      );
+
+      if (response.data.isExist) {
+        alert("ALREADY EXIST");
+      } else if (!response.data.success) {
+        toast.error("Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      } else if (response && response.data && response.data.success) {
+        SET_FAV_ADDED(response.data.data);
+
+        toast.success("Added to your favourites.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      return response.data;
+    } catch (error) {
+      if (error) {
+        toast.error("Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
   };
 
   return (
@@ -134,10 +189,25 @@ const BookId = ({ data, display }) => {
                 <div className={styles.book_details_wrapper}>
                   <img src={`/books/${books.img}`} />
                   <div className={styles.stack_wrapper}>
-                    <MdFavoriteBorder
-                      className={styles.icons}
-                      style={{ color: "#f2b195", cursor: "pointer" }}
-                    />
+                    {!books.fav && (
+                      <MdFavoriteBorder
+                        className={styles.mySwiperSlide_tooltip_favourites}
+                        id={styles.mySwiperSlide_author_favourites}
+                        onClick={() => handleAddToFavs(books)}
+                      />
+                    )}
+
+                    {books.fav && (
+                      <MdFavorite
+                        className={
+                          styles.mySwiperSlide_tooltip_favourites_SHADED
+                        }
+                        id={styles.mySwiperSlide_author_favourites}
+                      />
+                    )}
+
+                    {/* =================================== */}
+
                     <span className="mx-2"></span>
                     <BsCart2
                       className={styles.icons}

@@ -80,6 +80,7 @@ export default async function handler(req, res) {
     // );
 
     const new_data = new Fav({
+      _id: data._id,
       title: data.title,
       author: data.author,
       ratings: data.ratings,
