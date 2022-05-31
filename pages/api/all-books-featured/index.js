@@ -4,7 +4,7 @@ import Books from "../../../models/books";
 export default async function handler(req, res) {
   if (req.method === "GET") {
     await Dbconnection();
-    const get_all_books = await Books.find({});
+    const get_all_books = await Books.find({ cat: { $in: ["tr", "ft"] } });
     if (!get_all_books) {
       return res.status(400).json({
         success: false,

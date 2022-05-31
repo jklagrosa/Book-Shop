@@ -10,6 +10,7 @@ const bookSlice = createSlice({
     remove_from_favs: [],
     dynamic_page_change: [],
     cartAdded: [],
+    remove_from_cart: [],
   },
   reducers: {
     GET_ALL_BOOKS: (state, action) => {
@@ -37,6 +38,10 @@ const bookSlice = createSlice({
     ALL_CART_ADDED: (state, action) => {
       state.cartAdded = action.payload;
     },
+
+    BOOK_IS_REMOVE_FROM_CART: (state, action) => {
+      state.remove_from_cart = action.payload;
+    },
   },
 });
 
@@ -48,6 +53,7 @@ export const {
   BOOK_IS_REMOVE_FROM_FAVS,
   DYNAMIC_PAGE_BOOK,
   ALL_CART_ADDED,
+  BOOK_IS_REMOVE_FROM_CART,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;

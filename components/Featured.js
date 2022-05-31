@@ -125,7 +125,7 @@ const Featured = () => {
       dispatch(ALL_CART_ADDED(get_new_cart_books.data.data.reverse()));
       window.localStorage.setItem(
         "cart",
-        JSON.stringify(get_new_cart_books.data.data.reverse())
+        JSON.stringify(get_new_cart_books.data.data)
       );
     }
   };
@@ -155,7 +155,10 @@ const Featured = () => {
 
   const GET_UPDATED_DOCS_DATA = async () => {
     // console.log("Heart Icon Updated!");
-    const response = await axios.get(`${BASE_URL}/api/all-books`, headersOpts);
+    const response = await axios.get(
+      `${BASE_URL}/api/all-books-featured`,
+      headersOpts
+    );
     if (!response.data.success) {
       return response.data;
       // toast.error("Cannot get all your favourite books.", {

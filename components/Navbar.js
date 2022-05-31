@@ -22,6 +22,7 @@ import {
   ALL_FAV_BOOKS,
   BOOK_IS_REMOVE_FROM_FAVS,
   DYNAMIC_PAGE_BOOK,
+  BOOK_IS_REMOVE_FROM_CART,
 } from "../store/books";
 
 const Navigation = () => {
@@ -37,6 +38,7 @@ const Navigation = () => {
   const [HAS_CART, SET_HAS_CART] = useState(true);
 
   const [FAV_DELETED, SET_FAV_DELETED] = useState(null);
+  const [CART_DELETED, SET_CART_DELETED] = useState(null);
 
   const { favBooks, cartAdded } = useSelector((state) => state.book);
 
@@ -60,27 +62,36 @@ const Navigation = () => {
     }
   }, [favBooks]);
 
+  // ==========================================
+
   useEffect(() => {
-    const parsed_cart_items = window.localStorage.getItem("cart")
-      ? JSON.parse(window.localStorage.getItem("cart"))
-      : false;
-
-    if (parsed_cart_items) {
-      SETCART(parsed_cart_items);
-      SET_HAS_CART(true);
-    } else if (!parsed_cart_items) {
-      if (cartAdded) {
-        SETCART(cartAdded);
-        SET_HAS_CART(true);
-      } else {
-        SETCART(null);
-        SET_HAS_CART(false);
-      }
+    if (cartAdded) {
+      SETFAVS(cartAdded);
+      SET_HAS_FAVS(true);
+    } else {
+      SETFAVS(null);
+      SET_HAS_FAVS(false);
     }
-    console.log(`CART ITEMS!`);
-
-    // cartAdded || parsed_cart_items
   }, [cartAdded]);
+
+  // useEffect(() => {
+  //   const parsed_cart_items = window.localStorage.getItem("cart")
+  //     ? JSON.parse(window.localStorage.getItem("cart"))
+  //     : false;
+
+  //   if (parsed_cart_items) {
+  //     SETCART(parsed_cart_items);
+  //     SET_HAS_CART(true);
+  //   } else if (!parsed_cart_items) {
+  //     if (cartAdded) {
+  //       SETCART(cartAdded);
+  //       SET_HAS_CART(true);
+  //     } else {
+  //       SETCART(null);
+  //       SET_HAS_CART(false);
+  //     }
+  //   }
+  // }, [cartAdded]);
 
   const GET_NEW_FAV_DATA = async () => {
     console.log("ALL FAV BOOKS RAN!");
@@ -107,9 +118,41 @@ const Navigation = () => {
     }
   };
 
+  const GET_NEW_CART_DATA = async () => {
+    console.log("ALL FAV BOOKS RAN!");
+    const get_new_fav_books = await axios.get(
+      `${BASE_URL}/api/cart`,
+      headersOpts
+    );
+    if (!get_new_fav_books.data.success) {
+      toast.error("Cannot get all your favourite books.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (
+      get_new_fav_books &&
+      get_new_fav_books.data &&
+      get_new_fav_books.data.success
+    ) {
+      dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
+    }
+  };
+  // FAVS
   useEffect(() => {
     GET_NEW_FAV_DATA();
   }, [FAV_DELETED]);
+  // END
+
+  // CART
+  useEffect(() => {
+    GET_NEW_CART_DATA();
+  }, [CART_DELETED]);
+  // END
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -152,6 +195,32 @@ const Navigation = () => {
       console.log("YEHEY DELETED");
       SET_FAV_DELETED(response.data.data);
       dispatch(BOOK_IS_REMOVE_FROM_FAVS(response.data.data));
+      dispatch(DYNAMIC_PAGE_BOOK(response.data.data));
+    }
+
+    return response.data;
+  };
+
+  const handleRemoveFromCart = async (uid) => {
+    const response = await axios.post(
+      `${BASE_URL}/api/cart-del`,
+      { id: uid },
+      headersOpts
+    );
+    if (!response.data.success) {
+      toast.error("Something went wrong, please try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response && response.data && response.data.data) {
+      console.log("YEHEY DELETED");
+      SET_CART_DELETED(response.data.data);
+      dispatch(BOOK_IS_REMOVE_FROM_CART(response.data.data));
       dispatch(DYNAMIC_PAGE_BOOK(response.data.data));
     }
 
@@ -392,6 +461,11 @@ const Navigation = () => {
                         </div>
 
                         <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+
+                        <RiCloseFill
+                          className={styles.SINGLE_REMOVE_BTN}
+                          onClick={() => handleRemoveFromCart(c._id)}
+                        />
                       </div>
                     </Col>
                   </Row>
