@@ -28,7 +28,11 @@ import { Navigation } from "swiper";
 import { BASE_URL, headersOpts } from "../utils/http";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { ALL_FAV_BOOKS, BOOK_IS_REMOVE_FROM_FAVS } from "../store/books";
+import {
+  ALL_FAV_BOOKS,
+  BOOK_IS_REMOVE_FROM_FAVS,
+  ALL_CART_ADDED,
+} from "../store/books";
 
 import { toast } from "react-toastify";
 
@@ -97,14 +101,56 @@ const Featured = () => {
     }
   };
 
+  const GET_NEW_CART_DATA = async () => {
+    console.log("ALL FAV BOOKS RAN!");
+    const get_new_cart_books = await axios.get(
+      `${BASE_URL}/api/cart`,
+      headersOpts
+    );
+    if (!get_new_cart_books.data.success) {
+      toast.error("Cannot get all your cart items.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (
+      get_new_cart_books &&
+      get_new_cart_books.data &&
+      get_new_cart_books.data.success
+    ) {
+      dispatch(ALL_CART_ADDED(get_new_cart_books.data.data.reverse()));
+    }
+  };
+
+  // FAVOURITES
   useEffect(() => {
     GET_NEW_FAV_DATA();
   }, [FAV_ADDED]);
 
+  useEffect(() => {
+    GET_UPDATED_DOCS_DATA();
+  }, [FAV_ADDED]);
+  // END
+  // ========================================
+  // CART
+  useEffect(() => {
+    GET_NEW_CART_DATA();
+  }, [CART_ADDED]);
+
+  useEffect(() => {
+    GET_UPDATED_DOCS_DATA();
+  }, [CART_ADDED]);
+
+  // END
+
   // =============================================================
 
   const GET_UPDATED_DOCS_DATA = async () => {
-    console.log("Heart Icon Updated!");
+    // console.log("Heart Icon Updated!");
     const response = await axios.get(`${BASE_URL}/api/all-books`, headersOpts);
     if (!response.data.success) {
       return response.data;
@@ -124,10 +170,6 @@ const Featured = () => {
 
     return response.data;
   };
-
-  useEffect(() => {
-    GET_UPDATED_DOCS_DATA();
-  }, [FAV_ADDED]);
 
   // ===================================================
 
@@ -153,7 +195,15 @@ const Featured = () => {
       );
 
       if (response.data.isExist) {
-        alert("ALREADY EXIST");
+        toast.error("Already saved as favourites.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
       } else if (!response.data.success) {
         toast.error("Please try again later.", {
           position: "top-right",
@@ -194,6 +244,7 @@ const Featured = () => {
     }
   };
   // ==============================================
+
   const handleAddToCart = async (data) => {
     try {
       const response = await axios.post(
@@ -203,7 +254,15 @@ const Featured = () => {
       );
 
       if (response.data.isExist) {
-        alert("ALREADY EXIST");
+        toast.error("Already in cart.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
       } else if (!response.data.success) {
         toast.error("Please try again later.", {
           position: "top-right",
@@ -217,7 +276,7 @@ const Featured = () => {
       } else if (response && response.data && response.data.success) {
         SET_CART_ADDED(response.data.data);
 
-        toast.success("Added to your favourites.", {
+        toast.success("Added to your cart.", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
