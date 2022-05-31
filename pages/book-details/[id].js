@@ -96,11 +96,15 @@ const BookId = ({ data, display }) => {
 
   const [DYNAMIC_REFRESHED_PAGE, SET_DYNAMIC_REFRESHED_PAGE] = useState(null);
   const [DYNAMIC_BOOK_PAGE, SET_DYNAMIC_BOOK_PAGE] = useState(null);
+  const [IS_HEART, SET_IS_HEART] = useState(false);
+  const [RESET_IS_HEART, SET_RESET_IS_HEART] = useState(0);
 
   const parsed_data = data ? JSON.parse(data) : false;
   const parsed_display = display ? JSON.parse(display) : false;
 
-  const { remove_from_favs } = useSelector((state) => state.book);
+  const { remove_from_favs, dynamic_page_change } = useSelector(
+    (state) => state.book
+  );
 
   const router = useRouter();
 
@@ -154,6 +158,24 @@ const BookId = ({ data, display }) => {
     }
   };
 
+  useEffect(() => {
+    if (DYNAMIC_REFRESHED_PAGE) {
+      GET_NEW_FAV_DATA();
+    }
+  }, [DYNAMIC_REFRESHED_PAGE]);
+
+  // useEffect(() => {
+  //   if (DYNAMIC_BOOK_PAGE) {
+  //     GET_ALL_REFRESHED_DATA();
+  //   }
+  // }, [DYNAMIC_BOOK_PAGE]);
+
+  // useEffect(() => {
+  //   if (remove_from_favs) {
+  //     router.reload();
+  //   }
+  // }, []);
+
   // const GET_ALL_REFRESHED_DATA = async () => {
   //   const response = await axios.get(`${BASE_URL}/api/all-books`, headersOpts);
   //   if (!response.data.success) {
@@ -176,22 +198,16 @@ const BookId = ({ data, display }) => {
   // };
 
   useEffect(() => {
-    if (DYNAMIC_REFRESHED_PAGE) {
-      GET_NEW_FAV_DATA();
+    if (dynamic_page_change) {
+      if (dynamic_page_change._id === parsed_data._id) {
+        if (RESET_IS_HEART === 0) {
+          SET_RESET_IS_HEART(1);
+          SET_IS_HEART(false);
+          console.log(`RESET_IS_HEART RAN!`);
+        }
+      }
     }
-  }, [DYNAMIC_REFRESHED_PAGE]);
-
-  // useEffect(() => {
-  //   if (DYNAMIC_BOOK_PAGE) {
-  //     GET_ALL_REFRESHED_DATA();
-  //   }
-  // }, [DYNAMIC_BOOK_PAGE]);
-
-  // useEffect(() => {
-  //   if (remove_from_favs) {
-  //     router.reload();
-  //   }
-  // }, []);
+  }, [dynamic_page_change]);
 
   const handleSelectedBook = (_id) => {
     return router.push({
@@ -220,7 +236,7 @@ const BookId = ({ data, display }) => {
         });
       } else if (response && response.data && response.data.success) {
         SET_DYNAMIC_REFRESHED_PAGE(response.data.data);
-
+        SET_IS_HEART(true);
         toast.success("Added to your favourites.", {
           position: "top-right",
           autoClose: 5000,
@@ -262,7 +278,7 @@ const BookId = ({ data, display }) => {
                 <div className={styles.book_details_wrapper}>
                   <img src={`/books/${books.img}`} />
                   <div className={styles.stack_wrapper}>
-                    {!books.fav && (
+                    {!books.fav && !IS_HEART && (
                       <MdFavoriteBorder
                         className={styles.mySwiperSlide_tooltip_favourites}
                         id={styles.mySwiperSlide_author_favourites}
@@ -279,7 +295,16 @@ const BookId = ({ data, display }) => {
                       />
                     )}
 
-                    {/* =================================== */}
+                    {IS_HEART && (
+                      <MdFavorite
+                        className={
+                          styles.mySwiperSlide_tooltip_favourites_SHADED
+                        }
+                        id={styles.mySwiperSlide_author_favourites}
+                      />
+                    )}
+
+                    {/* =============================================== */}
 
                     <span className="mx-2"></span>
                     <BsCart2

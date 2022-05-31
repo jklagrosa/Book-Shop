@@ -8,6 +8,7 @@ const bookSlice = createSlice({
     bestSeller: [],
     favBooks: [],
     remove_from_favs: [],
+    dynamic_page_change: [],
   },
   reducers: {
     GET_ALL_BOOKS: (state, action) => {
@@ -27,6 +28,10 @@ const bookSlice = createSlice({
     BOOK_IS_REMOVE_FROM_FAVS: (state, action) => {
       state.remove_from_favs = action.payload;
     },
+
+    DYNAMIC_PAGE_BOOK: (state, action) => {
+      state.dynamic_page_change = action.payload;
+    },
   },
 });
 
@@ -36,6 +41,7 @@ export const {
   GET_ALL_BEST_SELLER,
   ALL_FAV_BOOKS,
   BOOK_IS_REMOVE_FROM_FAVS,
+  DYNAMIC_PAGE_BOOK,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;

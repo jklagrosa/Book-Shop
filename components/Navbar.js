@@ -18,7 +18,11 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { BASE_URL, headersOpts } from "../utils/http";
 import { toast } from "react-toastify";
-import { ALL_FAV_BOOKS, BOOK_IS_REMOVE_FROM_FAVS } from "../store/books";
+import {
+  ALL_FAV_BOOKS,
+  BOOK_IS_REMOVE_FROM_FAVS,
+  DYNAMIC_PAGE_BOOK,
+} from "../store/books";
 
 const Navigation = () => {
   const [show, setShow] = useState(false);
@@ -123,6 +127,7 @@ const Navigation = () => {
       console.log("YEHEY DELETED");
       SET_FAV_DELETED(response.data.data);
       dispatch(BOOK_IS_REMOVE_FROM_FAVS(response.data.data));
+      dispatch(DYNAMIC_PAGE_BOOK(response.data.data));
     }
 
     return response.data;
