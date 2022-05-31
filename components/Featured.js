@@ -43,7 +43,9 @@ const Featured = () => {
   const [FAV_ADDED, SET_FAV_ADDED] = useState(null);
   const [CART_ADDED, SET_CART_ADDED] = useState(null);
 
-  const { books, remove_from_favs } = useSelector((state) => state.book);
+  const { books, remove_from_favs, remove_from_cart } = useSelector(
+    (state) => state.book
+  );
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -180,11 +182,24 @@ const Featured = () => {
 
   // ===================================================
 
+  // FAVS
   useEffect(() => {
     if (remove_from_favs) {
       GET_UPDATED_DOCS_DATA();
     }
   }, [remove_from_favs]);
+
+  // END
+
+  // ================================================
+
+  // CART
+  useEffect(() => {
+    if (remove_from_cart) {
+      GET_UPDATED_DOCS_DATA();
+    }
+  }, [remove_from_cart]);
+  // END
 
   const handleSelectedBook = (_id) => {
     return router.push({
