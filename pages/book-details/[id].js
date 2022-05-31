@@ -22,6 +22,8 @@ import { AiOutlineCalendar } from "react-icons/ai";
 
 import axios from "axios";
 import { BASE_URL, headersOpts } from "../../utils/http";
+import { ALL_FAV_BOOKS } from "../../store/books";
+import { useDispatch } from "react-redux";
 
 // import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -91,6 +93,10 @@ const BookId = ({ data, display }) => {
   const [display_books, setDisplay_Books] = useState([]);
   const [HAS_BOOKS, SET_HAS_BOOKS] = useState(true);
   const [HAS_DISPLAY, SET_HAS_DISPLAY] = useState(true);
+
+  const [DYNAMIC_REFRESHED_PAGE, SET_DYNAMIC_REFRESHED_PAGE] = useState(null);
+  const [DYNAMIC_BOOK_PAGE, SET_DYNAMIC_BOOK_PAGE] = useState(null);
+
   const parsed_data = data ? JSON.parse(data) : false;
   const parsed_display = display ? JSON.parse(display) : false;
 
@@ -98,7 +104,9 @@ const BookId = ({ data, display }) => {
 
   const router = useRouter();
 
-  console.log(books);
+  const dispatch = useDispatch();
+
+  // console.log(books);
 
   useEffect(() => {
     if (!parsed_data) {
@@ -120,6 +128,64 @@ const BookId = ({ data, display }) => {
       SET_HAS_DISPLAY(true);
     }
   }, []);
+
+  const GET_NEW_FAV_DATA = async () => {
+    console.log("ALL FAV BOOKS RAN!");
+    const get_new_fav_books = await axios.get(
+      `${BASE_URL}/api/favs`,
+      headersOpts
+    );
+    if (!get_new_fav_books.data.success) {
+      toast.error("Cannot get your favourites books.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (
+      get_new_fav_books &&
+      get_new_fav_books.data &&
+      get_new_fav_books.data.success
+    ) {
+      dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
+    }
+  };
+
+  // const GET_ALL_REFRESHED_DATA = async () => {
+  //   const response = await axios.get(`${BASE_URL}/api/all-books`, headersOpts);
+  //   if (!response.data.success) {
+  //     toast.error("Cannot get data. Please try again later", {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: false,
+  //       draggable: true,
+  //       progress: undefined,
+  //     });
+  //   } else if (response && response.data && response.data.data) {
+  //     // SET_DYNAMIC_REFRESHED_PAGE(response.data.data);
+  //     // setBooks(response.data.data);
+  //     SET_DYNAMIC_BOOK_PAGE(response.data.data);
+  //   }
+
+  //   return response.data;
+  // };
+
+  useEffect(() => {
+    if (DYNAMIC_REFRESHED_PAGE) {
+      GET_NEW_FAV_DATA();
+    }
+  }, [DYNAMIC_REFRESHED_PAGE]);
+
+  // useEffect(() => {
+  //   if (DYNAMIC_BOOK_PAGE) {
+  //     GET_ALL_REFRESHED_DATA();
+  //   }
+  // }, [DYNAMIC_BOOK_PAGE]);
 
   // useEffect(() => {
   //   if (remove_from_favs) {
@@ -153,7 +219,7 @@ const BookId = ({ data, display }) => {
           progress: undefined,
         });
       } else if (response && response.data && response.data.success) {
-        SET_FAV_ADDED(response.data.data);
+        SET_DYNAMIC_REFRESHED_PAGE(response.data.data);
 
         toast.success("Added to your favourites.", {
           position: "top-right",
@@ -165,8 +231,11 @@ const BookId = ({ data, display }) => {
           progress: undefined,
         });
       }
+
+      return response.data;
     } catch (error) {
       if (error) {
+        console.log(`Error: ${error}`);
         toast.error("Please try again later.", {
           position: "top-right",
           autoClose: 5000,
@@ -177,8 +246,6 @@ const BookId = ({ data, display }) => {
           progress: undefined,
         });
       }
-    } finally {
-      return response.data;
     }
   };
 
