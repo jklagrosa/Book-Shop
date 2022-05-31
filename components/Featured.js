@@ -37,6 +37,7 @@ const Featured = () => {
   const [isEmpty, setIsEmpty] = useState(false);
 
   const [FAV_ADDED, SET_FAV_ADDED] = useState(null);
+  const [CART_ADDED, SET_CART_ADDED] = useState(null);
 
   const { books, remove_from_favs } = useSelector((state) => state.book);
   const router = useRouter();
@@ -192,6 +193,56 @@ const Featured = () => {
       }
     }
   };
+  // ==============================================
+  const handleAddToCart = async (data) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/cart`,
+        data,
+        headersOpts
+      );
+
+      if (response.data.isExist) {
+        alert("ALREADY EXIST");
+      } else if (!response.data.success) {
+        toast.error("Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      } else if (response && response.data && response.data.success) {
+        SET_CART_ADDED(response.data.data);
+
+        toast.success("Added to your favourites.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      return response.data;
+    } catch (error) {
+      if (error) {
+        toast.error("Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
+  };
 
   return !isEmpty ? (
     <>
@@ -286,12 +337,20 @@ const Featured = () => {
 
                       <span className="mx-2"></span>
 
-                      <Tooltip title="Add to cart" placement="top-start">
+                      {!book.cart && (
                         <BsCart2
                           className={styles.mySwiperSlide_tooltip_cart}
                           id={styles.mySwiperSlide_author_favourites}
+                          onClick={() => handleAddToCart(book)}
                         />
-                      </Tooltip>
+                      )}
+
+                      {book.cart && (
+                        <BsCartFill
+                          className={styles.mySwiperSlide_tooltip_cart}
+                          id={styles.mySwiperSlide_author_favourites}
+                        />
+                      )}
                     </h5>
 
                     <Tooltip title="Genre" placement="top-start">

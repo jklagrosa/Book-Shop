@@ -11,22 +11,14 @@ export default async function handler(req, res) {
     if (GET_ALL_DATA) {
       await Books.updateMany(
         {},
-        { $set: { fav: false, qty: 1 } },
-        { upsert: true },
-        (err, doc) => {
-          if (err) {
-            return res.status(400).json({
-              success: false,
-              data: err,
-            });
-          }
+        { $set: { cart: false } },
+        { upsert: true }
+      ).clone();
 
-          return res.status(200).json({
-            success: true,
-            data: doc,
-          });
-        }
-      );
+      return res.status(200).json({
+        success: true,
+        data: GET_ALL_DATA,
+      });
     } else {
       return res.status(69).json({
         success: false,

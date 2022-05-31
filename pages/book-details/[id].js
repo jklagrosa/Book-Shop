@@ -16,6 +16,7 @@ import {
   MdFavoriteBorder,
   MdFavorite,
   MdDateRange,
+  MdLanguage,
 } from "react-icons/md";
 
 import { AiOutlineCalendar } from "react-icons/ai";
@@ -322,6 +323,9 @@ const BookId = ({ data, display }) => {
                     <span className={styles.book_others}>
                       {books.ratings}/5
                     </span>
+                    <br></br>
+                    <MdLanguage className={styles.icons_others} />
+                    <span className={styles.book_others}>{books.lang}</span>
                     <br></br>
                     <AiOutlineCalendar className={styles.icons_others} />
                     <span className={styles.book_others}>{books.p_date}</span>

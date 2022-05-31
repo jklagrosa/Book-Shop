@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const bookSchema = new mongoose.Schema({
+const cartSchema = new mongoose.Schema({
   title: {
     type: String,
   },
@@ -47,4 +47,4 @@ const bookSchema = new mongoose.Schema({
 
 mongoose.models = {};
 
-export default mongoose.model("books-collection", bookSchema);
+export default mongoose.model("cart", cartSchema);
