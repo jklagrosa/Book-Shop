@@ -1,6 +1,6 @@
 import Dbconnection from "../../../utils/conn";
 import Cart from "../../../models/cart";
-// import Books from "../../../models/books";
+import Books from "../../../models/books";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -36,20 +36,34 @@ export default async function handler(req, res) {
         data: null,
       });
     } else if (cartItem.qty === 0) {
-      const DELETE_FROM_CART = await Cart.findOneAndDelete({
+      await Cart.remove({
         _id: cartItem._id,
-      });
-      if (DELETE_FROM_CART) {
-        console.log(`Cart is now removed from cart!`);
-        return res.status(200).json({
-          success: true,
-          data: UPDATED_CART,
-        });
-      }
+      }).then(async (err, result) => {
+        if (result) {
+          await Books.findOneAndUpdate(
+            { _id: cartItem._id },
+            { cart: false },
+            { new: true }
+          ).exec();
 
-      return res.status(400).json({
-        success: false,
-        data: null,
+          console.log(`Cart is now removed from cart!`);
+          return res.status(200).json({
+            success: true,
+            data: UPDATED_CART,
+          });
+        }
+
+        if (err) {
+          return res.status(400).json({
+            success: false,
+            data: null,
+          });
+        }
+
+        return res.status(400).json({
+          success: false,
+          data: null,
+        });
       });
     }
 

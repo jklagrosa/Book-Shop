@@ -144,6 +144,13 @@ const Navigation = () => {
       dispatch(ALL_CART_ADDED(get_new_fav_books.data.data.reverse()));
     }
   };
+
+
+  const GET_ALL_BOOKS = async () => {
+    
+  }
+
+
   // FAVS
   useEffect(() => {
     GET_NEW_FAV_DATA();
