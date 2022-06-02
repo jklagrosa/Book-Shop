@@ -40,6 +40,7 @@ const cartSchema = new mongoose.Schema({
   qty: {
     type: Number,
     default: 1,
+    min: 0,
   },
   cart: {
     type: Boolean,

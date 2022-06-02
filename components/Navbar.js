@@ -145,12 +145,6 @@ const Navigation = () => {
     }
   };
 
-
-  const GET_ALL_BOOKS = async () => {
-    
-  }
-
-
   // FAVS
   useEffect(() => {
     GET_NEW_FAV_DATA();
