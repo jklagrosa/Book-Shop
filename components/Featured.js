@@ -267,63 +267,63 @@ const Featured = () => {
   };
   // ==============================================
 
-  const handleAddToCart = async (data) => {
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/api/cart`,
-        data,
-        headersOpts
-      );
+  // const handleAddToCart = async (data) => {
+  //   try {
+  //     const response = await axios.post(
+  //       `${BASE_URL}/api/cart`,
+  //       data,
+  //       headersOpts
+  //     );
 
-      if (response.data.isExist) {
-        toast.error("Already in cart.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
-      } else if (!response.data.success) {
-        toast.error("Please try again later.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
-      } else if (response && response.data && response.data.success) {
-        SET_CART_ADDED(response.data.data);
+  //     if (response.data.isExist) {
+  //       toast.error("Already in cart.", {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: false,
+  //         draggable: true,
+  //         progress: undefined,
+  //       });
+  //     } else if (!response.data.success) {
+  //       toast.error("Please try again later.", {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: false,
+  //         draggable: true,
+  //         progress: undefined,
+  //       });
+  //     } else if (response && response.data && response.data.success) {
+  //       SET_CART_ADDED(response.data.data);
 
-        toast.success("Added to your cart.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
+  //       toast.success("Added to your cart.", {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //       });
+  //     }
 
-      return response.data;
-    } catch (error) {
-      if (error) {
-        toast.error("Please try again later.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-    }
-  };
+  //     return response.data;
+  //   } catch (error) {
+  //     if (error) {
+  //       toast.error("Please try again later.", {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: false,
+  //         draggable: true,
+  //         progress: undefined,
+  //       });
+  //     }
+  //   }
+  // };
 
   return !isEmpty ? (
     <>

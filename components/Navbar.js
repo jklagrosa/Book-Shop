@@ -178,7 +178,14 @@ const Navigation = () => {
 
   // CART BUTTONS
   const Increment = async (item) => {
-    const response = axios.post(`${BASE_URL}`, { data: item }, headersOpts);
+    const response = await axios.post(
+      `${BASE_URL}/api/cart-increment`,
+      { data: item },
+      headersOpts
+    );
+    if(!response.data.success){
+      
+    }
   };
   // END
 

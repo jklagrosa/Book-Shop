@@ -43,6 +43,7 @@ const cartSchema = new mongoose.Schema({
   cart: {
     type: Boolean,
   },
+  
 });
 
 mongoose.models = {};
