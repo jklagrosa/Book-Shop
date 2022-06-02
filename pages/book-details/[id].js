@@ -90,6 +90,11 @@ const BookId = ({ data, display }) => {
   const [HAS_BOOKS, SET_HAS_BOOKS] = useState(true);
   const [HAS_DISPLAY, SET_HAS_DISPLAY] = useState(true);
 
+  const [IS_HEART, SET_IS_HEART] = useState(false);
+  const [IS_DISABLE, SET_IS_DISABLE] = useState(0);
+
+  const { dynamic_page_change } = useSelector((state) => state.book);
+
   const parsed_data = data ? JSON.parse(data) : false;
   const parsed_display = display ? JSON.parse(display) : false;
 
@@ -105,7 +110,7 @@ const BookId = ({ data, display }) => {
       setBooks([]);
       SET_HAS_BOOKS(false);
     }
-  }, [parsed_data]);
+  }, []);
 
   useEffect(() => {
     if (parsed_display) {
@@ -115,7 +120,38 @@ const BookId = ({ data, display }) => {
       setDisplay_Books([]);
       SET_HAS_DISPLAY(false);
     }
-  }, [parsed_display]);
+  }, []);
+
+  const GET_NEW_FAV_DATA = async () => {
+    console.log("ALL FAV BOOKS RAN!");
+    const get_new_fav_books = await axios.get(
+      `${BASE_URL}/api/favs`,
+      headersOpts
+    );
+    if (!get_new_fav_books.data.success) {
+      toast.error("Cannot get all your favourite books.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+
+      // SET_IS_HEART(false);
+      // SET_IS_DISABLE(0);
+    } else if (
+      get_new_fav_books &&
+      get_new_fav_books.data &&
+      get_new_fav_books.data.success
+    ) {
+      dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
+
+      // SET_IS_HEART(true);
+      // SET_IS_DISABLE(1);
+    }
+  };
 
   const handleAddToFavs_DYNAMIC = async (bId) => {
     try {
@@ -136,10 +172,10 @@ const BookId = ({ data, display }) => {
           progress: undefined,
         });
       } else if (response && response.data && response.data.success) {
-        // await GET_UPDATED_DYNAMIC_CONTENTS();
-        // await GET_NEW_FAV_DATA();
-        SET_DYNAMIC_REFRESHED_PAGE(response.data.data);
-        // SET_IS_HEART(true);
+        await GET_NEW_FAV_DATA();
+
+        SET_IS_HEART(true);
+
         toast.success("Added to your favourites.", {
           position: "top-right",
           autoClose: 5000,
@@ -175,6 +211,14 @@ const BookId = ({ data, display }) => {
     });
   };
 
+  if (dynamic_page_change._id === parsed_data._id) {
+    // console.log(`DYNAMIC SHIT: ${dynamic_page_change._id}`);
+    console.log(`HOLY COWNESS`);
+    // router.reload()
+    // window.location.reload();
+    router.reload();
+  }
+
   return (
     <>
       <Navbar />
@@ -188,15 +232,9 @@ const BookId = ({ data, display }) => {
                 <div className={styles.book_details_wrapper}>
                   <img src={`/books/${books.img}`} />
                   <div className={styles.stack_wrapper}>
-                    {/* {!books.fav && !IS_HEART && (
-                      <MdFavoriteBorder
-                        className={styles.mySwiperSlide_tooltip_favourites}
-                        id={styles.mySwiperSlide_author_favourites}
-                        onClick={() => handleAddToFavs_DYNAMIC(books._id)}
-                      />
-                    )} */}
+                    {/* ================== */}
 
-                    {!books.fav && (
+                    {!books.fav && !IS_HEART && (
                       <MdFavoriteBorder
                         className={styles.mySwiperSlide_tooltip_favourites}
                         id={styles.mySwiperSlide_author_favourites}
@@ -204,7 +242,24 @@ const BookId = ({ data, display }) => {
                       />
                     )}
 
+                    {/* {!books.fav && (
+                      <MdFavoriteBorder
+                        className={styles.mySwiperSlide_tooltip_favourites}
+                        id={styles.mySwiperSlide_author_favourites}
+                        onClick={() => handleAddToFavs_DYNAMIC(books._id)}
+                      />
+                    )} */}
+
                     {books.fav && (
+                      <MdFavorite
+                        className={
+                          styles.mySwiperSlide_tooltip_favourites_SHADED
+                        }
+                        id={styles.mySwiperSlide_author_favourites}
+                      />
+                    )}
+
+                    {IS_HEART && (
                       <MdFavorite
                         className={
                           styles.mySwiperSlide_tooltip_favourites_SHADED
