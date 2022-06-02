@@ -31,191 +31,77 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-export async function getStaticPaths() {
-  await dbConnection();
-  const get_id = await Books.find({});
-  const paths = get_id.map((x) => {
-    return {
-      params: { id: `${x._id}` },
-    };
-  });
-  console.log(paths);
-  if (!get_id) {
-    return {
-      paths: [],
-      fallback: false,
-    };
-  }
+// export async function getStaticPaths() {
+//   await dbConnection();
+//   const get_id = await Books.find({});
+//   const paths = get_id.map((x) => {
+//     return {
+//       params: { id: `${x._id}` },
+//     };
+//   });
+//   console.log(paths);
+//   if (!get_id) {
+//     return {
+//       paths: [],
+//       fallback: false,
+//     };
+//   }
 
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 
-export async function getStaticProps(context) {
-  await dbConnection();
-  const { params } = context;
-  const find_book = await Books.findOne({ _id: `${params.id}` });
-  const get_books_for_left_display = await Books.find({}).limit(8);
+// export async function getServerSideProps(context) {
+//   await dbConnection();
+//   const { params } = context;
 
-  //
-  // console.log(`Params: ${params.id}`);
-  //
+//   console.log(`getServerSide: ${Object.values(params)}`);
 
-  if (!find_book) {
-    return {
-      props: {
-        data: null,
-      },
-    };
-  }
+//   const find_book = await Books.findOne({ _id: `${params.id}` });
+//   const get_books_for_left_display = await Books.find({}).limit(8);
 
-  if (!get_books_for_left_display) {
-    return {
-      props: {
-        display: null,
-      },
-    };
-  }
+//   //
+//   // console.log(`Params: ${params.id}`);
+//   //
 
-  console.log(find_book);
+//   if (!find_book) {
+//     return {
+//       props: {
+//         data: null,
+//       },
+//     };
+//   }
 
-  return {
-    props: {
-      data: JSON.stringify(find_book),
-      display: JSON.stringify(get_books_for_left_display),
-    },
-  };
-}
+//   if (!get_books_for_left_display) {
+//     return {
+//       props: {
+//         display: null,
+//       },
+//     };
+//   }
 
-const BookId = ({ data, display }) => {
+//   // console.log(find_book);
+
+//   return {
+//     props: {
+//       data: JSON.stringify(find_book),
+//       display: JSON.stringify(get_books_for_left_display),
+//     },
+//   };
+// }
+
+const BookId = () => {
   const [books, setBooks] = useState([]);
   const [display_books, setDisplay_Books] = useState([]);
   const [HAS_BOOKS, SET_HAS_BOOKS] = useState(true);
   const [HAS_DISPLAY, SET_HAS_DISPLAY] = useState(true);
-
-  const [DYNAMIC_REFRESHED_PAGE, SET_DYNAMIC_REFRESHED_PAGE] = useState(null);
-  const [DYNAMIC_BOOK_PAGE, SET_DYNAMIC_BOOK_PAGE] = useState(null);
-  const [IS_HEART, SET_IS_HEART] = useState(false);
-  const [RESET_IS_HEART, SET_RESET_IS_HEART] = useState(0);
-
-  const parsed_data = data ? JSON.parse(data) : false;
-  const parsed_display = display ? JSON.parse(display) : false;
-
-  const { remove_from_favs, dynamic_page_change } = useSelector(
-    (state) => state.book
-  );
-
   const router = useRouter();
+  // const [GET_ID, SET_GET_ID] = useState(router.params.id);
+  console.log(`NEXT ROUTER: ${router.query.id}`);
 
   const dispatch = useDispatch();
-
-  // console.log(books);
-
-  useEffect(() => {
-    if (!parsed_data) {
-      setBooks([]);
-      SET_HAS_BOOKS(false);
-    } else {
-      setBooks(parsed_data);
-      SET_HAS_BOOKS(true);
-      console.log(books);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!parsed_display) {
-      setDisplay_Books([]);
-      SET_HAS_DISPLAY(false);
-    } else {
-      setDisplay_Books(parsed_display);
-      SET_HAS_DISPLAY(true);
-    }
-  }, []);
-
-  const GET_NEW_FAV_DATA = async () => {
-    console.log("ALL FAV BOOKS RAN!");
-    const get_new_fav_books = await axios.get(
-      `${BASE_URL}/api/favs`,
-      headersOpts
-    );
-    if (!get_new_fav_books.data.success) {
-      toast.error("Cannot get your favourites books.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
-    } else if (
-      get_new_fav_books &&
-      get_new_fav_books.data &&
-      get_new_fav_books.data.success
-    ) {
-      dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
-    }
-  };
-
-  useEffect(() => {
-    if (DYNAMIC_REFRESHED_PAGE) {
-      GET_NEW_FAV_DATA();
-    }
-  }, [DYNAMIC_REFRESHED_PAGE]);
-
-  // useEffect(() => {
-  //   if (DYNAMIC_BOOK_PAGE) {
-  //     GET_ALL_REFRESHED_DATA();
-  //   }
-  // }, [DYNAMIC_BOOK_PAGE]);
-
-  // useEffect(() => {
-  //   if (remove_from_favs) {
-  //     router.reload();
-  //   }
-  // }, []);
-
-  // const GET_ALL_REFRESHED_DATA = async () => {
-  //   const response = await axios.get(`${BASE_URL}/api/all-books`, headersOpts);
-  //   if (!response.data.success) {
-  //     toast.error("Cannot get data. Please try again later", {
-  //       position: "top-center",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: false,
-  //       draggable: true,
-  //       progress: undefined,
-  //     });
-  //   } else if (response && response.data && response.data.data) {
-  //     // SET_DYNAMIC_REFRESHED_PAGE(response.data.data);
-  //     // setBooks(response.data.data);
-  //     SET_DYNAMIC_BOOK_PAGE(response.data.data);
-  //   }
-
-  //   return response.data;
-  // };
-
-  useEffect(() => {
-    if (dynamic_page_change) {
-      if (dynamic_page_change._id === parsed_data._id) {
-        if (RESET_IS_HEART === 0) {
-          SET_RESET_IS_HEART(1);
-          SET_IS_HEART(false);
-          console.log(`RESET_IS_HEART RAN!`);
-        }
-      }
-    }
-  }, [dynamic_page_change]);
-
-  const handleSelectedBook = (_id) => {
-    return router.push({
-      pathname: "/book-details-display",
-      query: { id: _id },
-    });
-  };
 
   const handleAddToFavs_DYNAMIC = async (bId) => {
     try {
@@ -236,6 +122,8 @@ const BookId = ({ data, display }) => {
           progress: undefined,
         });
       } else if (response && response.data && response.data.success) {
+        await GET_UPDATED_DYNAMIC_CONTENTS();
+
         SET_DYNAMIC_REFRESHED_PAGE(response.data.data);
         SET_IS_HEART(true);
         toast.success("Added to your favourites.", {
@@ -266,6 +154,38 @@ const BookId = ({ data, display }) => {
     }
   };
 
+  const GET_NEW_FAV_DATA = async () => {
+    console.log("ALL FAV BOOKS RAN!");
+    const get_new_fav_books = await axios.get(
+      `${BASE_URL}/api/favs`,
+      headersOpts
+    );
+    if (!get_new_fav_books.data.success) {
+      toast.error("Cannot get your favourites books.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (
+      get_new_fav_books &&
+      get_new_fav_books.data &&
+      get_new_fav_books.data.success
+    ) {
+      dispatch(ALL_FAV_BOOKS(get_new_fav_books.data.data.reverse()));
+    }
+  };
+
+  const handleSelectedBook = (_id) => {
+    return router.push({
+      pathname: "/book-details-display",
+      query: { id: _id },
+    });
+  };
+
   return (
     <>
       <Navbar />
@@ -279,7 +199,15 @@ const BookId = ({ data, display }) => {
                 <div className={styles.book_details_wrapper}>
                   <img src={`/books/${books.img}`} />
                   <div className={styles.stack_wrapper}>
-                    {!books.fav && !IS_HEART && (
+                    {/* {!books.fav && !IS_HEART && (
+                      <MdFavoriteBorder
+                        className={styles.mySwiperSlide_tooltip_favourites}
+                        id={styles.mySwiperSlide_author_favourites}
+                        onClick={() => handleAddToFavs_DYNAMIC(books._id)}
+                      />
+                    )} */}
+
+                    {!books.fav && (
                       <MdFavoriteBorder
                         className={styles.mySwiperSlide_tooltip_favourites}
                         id={styles.mySwiperSlide_author_favourites}
@@ -296,14 +224,14 @@ const BookId = ({ data, display }) => {
                       />
                     )}
 
-                    {IS_HEART && (
+                    {/* {IS_HEART && (
                       <MdFavorite
                         className={
                           styles.mySwiperSlide_tooltip_favourites_SHADED
                         }
                         id={styles.mySwiperSlide_author_favourites}
                       />
-                    )}
+                    )} */}
 
                     {/* =============================================== */}
 
