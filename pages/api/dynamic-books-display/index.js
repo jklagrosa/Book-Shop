@@ -2,26 +2,20 @@ import Dbconnection from "../../../utils/conn";
 import Books from "../../../models/books";
 
 export default async function handler(req, res) {
-  if (req.method === "POST") {
+  if (req.method === "GET") {
     await Dbconnection();
-
-    const { id } = req.body;
-
-    const find_dynamic_book = await Books.find({ _id: id });
-    if (!find_dynamic_book) {
+    const get_all_new_books = await Books.find({}).limit(8);
+    if (!get_all_new_books) {
       return res.status(400).json({
         success: false,
-        data: null,
-        message: "Error",
+        message: "Cannot get all the favourite books.",
       });
     }
 
-    console.log(find_dynamic_book);
-
     return res.status(200).json({
       success: true,
-      data: find_dynamic_book,
-      message: "Success",
+      data: get_all_new_books,
+      message: "Getting all new favourite books.",
     });
   }
 }
