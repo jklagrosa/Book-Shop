@@ -201,6 +201,31 @@ const Navigation = () => {
   };
   // END
 
+  // Decrement
+  const Decrement = async (id) => {
+    const response = await axios.post(
+      `${BASE_URL}/api/cart-decrement`,
+      { id: id },
+      headersOpts
+    );
+    if (!response.data.success) {
+      toast.error("Cannot remove from your cart, try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response && response.data && response.data.success) {
+      await GET_NEW_CART_DATA();
+      // dispatch(ALL_CART_ADDED(response.data.data));
+    }
+  };
+
+  // End
+
   const handleRemoveFromFavs = async (uid) => {
     const response = await axios.post(
       `${BASE_URL}/api/favs-del`,

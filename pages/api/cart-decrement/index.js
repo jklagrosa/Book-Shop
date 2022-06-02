@@ -18,22 +18,40 @@ export default async function handler(req, res) {
 
     const UPDATED_CART = await Cart.findOneAndUpdate(
       { _id: cartItem._id },
-      { $inc: { qty: 1 } },
+      { $inc: { qty: -1 } },
       { new: true }
     ).exec();
 
-    if (UPDATED_CART) {
-      console.log(`Increment by 1! Yehey!`);
-      return res.status(200).json({
-        success: true,
-        data: UPDATED_CART,
+    if (cartItem.qty !== 0) {
+      if (UPDATED_CART) {
+        console.log(`Decrement by 1! Yehey!`);
+        return res.status(200).json({
+          success: true,
+          data: UPDATED_CART,
+        });
+      }
+
+      return res.status(400).json({
+        success: false,
+        data: null,
+      });
+    } else if (cartItem.qty === 0) {
+      const DELETE_FROM_CART = await Cart.findOneAndDelete({
+        _id: cartItem._id,
+      });
+      if (DELETE_FROM_CART) {
+        console.log(`Cart is now removed from cart!`);
+        return res.status(200).json({
+          success: true,
+          data: UPDATED_CART,
+        });
+      }
+
+      return res.status(400).json({
+        success: false,
+        data: null,
       });
     }
-
-    return res.status(400).json({
-      success: false,
-      data: null,
-    });
 
     // return res.status(400).json({
     //   success: false,
