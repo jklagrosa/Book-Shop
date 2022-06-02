@@ -3,13 +3,51 @@ import Cart from "../../../models/cart";
 import Books from "../../../models/books";
 
 export default async function handler(req, res) {
-  if (req.method === "GET") {
+  if (req.method === "POST") {
     await Dbconnection();
 
     const { id } = req.body;
 
     const cartItem = await Cart.findOne({ _id: id });
     if (!cartItem) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+      });
+    }
+
+    // await Cart.find({});
+
+    if (cartItem.qty === 0) {
+      const update_book_cart_status = await Books.findOneAndUpdate(
+        { _id: cartItem._id },
+        { cart: false },
+        { new: true }
+      ).clone();
+      if (!update_book_cart_status) {
+        return res.status(404).json({
+          success: false,
+          data: null,
+        });
+      }
+
+      const delete_from_cart = await Cart.findOneAndDelete({
+        _id: cartItem._id,
+      }).clone();
+      if (!delete_from_cart) {
+        return res.status(404).json({
+          success: false,
+          data: null,
+        });
+      }
+    }
+
+    const DECREMENT_ITEM = await Cart.findOneAndUpdate(
+      { _id: cartItem._id },
+      { $inc: { qty: -1 } },
+      { new: true }
+    ).clone();
+    if (!DECREMENT_ITEM) {
       return res.status(404).json({
         success: false,
         data: null,
