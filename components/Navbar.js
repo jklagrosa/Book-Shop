@@ -177,14 +177,25 @@ const Navigation = () => {
   const router = useRouter();
 
   // CART BUTTONS
-  const Increment = async (item) => {
+  const Increment = async (id) => {
     const response = await axios.post(
       `${BASE_URL}/api/cart-increment`,
-      { data: item },
+      { id: id },
       headersOpts
     );
-    if(!response.data.success){
-      
+    if (!response.data.success) {
+      toast.error("Cannot add to your cart, try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response && response.data && response.data.success) {
+      await GET_NEW_CART_DATA();
+      // dispatch(ALL_CART_ADDED(response.data.data));
     }
   };
   // END
@@ -469,7 +480,7 @@ const Navigation = () => {
                         <div className={styles.BTNS}>
                           <input type="text" value={c.qty} />
                           <span className="me-2"></span>
-                          <button onClick={() => Increment(c)}>+</button>
+                          <button onClick={() => Increment(c._id)}>+</button>
                           <span className="mx-1"></span>
                           <button>-</button>
                         </div>
