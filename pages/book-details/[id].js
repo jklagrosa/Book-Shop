@@ -23,7 +23,7 @@ import { AiOutlineCalendar } from "react-icons/ai";
 
 import axios from "axios";
 import { BASE_URL, headersOpts } from "../../utils/http";
-import { ALL_FAV_BOOKS } from "../../store/books";
+import { ALL_FAV_BOOKS, ALL_CART_ADDED } from "../../store/books";
 import { useDispatch } from "react-redux";
 
 // import { useSelector } from "react-redux";
@@ -91,7 +91,7 @@ const BookId = ({ data, display }) => {
   const [HAS_DISPLAY, SET_HAS_DISPLAY] = useState(true);
 
   const [IS_HEART, SET_IS_HEART] = useState(false);
-  const [IS_DISABLE, SET_IS_DISABLE] = useState(0);
+  const [IS_CART, SET_IS_CART] = useState(false);
 
   const { dynamic_page_change } = useSelector((state) => state.book);
 
@@ -153,6 +153,35 @@ const BookId = ({ data, display }) => {
     }
   };
 
+  const GET_NEW_CART_DATA = async () => {
+    // console.log("ALL FAV BOOKS RAN!");
+    const get_new_cart_books = await axios.get(
+      `${BASE_URL}/api/cart`,
+      headersOpts
+    );
+    if (!get_new_cart_books.data.success) {
+      toast.error("Cannot get all your cart items.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (
+      get_new_cart_books &&
+      get_new_cart_books.data &&
+      get_new_cart_books.data.success
+    ) {
+      dispatch(ALL_CART_ADDED(get_new_cart_books.data.data.reverse()));
+      // window.localStorage.setItem(
+      //   "cart",
+      //   JSON.stringify(get_new_cart_books.data.data)
+      // );
+    }
+  };
+
   const handleAddToFavs_DYNAMIC = async (bId) => {
     try {
       const response = await axios.post(
@@ -177,6 +206,57 @@ const BookId = ({ data, display }) => {
         SET_IS_HEART(true);
 
         toast.success("Added to your favourites.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      return response.data;
+    } catch (error) {
+      if (error) {
+        console.log(`Error: ${error}`);
+        toast.error("Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
+  };
+
+  const handleAddToCart_DYNAMIC = async (bId) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/cart-dy-pages`,
+        { id: bId },
+        headersOpts
+      );
+
+      if (!response.data.success) {
+        toast.error("Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      } else if (response && response.data && response.data.success) {
+        await GET_NEW_CART_DATA();
+
+        SET_IS_CART(true);
+
+        toast.success("Added to your cart.", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -280,10 +360,28 @@ const BookId = ({ data, display }) => {
                     {/* =============================================== */}
 
                     <span className="mx-2"></span>
-                    <BsCart2
-                      className={styles.icons}
-                      style={{ color: "#12a4d9", cursor: "pointer" }}
-                    />
+
+                    {!books.cart && !IS_CART && (
+                      <BsCart2
+                        className={styles.icons}
+                        style={{ color: "#12a4d9", cursor: "pointer" }}
+                        onClick={() => handleAddToCart_DYNAMIC(books._id)}
+                      />
+                    )}
+
+                    {books.cart && (
+                      <BsCartFill
+                        className={styles.icons}
+                        style={{ color: "#12a4d9", cursor: "pointer" }}
+                      />
+                    )}
+
+                    {IS_CART && (
+                      <BsCartFill
+                        className={styles.icons}
+                        style={{ color: "#12a4d9", cursor: "pointer" }}
+                      />
+                    )}
 
                     <h3>{books.genre}</h3>
                     <h1>{books.title}</h1>
