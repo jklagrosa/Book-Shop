@@ -176,6 +176,12 @@ const Navigation = () => {
 
   const router = useRouter();
 
+  // CART BUTTONS
+  const Increment = async (item) => {
+    const response = axios.post(`${BASE_URL}`, { data: item }, headersOpts);
+  };
+  // END
+
   const handleRemoveFromFavs = async (uid) => {
     const response = await axios.post(
       `${BASE_URL}/api/favs-del`,
@@ -456,7 +462,7 @@ const Navigation = () => {
                         <div className={styles.BTNS}>
                           <input type="text" value={c.qty} />
                           <span className="me-2"></span>
-                          <button>+</button>
+                          <button onClick={() => Increment(c)}>+</button>
                           <span className="mx-1"></span>
                           <button>-</button>
                         </div>
