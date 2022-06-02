@@ -39,11 +39,11 @@ const cartSchema = new mongoose.Schema({
   },
   qty: {
     type: Number,
+    default: 1,
   },
   cart: {
     type: Boolean,
   },
-  
 });
 
 mongoose.models = {};

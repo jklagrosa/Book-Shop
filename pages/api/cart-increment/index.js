@@ -16,26 +16,24 @@ export default async function handler(req, res) {
       });
     }
 
-    await Cart.findOneAndUpdate(
+    const UPDATED_CART = await Cart.findOneAndUpdate(
       { _id: cartItem._id },
       { $inc: { qty: 1 } },
-      { new: true },
-      (err, result) => {
-        if (err) {
-          return res.status(400).json({
-            success: false,
-            data: null,
-          });
-        }
+      { new: true }
+    ).exec();
 
-        console.log(`Increment by 1! Yehey!`);
+    if (UPDATED_CART) {
+      console.log(`Increment by 1! Yehey!`);
+      return res.status(200).json({
+        success: true,
+        data: UPDATED_CART,
+      });
+    }
 
-        return res.status(200).json({
-          success: true,
-          data: result,
-        });
-      }
-    );
+    return res.status(400).json({
+      success: false,
+      data: null,
+    });
 
     // return res.status(400).json({
     //   success: false,

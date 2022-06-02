@@ -25,6 +25,7 @@ import {
   DYNAMIC_PAGE_BOOK,
   BOOK_IS_REMOVE_FROM_CART,
 } from "../store/books";
+// import cart from "../models/cart";
 
 const Navigation = () => {
   const [show, setShow] = useState(false);
@@ -273,6 +274,12 @@ const Navigation = () => {
 
   // };
 
+  let totalToPay = 0;
+
+  CART.forEach((el) => {
+    totalToPay += el.price * el.qty;
+  });
+
   return (
     <>
       <Navbar expand="lg" fixed="top" className={styles.Wrapper}>
@@ -448,7 +455,7 @@ const Navigation = () => {
           </Offcanvas.Title>
 
           <Offcanvas.Title>
-            <span className={styles.YOUR_CART}>To Pay: ₱4200</span>
+            <span className={styles.YOUR_CART}>To Pay: ₱{totalToPay}</span>
           </Offcanvas.Title>
         </Offcanvas.Header>
         {/* <button className={styles.CHECK_OUT_BTN}>Check Out</button> */}
@@ -482,10 +489,12 @@ const Navigation = () => {
                           <span className="me-2"></span>
                           <button onClick={() => Increment(c._id)}>+</button>
                           <span className="mx-1"></span>
-                          <button>-</button>
+                          <button onClick={() => Decrement(c._id)}>-</button>
                         </div>
 
-                        <h4 className={styles.QTY_TOTAL}>Total: ₱4200</h4>
+                        <h4 className={styles.QTY_TOTAL}>
+                          Total: ₱{c.price * c.qty}
+                        </h4>
 
                         <RiCloseFill
                           className={styles.SINGLE_REMOVE_BTN}
