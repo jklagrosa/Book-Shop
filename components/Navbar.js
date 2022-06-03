@@ -302,6 +302,36 @@ const Navigation = () => {
 
   // };
 
+  const handleCheckOut = async () => {
+    const response = await axios.post(`${BASE_URL}/api/checkout`, headersOpts);
+    if (!response.data.success) {
+      toast.error("Cannot check-out your items, Please try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response && response.data && response.data.success) {
+      toast.success(
+        "Thank you for your purchase! Every customer matters to us.",
+        {
+          position: "top-center",
+          autoClose: 8000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+
+      dispatch(ITEM_REMOVE_FROM_CART(response.data.data));
+    }
+  };
+
   let totalToPay = 0;
 
   CART.forEach((el) => {
@@ -480,7 +510,9 @@ const Navigation = () => {
         <Offcanvas.Header closeButton>
           {CART.length > 0 && (
             <Offcanvas.Title>
-              <button className={styles.CHECK_OUT_BTN}>Check Out</button>
+              <button className={styles.CHECK_OUT_BTN} onClick={handleCheckOut}>
+                Check Out
+              </button>
             </Offcanvas.Title>
           )}
 

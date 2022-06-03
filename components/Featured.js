@@ -155,6 +155,7 @@ const Featured = () => {
   // CART REMOVED
   useEffect(() => {
     GET_UPDATED_DOCS_DATA();
+    GET_NEW_CART_DATA();
   }, [decement_cart_changes]);
   // END
 
