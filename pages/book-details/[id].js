@@ -265,7 +265,7 @@ const BookId = ({ data, display }) => {
           draggable: true,
           progress: undefined,
         });
-      }
+      } 
 
       return response.data;
     } catch (error) {
