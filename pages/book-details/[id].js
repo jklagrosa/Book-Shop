@@ -23,7 +23,11 @@ import { AiOutlineCalendar } from "react-icons/ai";
 
 import axios from "axios";
 import { BASE_URL, headersOpts } from "../../utils/http";
-import { ALL_FAV_BOOKS, ALL_CART_ADDED } from "../../store/books";
+import {
+  ALL_FAV_BOOKS,
+  ALL_CART_ADDED,
+  CHECK_OUT_TRUE,
+} from "../../store/books";
 import { useDispatch } from "react-redux";
 
 // import { useSelector } from "react-redux";
@@ -93,7 +97,7 @@ const BookId = ({ data, display }) => {
   const [IS_HEART, SET_IS_HEART] = useState(false);
   const [IS_CART, SET_IS_CART] = useState(false);
 
-  const { dynamic_page_change, decement_cart_changes } = useSelector(
+  const { dynamic_page_change, decement_cart_changes, check_out } = useSelector(
     (state) => state.book
   );
 
@@ -307,9 +311,6 @@ const BookId = ({ data, display }) => {
 
     router.reload();
   }
-
-  // if (decement_cart_changes._id === parsed_data._id) {
-  // }
 
   return (
     <>

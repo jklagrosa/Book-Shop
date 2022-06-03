@@ -12,6 +12,7 @@ const bookSlice = createSlice({
     cartAdded: [],
     remove_from_cart: [],
     decement_cart_changes: [],
+    check_out: null,
   },
   reducers: {
     GET_ALL_BOOKS: (state, action) => {
@@ -46,6 +47,9 @@ const bookSlice = createSlice({
     ITEM_REMOVE_FROM_CART: (state, action) => {
       state.decement_cart_changes = action.payload;
     },
+    CHECK_OUT_TRUE: (state, action) => {
+      state.check_out = action.payload;
+    },
   },
 });
 
@@ -59,6 +63,7 @@ export const {
   ALL_CART_ADDED,
   BOOK_IS_REMOVE_FROM_CART,
   ITEM_REMOVE_FROM_CART,
+  CHECK_OUT_TRUE,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;

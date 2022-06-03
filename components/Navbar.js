@@ -25,6 +25,7 @@ import {
   DYNAMIC_PAGE_BOOK,
   BOOK_IS_REMOVE_FROM_CART,
   ITEM_REMOVE_FROM_CART,
+  CHECK_OUT_TRUE
 } from "../store/books";
 // import cart from "../models/cart";
 
@@ -329,6 +330,8 @@ const Navigation = () => {
       );
 
       dispatch(ITEM_REMOVE_FROM_CART(response.data.data));
+      dispatch(CHECK_OUT_TRUE("refresh"));
+
     }
   };
 
