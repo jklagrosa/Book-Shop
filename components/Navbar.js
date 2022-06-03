@@ -24,6 +24,7 @@ import {
   BOOK_IS_REMOVE_FROM_FAVS,
   DYNAMIC_PAGE_BOOK,
   BOOK_IS_REMOVE_FROM_CART,
+  ITEM_REMOVE_FROM_CART,
 } from "../store/books";
 // import cart from "../models/cart";
 
@@ -221,6 +222,7 @@ const Navigation = () => {
       });
     } else if (response && response.data && response.data.success) {
       await GET_NEW_CART_DATA();
+      dispatch(ITEM_REMOVE_FROM_CART(response.data.data));
       // dispatch(ALL_CART_ADDED(response.data.data));
     }
   };
