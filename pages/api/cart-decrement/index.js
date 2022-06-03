@@ -54,8 +54,6 @@ export default async function handler(req, res) {
           });
         }
 
-        await Books.find({});
-
         console.log(`Potangina mo!, ${UPDATED_CART}`);
         return res.status(200).json({
           success: true,

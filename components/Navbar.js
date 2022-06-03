@@ -478,9 +478,11 @@ const Navigation = () => {
         className={styles.CART_N_FAV_OFFCANVAS}
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-            <button className={styles.CHECK_OUT_BTN}>Check Out</button>
-          </Offcanvas.Title>
+          {CART.length > 0 && (
+            <Offcanvas.Title>
+              <button className={styles.CHECK_OUT_BTN}>Check Out</button>
+            </Offcanvas.Title>
+          )}
 
           <Offcanvas.Title>
             <span className={styles.YOUR_CART}>To Pay: ₱{totalToPay}</span>
