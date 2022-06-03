@@ -93,7 +93,9 @@ const BookId = ({ data, display }) => {
   const [IS_HEART, SET_IS_HEART] = useState(false);
   const [IS_CART, SET_IS_CART] = useState(false);
 
-  const { dynamic_page_change } = useSelector((state) => state.book);
+  const { dynamic_page_change, decement_cart_changes } = useSelector(
+    (state) => state.book
+  );
 
   const parsed_data = data ? JSON.parse(data) : false;
   const parsed_display = display ? JSON.parse(display) : false;
@@ -182,6 +184,10 @@ const BookId = ({ data, display }) => {
     }
   };
 
+  useEffect(() => {
+    GET_NEW_CART_DATA();
+  }, [decement_cart_changes]);
+
   const handleAddToFavs_DYNAMIC = async (bId) => {
     try {
       const response = await axios.post(
@@ -265,7 +271,7 @@ const BookId = ({ data, display }) => {
           draggable: true,
           progress: undefined,
         });
-      } 
+      }
 
       return response.data;
     } catch (error) {
@@ -292,12 +298,18 @@ const BookId = ({ data, display }) => {
   };
 
   if (dynamic_page_change._id === parsed_data._id) {
+    // await GET_NEW_CART_DATA();
+
     // console.log(`DYNAMIC SHIT: ${dynamic_page_change._id}`);
     console.log(`HOLY COWNESS`);
     // router.reload()
     // window.location.reload();
+
     router.reload();
   }
+
+  // if (decement_cart_changes._id === parsed_data._id) {
+  // }
 
   return (
     <>
@@ -363,23 +375,35 @@ const BookId = ({ data, display }) => {
 
                     {!books.cart && !IS_CART && (
                       <BsCart2
-                        className={styles.icons}
-                        style={{ color: "#12a4d9", cursor: "pointer" }}
+                        // className={styles.icons}
+                        className={styles.mySwiperSlide_tooltip_cart}
+                        style={{
+                          color: "#12a4d9",
+                          cursor: "pointer",
+                        }}
                         onClick={() => handleAddToCart_DYNAMIC(books._id)}
                       />
                     )}
 
                     {books.cart && (
                       <BsCartFill
-                        className={styles.icons}
-                        style={{ color: "#12a4d9", cursor: "pointer" }}
+                        // className={styles.icons}
+                        className={styles.mySwiperSlide_tooltip_cart}
+                        style={{
+                          color: "#12a4d9",
+                          cursor: "pointer",
+                        }}
                       />
                     )}
 
                     {IS_CART && (
                       <BsCartFill
-                        className={styles.icons}
-                        style={{ color: "#12a4d9", cursor: "pointer" }}
+                        // className={styles.icons}
+                        className={styles.mySwiperSlide_tooltip_cart}
+                        style={{
+                          color: "#12a4d9",
+                          cursor: "pointer",
+                        }}
                       />
                     )}
 
